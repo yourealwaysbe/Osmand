@@ -256,7 +256,7 @@ public class Amenity extends MapObject  {
 		public int compare(Amenity a1, Amenity a2) {
 			int result = MapObject.BY_ID_COMPARATOR.compare(a1, a2);
 			if (result == 0) {
-				result = a1.type.compareTo(a2.type);
+				result = PoiCategory.COMPARATOR.compare(a1.type, a2.type);
 			}
 			if (result == 0) {
 				result = a1.subType.compareTo(a2.subType);

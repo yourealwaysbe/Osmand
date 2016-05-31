@@ -1,6 +1,7 @@
 package net.osmand.osm;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -8,7 +9,8 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class PoiCategory extends PoiFilter implements Comparable<PoiCategory> {
+public class PoiCategory extends PoiFilter {
+	public static final PoiCategoryComparator COMPARATOR = new PoiCategoryComparator();
 
 	private List<PoiFilter> poiFilters = new ArrayList<PoiFilter>();
 	private Set<PoiType> basemapPoi = null;
@@ -85,13 +87,21 @@ public class PoiCategory extends PoiFilter implements Comparable<PoiCategory> {
 	}
 
 	@Override
-	public int compareTo(PoiCategory poiCategory) {
-		return Double.compare(regId, poiCategory.regId);
-	}
-
-	@Override
 	public String toString() {
 		return keyName + " (" + regId + ")";
+	}
+
+	public static class PoiCategoryComparator implements Comparator<PoiCategory> {
+		@Override
+		public int compare(PoiCategory c1, PoiCategory c2) {
+			if (c1 == null ^ c2 == null) {
+				return (c1 == null) ? -1 : 1;
+			} else if (c1 == c2) {
+				return 0;
+			} else {
+				return Double.compare(c1.regId, c2.regId);
+			}
+		}
 	}
 
 }
