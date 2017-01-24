@@ -127,7 +127,7 @@ android {
 		}
 		full {
 			dimension "version"
-			applicationId "net.osmand.plus"
+			applicationId "net.osmand.plus.au"
 		}
 
 		// CoreVersion
