@@ -37,7 +37,8 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 		setContentView(R.layout.activity_livie_updates);
 
 		inAppHelper = new InAppHelper(getMyApplication(), false);
-		if (Version.isDeveloperVersion(getMyApplication())) {
+		if (Version.isDeveloperVersion(getMyApplication()) || 
+				Version.isAmazonUnderground(getMyApplication())) {
 			inAppHelper = null;
 		}
 

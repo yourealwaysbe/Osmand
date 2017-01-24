@@ -135,7 +135,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 
 		progressBar = (ProgressBar) view.findViewById(R.id.progress);
 
-		if (!Version.isDeveloperVersion(getMyApplication())) {
+		if (!Version.isDeveloperVersion(getMyApplication()) && !Version.isAmazonUnderground(getMyApplication())) {
 			subscriptionHeader = inflater.inflate(R.layout.live_updates_header, listView, false);
 			updateSubscriptionHeader();
 
@@ -246,7 +246,8 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		if (getSettings().LIVE_UPDATES_PURCHASED.get() && !Version.isDeveloperVersion(getMyApplication())) {
+		if (getSettings().LIVE_UPDATES_PURCHASED.get() && !Version.isDeveloperVersion(getMyApplication()) &&
+				!Version.isAmazonUnderground(getMyApplication())) {
 			ActionBar actionBar = getMyActivity().getSupportActionBar();
 			if (actionBar != null) {
 				actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);

@@ -79,6 +79,9 @@ android {
 		freedev {
 			manifest.srcFile "AndroidManifest-freedev.xml"
 		}
+		au {
+			manifest.srcFile "AndroidManifest-au.xml"
+		}
 
 		legacy {
 			jniLibs.srcDirs = ["libgnustl"]
@@ -125,9 +128,13 @@ android {
 			dimension "version"
 			applicationId "net.osmand"
 		}
-		full {
+		fullau {
 			dimension "version"
 			applicationId "net.osmand.plus.au"
+		}
+		full {
+			dimension "version"
+			applicationId "net.osmand.plus"
 		}
 
 		// CoreVersion

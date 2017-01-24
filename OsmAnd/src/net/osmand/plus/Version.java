@@ -10,7 +10,7 @@ public class Version {
 	private final String appName;
 	private final static String FREE_VERSION_NAME = "net.osmand";
 	private final static String FREE_DEV_VERSION_NAME = "net.osmand.dev";
-	private final static String SHERPAFY_VERSION_NAME = "net.osmand.sherpafy";
+	private final static String AMAZON_UNDERGROUND = "net.osmand.plus.au";
 	
 	
 	public static boolean isGpsStatusEnabled(OsmandApplication ctx) {
@@ -38,12 +38,14 @@ public class Version {
 		return ctx.getString(R.string.versionFeatures).contains("+amazon");
 	}
 	
+	
+	
 	public static boolean isGooglePlayEnabled(OsmandApplication ctx) {
 		return ctx.getString(R.string.versionFeatures).contains("+play_market");
 	}
 	
-	public static boolean isSherpafy(OsmandApplication ctx) {
-		return ctx.getPackageName().equals(SHERPAFY_VERSION_NAME);
+	public static boolean isAmazonUnderground(OsmandApplication ctx) {
+		return ctx.getPackageName().equals(AMAZON_UNDERGROUND);
 	}
 	
 	private Version(OsmandApplication ctx) {
