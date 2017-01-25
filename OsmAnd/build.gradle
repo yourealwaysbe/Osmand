@@ -79,7 +79,7 @@ android {
 		freedev {
 			manifest.srcFile "AndroidManifest-freedev.xml"
 		}
-		au {
+		fullau {
 			manifest.srcFile "AndroidManifest-au.xml"
 		}
 
