@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +23,7 @@ import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.myplaces.SplitSegmentFragment;
 import net.osmand.plus.myplaces.TrackPointFragment;
 import net.osmand.plus.myplaces.TrackSegmentFragment;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
@@ -45,6 +47,10 @@ public class TrackActivity extends TabActivity {
 	private List<GpxDisplayGroup> displayGroups;
 	private List<GpxDisplayGroup> originalGroups = new ArrayList<>();
 	private boolean stopped = false;
+
+	public PagerSlidingTabStrip getSlidingTabLayout() {
+		return slidingTabLayout;
+	}
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -70,7 +76,54 @@ public class TrackActivity extends TabActivity {
 			actionBar.setElevation(0);
 		}
 		setContentView(R.layout.tab_content);
+	}
 
+	protected void setGpxDataItem(GpxDataItem gpxDataItem) {
+		this.gpxDataItem = gpxDataItem;
+	}
+
+	protected void setGpx(GPXFile result) {
+		this.gpxFile = result;
+		if (file == null) {
+			this.gpxFile = getMyApplication().getSavingTrackHelper().getCurrentGpx();
+		}
+	}
+
+	public List<GpxDisplayGroup> getGpxFile(boolean useDisplayGroups) {
+		if (gpxFile == null) {
+			return new ArrayList<>();
+		}
+		if (gpxFile.modifiedTime != modifiedTime) {
+			modifiedTime = gpxFile.modifiedTime;
+			GpxSelectionHelper selectedGpxHelper = ((OsmandApplication) getApplication()).getSelectedGpxHelper();
+			displayGroups = selectedGpxHelper.collectDisplayGroups(gpxFile);
+			originalGroups.clear();
+			for (GpxDisplayGroup g : displayGroups) {
+				originalGroups.add(g.cloneInstance());
+			}
+			if (file != null) {
+				SelectedGpxFile sf = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
+				if (sf != null && file != null && sf.getDisplayGroups() != null) {
+					displayGroups = sf.getDisplayGroups();
+				}
+			}
+		}
+		if (useDisplayGroups) {
+			return displayGroups;
+		} else {
+			return originalGroups;
+		}
+	}
+
+	@Override
+	public void onAttachFragment(Fragment fragment) {
+		fragList.add(new WeakReference<>(fragment));
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		stopped = false;
 		slidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
 		if (slidingTabLayout != null) {
 			slidingTabLayout.setShouldExpand(true);
@@ -124,6 +177,8 @@ public class TrackActivity extends TabActivity {
 							Fragment frag = f.get();
 							if (frag instanceof TrackSegmentFragment) {
 								((TrackSegmentFragment) frag).updateContent();
+							} else if (frag instanceof SplitSegmentFragment) {
+								((SplitSegmentFragment) frag).reloadSplitFragment();
 							} else if (frag instanceof TrackPointFragment) {
 								((TrackPointFragment) frag).setContent();
 							}
@@ -141,53 +196,6 @@ public class TrackActivity extends TabActivity {
 				}
 			}.execute((Void) null);
 		}
-	}
-
-	protected void setGpxDataItem(GpxDataItem gpxDataItem) {
-		this.gpxDataItem = gpxDataItem;
-	}
-
-	protected void setGpx(GPXFile result) {
-		this.gpxFile = result;
-		if (file == null) {
-			this.gpxFile = getMyApplication().getSavingTrackHelper().getCurrentGpx();
-		}
-	}
-
-	public List<GpxDisplayGroup> getGpxFile(boolean useDisplayGroups) {
-		if (gpxFile == null) {
-			return new ArrayList<>();
-		}
-		if (gpxFile.modifiedTime != modifiedTime) {
-			modifiedTime = gpxFile.modifiedTime;
-			GpxSelectionHelper selectedGpxHelper = ((OsmandApplication) getApplication()).getSelectedGpxHelper();
-			displayGroups = selectedGpxHelper.collectDisplayGroups(gpxFile);
-			originalGroups.clear();
-			for (GpxDisplayGroup g : displayGroups) {
-				originalGroups.add(g.cloneInstance());
-			}
-			if (file != null) {
-				SelectedGpxFile sf = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
-				if (sf != null && file != null && sf.getDisplayGroups() != null) {
-					displayGroups = sf.getDisplayGroups();
-				}
-			}
-		}
-		if (useDisplayGroups) {
-			return displayGroups;
-		} else {
-			return originalGroups;
-		}
-	}
-
-	@Override
-	public void onAttachFragment(Fragment fragment) {
-		fragList.add(new WeakReference<>(fragment));
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
 	}
 
 	public OsmandApplication getMyApplication() {
@@ -219,26 +227,65 @@ public class TrackActivity extends TabActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		switch (itemId) {
-		case android.R.id.home:
-			if (getIntent().hasExtra(MapActivity.INTENT_KEY_PARENT_MAP_ACTIVITY)) {
-				OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
-				final Intent favorites = new Intent(this, appCustomization.getFavoritesActivity());
-				getMyApplication().getSettings().FAVORITES_TAB.set(FavoritesActivity.GPX_TAB);
-				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				startActivity(favorites);
-			}
-			finish();
-			return true;
+			case android.R.id.home:
+				int backStackEntriesCount = getSupportFragmentManager().getBackStackEntryCount();
+				if (backStackEntriesCount > 0) {
+					FragmentManager.BackStackEntry backStackEntry = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1);
+					if (backStackEntry.getName().equals(SplitSegmentFragment.TAG)) {
+						for (WeakReference<Fragment> f : fragList) {
+							Fragment frag = f.get();
+							if (frag instanceof TrackSegmentFragment) {
+								((TrackSegmentFragment) frag).updateSplitView();
+							}
+						}
+						getSupportFragmentManager().popBackStack();
+						if (isHavingWayPoints() || isHavingRoutePoints()) {
+							getSlidingTabLayout().setVisibility(View.VISIBLE);
+						}
+						return true;
+					}
+				}
+				if (getIntent().hasExtra(MapActivity.INTENT_KEY_PARENT_MAP_ACTIVITY)) {
+					OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
+					final Intent favorites = new Intent(this, appCustomization.getFavoritesActivity());
+					getMyApplication().getSettings().FAVORITES_TAB.set(FavoritesActivity.GPX_TAB);
+					favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+					startActivity(favorites);
+				}
+				finish();
+				return true;
 
 		}
 		return false;
 	}
 
-	boolean isHavingWayPoints(){
+	@Override
+	public void onBackPressed() {
+		int backStackEntriesCount = getSupportFragmentManager().getBackStackEntryCount();
+		if (backStackEntriesCount > 0) {
+			FragmentManager.BackStackEntry backStackEntry = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1);
+			if (backStackEntry.getName().equals(SplitSegmentFragment.TAG)) {
+				for (WeakReference<Fragment> f : fragList) {
+					Fragment frag = f.get();
+					if (frag instanceof TrackSegmentFragment) {
+						((TrackSegmentFragment) frag).updateSplitView();
+					}
+				}
+				getSupportFragmentManager().popBackStack();
+				if (isHavingWayPoints() || isHavingRoutePoints()) {
+					getSlidingTabLayout().setVisibility(View.VISIBLE);
+				}
+				return;
+			}
+		}
+		super.onBackPressed();
+	}
+
+	boolean isHavingWayPoints() {
 		return getGpx() != null && getGpx().hasWptPt();
 	}
 
-	boolean isHavingRoutePoints(){
+	boolean isHavingRoutePoints() {
 		return getGpx() != null && getGpx().hasRtePt();
 	}
 
@@ -250,4 +297,3 @@ public class TrackActivity extends TabActivity {
 		return gpxDataItem;
 	}
 }
-

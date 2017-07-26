@@ -132,7 +132,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setTitle(isAddingPoi ? R.string.poi_create_title : R.string.poi_edit_title);
-		toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+		toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -408,10 +408,10 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		for(int i = 0; i < name.length(); i++) {
 			char c = name.charAt(i);
 			if(Character.isLetter(c) || Character.getType(c) == Character.LETTER_NUMBER) {
-				if(Character.toUpperCase(c) != c && Character.toLowerCase(c) == c) {
-					lower ++;
-				} else {
+				if(Character.isUpperCase(c)) {
 					capital ++;
+				} else {
+					lower ++;
 				}
 			} else {
 				nonalpha ++;
@@ -432,6 +432,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		}
 		String poiTypeTag = editPoiData.getTagValues().get(EditPoiData.POI_TYPE_TAG);
+		String comment = "";
 		if (poiTypeTag != null) {
 			final PoiType poiType = editPoiData.getAllTranslatedSubTypes().get(poiTypeTag.trim().toLowerCase());
 			if (poiType != null) {
@@ -448,8 +449,10 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			if (offlineEdit && !Algorithms.isEmpty(poiTypeTag)) {
 				node.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiTypeTag);
 			}
-		} 
-		commitNode(action, node, mOpenstreetmapUtil.getEntityInfo(node.getId()), "", false,
+			String actionString = action == OsmPoint.Action.CREATE ? getString(R.string.default_changeset_add) : getString(R.string.default_changeset_edit);
+			comment = actionString + " " + poiTypeTag;
+		}
+		commitNode(action, node, mOpenstreetmapUtil.getEntityInfo(node.getId()), comment, false,
 				new CallbackWithObject<Node>() {
 
 					@Override

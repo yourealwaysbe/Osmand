@@ -705,6 +705,12 @@ public class OsmandSettings {
 
 	public final CommonPreference<RulerMode> RULER_MODE = new EnumIntPreference<>("ruler_mode", RulerMode.FIRST, RulerMode.values()).makeGlobal();
 
+	public final CommonPreference<Boolean> USE_MAPILLARY_FILTER = new BooleanPreference("use_mapillary_filters", false).makeGlobal();
+	public final CommonPreference<String> MAPILLARY_FILTER_USER_KEY = new StringPreference("mapillary_filter_user_key", "").makeGlobal();
+	public final CommonPreference<String> MAPILLARY_FILTER_USERNAME = new StringPreference("mapillary_filter_username", "").makeGlobal();
+	public final CommonPreference<Long> MAPILLARY_FILTER_FROM_DATE = new LongPreference("mapillary_filter_from_date", 0).makeGlobal();
+	public final CommonPreference<Long> MAPILLARY_FILTER_TO_DATE = new LongPreference("mapillary_filter_to_date", 0).makeGlobal();
+
 	public final CommonPreference<Boolean> USE_FAST_RECALCULATION = new BooleanPreference("use_fast_recalculation", true).makeGlobal().cache();
 	public final CommonPreference<Boolean> FORCE_PRIVATE_ACCESS_ROUTING_ASKED = new BooleanPreference("force_private_access_routing", false).makeProfile().cache();
 
@@ -746,7 +752,7 @@ public class OsmandSettings {
 	public final OsmandPreference<DrivingRegion> DRIVING_REGION = new EnumIntPreference<DrivingRegion>(
 			"default_driving_region", DrivingRegion.EUROPE_ASIA, DrivingRegion.values()) {
 		protected boolean setValue(Object prefs, DrivingRegion val) {
-			if (val != null) {
+			if (val != null && !METRIC_SYSTEM_CHANGED_MANUALLY.get()) {
 				METRIC_SYSTEM.set(val.defMetrics);
 			}
 			return super.setValue(prefs, val);
@@ -776,6 +782,8 @@ public class OsmandSettings {
 
 		;
 	}.makeGlobal().cache();
+
+	public final CommonPreference<Boolean> METRIC_SYSTEM_CHANGED_MANUALLY = new BooleanPreference("metric_system_changed_manually", false).makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	// cache of metrics constants as they are used very often
@@ -918,6 +926,8 @@ public class OsmandSettings {
 	public static final String BILLING_USER_DONATION_WORLD_PARAMETER = "";
 	public static final String BILLING_USER_DONATION_NONE_PARAMETER = "none";
 
+	public final OsmandPreference<Boolean> INAPPS_READ = new BooleanPreference("inapps_read", false).makeGlobal();
+
 	public final OsmandPreference<String> BILLING_USER_ID = new StringPreference("billing_user_id", "").makeGlobal();
 	public final OsmandPreference<String> BILLING_USER_TOKEN = new StringPreference("billing_user_token", "").makeGlobal();
 	public final OsmandPreference<String> BILLING_USER_NAME = new StringPreference("billing_user_name", "").makeGlobal();
@@ -1022,6 +1032,8 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> DISABLE_RECORDING_ONCE_APP_KILLED = new BooleanPreference("disable_recording_once_app_killed", false).makeGlobal();
 
+	public final CommonPreference<Boolean> STORE_TRACKS_IN_MONTHLY_DIRECTORIES = new BooleanPreference("store_tracks_in_monthly_directories", false).makeGlobal();
+
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new BooleanPreference("fast_route_mode", true).makeProfile();
 	// temporarily for new version
@@ -1114,8 +1126,11 @@ public class OsmandSettings {
 	public final CommonPreference<Integer> LIVE_MONITORING_INTERVAL = new IntPreference("live_monitoring_interval", 5000).makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<Integer> LIVE_MONITORING_MAX_INTERVAL_TO_SEND = new IntPreference("live_monitoring_maximum_interval_to_send", 900000).makeGlobal();
+
+	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> LIVE_MONITORING_URL = new StringPreference("live_monitoring_url",
-			"http://example.com?lat={0}&lon={1}&timestamp={2}&hdop={3}&altitude={4}&speed={5}").makeGlobal();
+			"https://example.com?lat={0}&lon={1}&timestamp={2}&hdop={3}&altitude={4}&speed={5}").makeGlobal();
 
 	public final CommonPreference<String> GPS_STATUS_APP = new StringPreference("gps_status_app", "").makeGlobal();
 

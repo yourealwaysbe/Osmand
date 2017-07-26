@@ -961,10 +961,10 @@
 	<string name="poi_fax">Факс</string>
 	<string name="facebook">Фэйсбук</string>
 	<string name="poi_mobile">Сотавы тэлефон</string>
-	<string name="poi_animal_shelter_dog">Тып прытулку: для сабак</string>
-	<string name="poi_animal_shelter_cat">Тып прытулку: для котак</string>
-	<string name="poi_animal_shelter_dog_cat">Тып прытулку: для сабак і котак</string>
-	<string name="poi_animal_shelter_bird">Тып прытулку: для птушак</string>
+	<string name="poi_animal_shelter_dog">Сабакі</string>
+	<string name="poi_animal_shelter_cat">Каты</string>
+	<string name="poi_animal_shelter_dog_cat">Сабакі, каты</string>
+	<string name="poi_animal_shelter_bird">Птушкі</string>
 
 <string name="poi_shower">Душ</string>
 	<string name="poi_recycling_centre">Пункт прыёму</string>
@@ -1695,7 +1695,7 @@
 	<string name="poi_payment_gift_card_no">Падарункавыя карткі не прымаюцца</string>
 	<string name="poi_payment_golden_crown_yes">Залатая Карона</string>
 	<string name="poi_payment_golden_crown_no">Карткі Залатая Карона не прымаюцца</string>
-	<string name="poi_payment_pro100_yes">"ПРО100 "</string>
+	<string name="poi_payment_pro100_yes">ПРО100</string>
 	<string name="poi_payment_pro100_no">Карткі ПРО100 не прымаюцца</string>
 	<string name="poi_payment_union_card_yes">Union Card</string>
 	<string name="poi_payment_union_card_no">Карткі Union Card не прымаюцца</string>
@@ -2133,7 +2133,7 @@
 	<string name="poi_openfire_no">Развядзеньне адкрытага агню забаронена</string>
 	<string name="poi_backcountry_yes">Так</string>
 	<string name="poi_backcountry_no">Не</string>
-	<string name="poi_scout_yes">Лягер скаўтаў</string>
+	<string name="poi_scout_yes">так</string>
 	<string name="poi_scout_no">Лягер скаўтаў: не</string>
 	<string name="poi_group_only_yes">Даступна толькі для груп: так</string>
 	<string name="poi_group_only_no">Даступна толькі для груп: не</string>
@@ -2296,7 +2296,7 @@
 	<string name="poi_historic_period_old_kingdom">Гістарычны пэрыяд: старажытнае царства (2686 – 2181 г. да н.э.)</string>
 	<string name="poi_historic_period_first_intermediate_period">Гістарычны пэрыяд: першы пераходны пэрыяд (2181 – 2055 г. да н.э.)</string>
 	<string name="poi_historic_period_second_intermediate_period">Гістарычны пэрыяд: другі пераходны пэрыяд (1650 – 1550 г. да н.э.)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Гістарычны пэрыяд: трэці пераходны пэрыяд (1069 – 664 г. да н.э.) "</string>
+	<string name="poi_historic_period_third_intermediate_period">Гістарычны пэрыяд: трэці пераходны пэрыяд (1069 – 664 г. да н.э.)</string>
 	<string name="poi_historic_period_first_persian_period">Гістарычны пэрыяд: першы пэрсідзкі пэрыяд</string>
 	<string name="poi_historic_period_late_period">Гістарычны пэрыяд: позняе царства (664 – 332 г. да н.э.)</string>
 	<string name="poi_historic_period_second_persian_period">Гістарычны пэрыяд: другі пэрсідскі пэрыяд</string>
@@ -2749,7 +2749,7 @@
 	<string name="poi_health_facility_type_nursing_home">Тып мэдустановы: хоспіс</string>
 	<string name="poi_health_facility_type_support_group_home">Тып мэдустановы: сустрэчы груп падтрымкі</string>
 
-	<string name="poi_health_specialty_palliative_medicine_yes">Спэцыялізацыя: паліятыўная дапамога</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Паліятыўная дапамога</string>
 
 	<string name="poi_suction_point">Пункт пампаваньня вады</string>
 
@@ -2860,10 +2860,10 @@
 	<string name="poi_fire_hydrant_pressure">Ціск вады ў гідранце</string>
 	<string name="poi_fire_hydrant_count">Колькасьць гідрантаў</string>
 	<string name="poi_fire_hydrant_flow_capacity">Прапускная здольнасьць гідранта</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Разьмяшчэньне гідранта: ходнік</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Разьмяшчэньне гідранта: паркоўка</string>
-	<string name="poi_fire_hydrant_position_street">Разьмяшчэньне гідранта: вуліца</string>
-	<string name="poi_fire_hydrant_position_underground">Разьмяшчэньне гідранта: падземны</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Ходнік</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Паркоўка</string>
+	<string name="poi_fire_hydrant_position_street">Вуліца</string>
+	<string name="poi_fire_hydrant_position_underground">Падземны</string>
 	<string name="poi_fire_hydrant_style_water_source_main">Асноўная</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">Сажалка</string>
 	<string name="poi_fire_hydrant_style_water_source_stream">Струмень</string>
@@ -2943,9 +2943,9 @@
 	<string name="poi_payment_troika_no">Карткі Тройка не прымаюцца</string>
 
 	<string name="poi_telescope">Тэлескоп</string>
-	<string name="poi_telescope_type_optical">Тэлескоп: аптычны</string>
-	<string name="poi_telescope_type_radio">Тэлескоп: радыё</string>
-	<string name="poi_telescope_type_gamma">Тэлескоп: гама</string>
+	<string name="poi_telescope_type_optical">Аптычны</string>
+	<string name="poi_telescope_type_radio">Радыё</string>
+	<string name="poi_telescope_type_gamma">Гама</string>
 	<string name="poi_telescope_diameter">Дыямэтар</string>
 	<string name="poi_telescope_spectrum">Спэктр</string>
 	<string name="poi_telescope_usage_education">Прызначэньне: адукацыя</string>
@@ -3042,7 +3042,7 @@
 
 	<string name="poi_seamark_dyke">Вадзяны знак: насып</string>
 	<string name="poi_content_wastewater">Зьмесьціва: сьцёкі</string>
-	<string name="poi_fire_hydrant_position_green">Разьмяшчэньне гідранта: трава</string>
+	<string name="poi_fire_hydrant_position_green">Трава</string>
 	<string name="poi_wiki_link">Вікіпэдыя</string>
 
 <string name="poi_toilets_disposal_chemical">Утылізацыя адыходаў: хімічная</string>
@@ -3057,9 +3057,9 @@
 <string name="poi_denomination_uniting">Яднаючая Царква ў Аўстраліі</string>
 	<string name="poi_denomination_reform">Рэфармісцкі юдаізм</string>
 	<string name="poi_memorial_koshinto">Кашынта</string>
-	<string name="poi_service_bicycle_charging_no">Зарадка электравеласіпедаў: не</string>
+	<string name="poi_service_bicycle_charging_no">Зарадка: не</string>
 
-<string name="poi_service_bicycle_charging_yes">Зарадка электравеласіпедаў: ёсць</string>
+<string name="poi_service_bicycle_charging_yes">Зарадка: ёсць</string>
 	<string name="poi_shop_craft">Тавары для рукадзельля</string>
 
 	<string name="poi_fuel_avia_type">Від паліва</string>
@@ -3378,7 +3378,7 @@
 
 <string name="poi_fire_hydrant_type_dry_barrel">Наземны сухі</string>
 	<string name="poi_counselling_type_nutrition_nfire_hydo">Кансультацыя па пытаньнях харчаваньня: не</string>
-	<string name="poi_fire_hydrant_position_lane">Разьмяшчэньне гідранта: паласа руху</string>
+	<string name="poi_fire_hydrant_position_lane">Паласа руху</string>
 	<string name="poi_fire_hydrant_style_wsh">Дызайн гідранта: wsh</string>
 	<string name="poi_cuisine_buschenschank">Buschenschank (вытанчаныя аўстрыйскія віны)</string>
 	<string name="poi_cuisine_fine_dining">Эксклюзіўныя стравы</string>
@@ -3443,5 +3443,25 @@
 	<string name="poi_motorcycle_type_offroad">Пазадарожныя</string>
 	<string name="poi_motorcycle_type_dualsport">Двайнога прызначэння</string>
 	<string name="poi_motorcycle_type_standard">Класічныя</string>
+
+<string name="poi_lock_basin">Запорны басейн</string>
+	<string name="poi_generator_output_electricity_no">Выхад (электрычнасць): не</string>
+
+	<string name="poi_owner">Уладальнік</string>
+
+<string name="poi_animal_shelter_type">Прымаюцца жывёлы</string>
+	<string name="poi_animal_shelter_purpose">Мэта</string>
+
+<string name="poi_animal_shelter_wildlife">Звяры</string>
+	<string name="poi_animal_shelter_horse">Коні</string>
+	<string name="poi_animal_shelter_mammal">Сысуны</string>
+	<string name="poi_animal_shelter_fish">Рыбы</string>
+
+	<string name="poi_animal_shelter_purpose_adoption_yes">Апека: так</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">Апека: не</string>
+	<string name="poi_animal_shelter_purpose_release_yes">Выпуск: так</string>
+	<string name="poi_animal_shelter_purpose_release_no">Выпуск: не</string>
+
+	<string name="poi_spaceport">Касмадром</string>
 
 </resources>

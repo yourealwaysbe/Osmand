@@ -14,7 +14,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.PreferenceManager;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AlertDialog;
@@ -129,7 +128,7 @@ public class OsmandApplication extends MultiDexApplication {
 	@Override
 	public void onCreate() {
 		long timeToStart = System.currentTimeMillis();
-		if (Version.getAppName(this).equals("OsmAnd~")) {
+		if (Version.isDeveloperVersion(this)) {
 			if (android.os.Build.VERSION.SDK_INT >= 9) {
 				try {
 					Class.forName("net.osmand.plus.base.EnableStrictMode").newInstance();
@@ -158,6 +157,7 @@ public class OsmandApplication extends MultiDexApplication {
 			externalStorageDirectoryReadOnly = true;
 			externalStorageDirectory = osmandSettings.getInternalAppPath();
 		}
+		osmandSettings.USE_MAP_MARKERS.set(true);
 		
 		checkPreferredLocale();
 		appInitializer.onCreateApplication();

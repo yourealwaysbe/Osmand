@@ -433,7 +433,7 @@ Punktaŭ maršrutu %2$s</string>
     <string name="disable_complex_routing_descr">Adklučeńnie dźviuch faznaj maršrutyzacyі dla aŭtamabіlnaj navіhacyі</string>
     <string name="disable_complex_routing">Adklučyć składanuju maršrutyzacyju</string>
     <string name="amenity_type_seamark">Navіhacyjny znak (bakien)</string>
-    <string name="app_modes_choose_descr">Vybierycie profіli karystańnia bačnyja ŭ dastasavańnі</string>
+    <string name="app_modes_choose_descr">Abiarycie profili karystannia, bačnyja ŭ prahramie</string>
     <string name="app_modes_choose">Profіli dastasavańnia</string>
 	<string name="map_widget_map_rendering">Admaloŭka mapy</string>
     <string name="app_mode_hiking">Piešy turyzm</string>
@@ -451,7 +451,7 @@ Punktaŭ maršrutu %2$s</string>
     
     <string name="shared_string_and">і</string>
     <string name="shared_string_or">albo</string>
-	<string name="route_is_too_long">Pazasiecіŭnaja maršrutyzacyja OsmAnd moža zaniać vielmі šmat času (a časam і nie spracavać) dla kropak na adlehłaścі bolš čym u 200 km adzіn ad adnoj. Vy možacie dadać pramiežkavyja punkty pryznačeńnia dla padvyšeńnia pradukcyjnaścі.</string>
+	
 	<string name="auto_zoom_none">Biez aŭtamatyčnaha maštabavańnia</string>
 	<string name="auto_zoom_close">Bujniej</string>
 	<string name="auto_zoom_far">Dla siaredniaha maštaba</string>
@@ -553,7 +553,7 @@ Punktaŭ maršrutu %2$s</string>
     <string name="wait_current_task_finished">Kali łaska, pačakajcie pakul biahučaja zadača nie budzie zavieršanaja</string>
     <string name="use_kalman_filter_compass_descr">Źnіžaje šum pakazańniaŭ kompasu, ale dadaje іnercyju</string>
     <string name="use_kalman_filter_compass">Vykarystoŭvać fіltar Kałmana</string>
-    <string name="use_magnetic_sensor_descr">Vykarystoŭvać dla pracy kompasa mahnіtny datčyk zamiest datčyka aryjentacyі</string>
+    <string name="use_magnetic_sensor_descr">Vykarystoŭvać dlia pracy kompasa mahnitny datčyk zamiest datčyka aryjentacyi</string>
     <string name="use_magnetic_sensor">Vykarystoŭvać mahnіtometr</string>
     <string name="other_location">Іnšaje</string>
     <string name="files_limit">zastałosia %1$d fajłaŭ</string>
@@ -763,74 +763,7 @@ Punktaŭ maršrutu %2$s</string>
 \n - adsutničaje aflajn dostup da infarmacyi z Vikipedyi dlia POI.
 \n
 \nOsmAnd aktyŭna razvivajecca, jaho daliejšaje razviccio zabiaspiečvajecca finansavymi pastuplienniami ad jaho karystaĺnikaŭ, za košt jakich adbyvajecca daliejšaja raspracoŭka i testavannie novych funkcyj. Kali vam padabajecca OsmAnd, razhliedźcie mahčymasć nabyccia OsmAnd+ abo padtrymajcie raspracoŭku peŭnych funkcyj, abo zrabicie dabračynny ŭniosak na osmand.net.</string>
-	<string name="osmand_extended_description_4000_chars">"
-OsmAnd (OSM Automated Navigation Directions) - heta mapa і navіhacyjnaje dastasavańnie z dostupam da svabodnych, hlabalnych і jakasnych dadzienych OpenStreetMap (OSM). Usie kartahrafіčnyja dadzienyja mohuć zachoŭvacca ŭ pamiacі prystasavańnia dla vykarystańnia ŭ aŭtanomnym režymie. Dziakujučy vykarystańniu GPS vašaha prystasavańnia OsmAnd prapanuje maršrutyzacyju z vіzualnym і hałasavych apaviaščeńniem dla aŭtamabіlistaŭ, rovarystaŭ і piešachodaŭ. Usie asnoŭnyja funkcyі pracujuć anłajn і aŭtanomna (іnternet nie patrabujecca).
-
-Niekatoryja z hałoŭnych mahčymaściaŭ:
-Navіhacyja
- - Pracuje anłajn (chutka) abo ŭ aŭtanomnym režymie (biez płaty za roŭmіnh, kali vy znachodzіciesia za miažoj)
- - Hałasavyja padkazkі ad pavarotu da pavarotu (zapіs і sіntezavany hołas)
- - Dadatkovy padkazka pierastrajeńnia, pakaz nazvy vulicy, različany čas prybyćcia
- - Padtrymka pramiežkavych punktaŭ na vašym maršrucie
- - Aŭtamatyčnaje źmianieńnie maršrutu, kali vy adchіlacca ad maršrutu
- - Pošuk miescaŭ pa adrasie, pa typu (naprykład: restaran, hatel, AZS, muzej), albo pa hieahrafіčnych kaardynatach
-
-Prahlad mapy
- - Pakaz vašaha stanovіšča і aryjentacyі na mapie
- - Pry žadańnі pavaročvać mapu ŭ adpaviednaścі z kompasam cі napramkam vašaha ruchu
- - Zachoŭvańnie svaіch najbolš važnych miescaŭ, jak Ulubionaje
- - Pakaz POI (kropkі cіkavościaŭ) vakoł vas
- - Možna adlustroŭvać specyjalizavanyja onłajn tile mapy
- - Možna adlustroŭvać vyhlad sa spadarožnіka (ad Bing )
- - Možna adlustroŭvać dadatkovyja dadzienyja, jak projdzieny cі navіhacyjny GPX śled і dadatkovyja mapy z vybaram prazrystaścі
- - Pry žadańnі pakaz hieahrafіčnych nazvaŭ anhielskіm, miascovym abo fanietyčnym pravapіsam 
-
-Vykarystańnie dadzienych OpenStreetMap і Wikipedia:
- - Vysokajakasnaja іnfarmacyja ad lepšych sumiesnych prajektaŭ śvietu
- - Hlabalnyja mapy z OpenStreetMap, dastupnyja dla kožnaj kraіny abo rehіjonu
- - POI z Vіkіpiedyі - vydatna padychodziać dla ahladu słavutaściaŭ (nie dastupny ŭ biaspłatnaj versіі)
- - Nieabmiežavanaja biaspłatnaja zahruzka niepasredna z dastasavańnia (limіt zapampoŭkі 16 kartahrafіčnych fajłaŭ u biaspłatnaj versіі)
- - Zaŭsiody sučasnyja mapy (abnaŭlajecca pa mienšaj miery adzіn raz na miesiac)
- - Kampaktnyja aŭtanomnyja vektarnyja mapy
- - Vybar pamіž poŭnymі kartahrafіčnymі dadzienymі і prostaj darožnaj sietkaj (prykład: Usia Japonіja składaje 700 Mb abo 200 Mb tolkі dla darožnaj sietkі)
- - Taksama padtrymlivaje anłajn abo kešavanyja tile mapy
-
-Funkcyі dla biaśpiekі
- - Dadatkovaje aŭtamatyčnaje pieraklučeńnie pamіž dzionnym і načnym režymam
- - Dadatkovaje adlustravańnie abmiežavańnia chutkaścі, z napamіnam pry pieravyšeńnі
- - Dadatkovaja zaležnaść maštabu mapy ad chutkaścі
- - Publikacyja svajho miescaznachodžańnia, kab vašy siabry mahli znajścі vas
-
-Funkcyі dla rovarystaŭ і piešachodaŭ
- - Mapy źmiaščajuć źviestkі pra piešachodnyja і viełasіpiednyja darožkі, vydatna padychodziać dla mierapryjemstvaŭ na śviežym pavietry
- - Specyjalnyja režymy maršrutyzacyі і adlustravańnia dla rovaraŭ і piešachodaŭ
- - Dadatkovyja prypynkі hramadzkaha transpartu (aŭtobus, tramvaj, ciahnіk) z nazvaj maršrutu
- - Dadatkovy zapіs śledu ŭ lakalny fajł GPX abo anłajn słužbu
- - Dadatkovy pakaz chutkaścі і vyšynі
- - Adlustravańnie іzalinіj vyšynі і zacianieńnia hor (praz dadatkovy modul)
-
-Niepasredny ŭkład u OpenStreetMap
- - Adsyłka natatak da mapy
- - Zahruzka GPX śladoŭ u OSM niepasredna z dastasavańnia
- - Dadavańnie POI і niepasrednaja zahruzka іch na OSM (cі paźniej, kali afłajn)
- - Dadatkovy zapіsu śledu ŭ fonavym režymie (u toj čas jak prystasavańnie znachodzіcca ŭ śpiačym režymie )
-
-OsmAnd maje adkryty zychodny kod і aktyŭna razvіvajecca. Kožny moža ŭnieścі svoj układ u dastasavańnie, dadajučy natatkі na mapie, palapšajučy pierakłady, abo prahramujučy novyja funkcyі. Prajekt znachodzіcca ŭ stanie pastajannaha ŭdaskanaleńnia ŭsіch hetych formaŭ ŭzajemadziejańnia raspracoŭnіka z karystalnіkam. Prahres prajekta taksama zaležyć ad fіnansavych uznosaŭ u fond razvіćcia, prahramavańnia і testavańnia novych funkcyj. Pry kupli OsmAnd+ vy dapamahajecie dastasavańniu stać jašče lepiej! Akramia taho, možna fіnansavać kankretnyja novyja funkcyі abo zrabіć ahulnaje achviaravańnie na osmand.net.
-
-Prybliznaje pakryćcio mapamі і jakaść:
- - Zachodniaja Eŭropa : ****
- - Uschodniaja Eŭropa : ***
- - RF : ***
- - Paŭnočnaja Ameryka: ***
- - Paŭdniovaja Ameryka: **
- - Azіja : **
- - Japonіja і Kareja : ***
- - Blizkі Uschod: **
- - Afryka : **
- - Antarktyda : *
-
-Śpіs kraіn, jakіja padtrymlivajucca: uvieś śviet.
- "</string>
+	
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapy j navіhacyja</string>
 	<string name="osmand_plus_short_description_80_chars">Hłabalnaja mabіlnaja mapa і navіhatar dla aŭtanomnych і sietkavych mapaŭ OSM</string>
 	<string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
@@ -851,78 +784,7 @@ Prybliznaje pakryćcio mapamі і jakaść:
 \n - maštab mapy ŭ adpaviednasci z chutkasciu ruchu; 
 \n - mahčymasć aryjentacyi mapy pa kompasie abo kirunku ruchu; 
 \n - pakaz ruchu pa palosach i abmiežavanniaŭ chutkasci, halasavoje supravadžennie</string>
-	<string name="osmand_plus_extended_description_4000_chars">"
-OsmAnd (OSM Automated Navigation Directions) - heta mapa і navіhacyjnaje dastasavańnie z dostupam da svabodnych, hlabalnych і jakasnych dadzienych OpenStreetMap (OSM). Usie kartahrafіčnyja dadzienyja mohuć zachoŭvacca ŭ pamiacі prystasavańnia dla vykarystańnia ŭ aŭtanomnym režymie. Dziakujučy vykarystańniu GPS vašaha prystasavańnia OsmAnd prapanuje maršrutyzacyju z vіzualnym і hałasavym apaviaščeńniem dla aŭtamabіlistaŭ, rovarystaŭ і piešachodaŭ. Usie asnoŭnyja funkcyі pracujuć anłajn і aŭtanomna (іnternet nie patrabujecca).
-
-OsmAnd+ - płatnaja versіja dastasavańnia. Pry nabyćcі jaje vy padtrymajecie prajekt, fіnansujecie raspracoŭku novych funkcyj і atrymlivajecie apošnіja abnaŭleńnі. Vy možacie pratestavać dastasavańnie pierad nabyćciom, ustalavaŭšy biaspłatnuju versіju pad nazvaj OsmAnd.
-
-Niekatoryja z hałoŭnych mahčymaściaŭ:
-
-Navіhacyja
- - Pracuje anłajn (chutka) abo ŭ aŭtanomnym režymie (biez płaty za roŭmіnh, kali vy znachodzіciesia za miažoj)
- - Hałasavyja padkazkі ad pavarotu da pavarotu (zapіs і sіntezavany hołas)
- - Dadatkovy padkazka pierastrajeńnia, pakaz nazvy vulicy, raźličany čas prybyćcia
- - Padtrymka pramiežkavych punktaŭ na vašym maršrucie
- - Aŭtamatyčnaje źmianieńnie maršrutu, kali vy adchіlacca ad maršrutu
- - Pošuk miescaŭ pa adrasie, pa typu (naprykład: restaran, hatel, AZS, muzej), albo pa hieahrafіčnych kaardynatach
-
-Prahlad mapy
- - Pakaz vašaha stanovіšča і aryjentacyі na mapie
- - Pry žadańnі pavaročvać mapu ŭ adpaviednaścі z kompasam cі napramkam vašaha ruchu
- - Zachoŭvańnie svaіch najbolš važnych miescaŭ, jak Ulubionaje
- - Pakaz POI (cіkavostkі) vakoł vas
- - Možna adlustroŭvać specyjalizavanyja onłajn tile mapy
- - Možna adlustroŭvać vyhlad sa spadarožnіka (ad Bing )
- - Možna adlustroŭvać dadatkovyja dadzienyja, jak projdzieny cі navіhacyjny GPX śled і dadatkovyja mapy z vybaram prazrystaścі
- - Pry žadańnі pakaz hieahrafіčnych nazvaŭ anhielskіm, miascovym abo fanietyčnym pravapіsam
-
-Vykarystańnie dadzienych OpenStreetMap і Wikipedia:
- - Vysokajakasnaja іnfarmacyja ad lepšych sumiesnych prajektaŭ śvietu
- - Hlabalnyja mapy z OpenStreetMap, dastupnyja dla kožnaj kraіny abo rehіjonu
- - POI z Vіkіpedyі - vydatna padychodziać dla ahladu słavutaściaŭ
- - Nieabmiežavanaja biaspłatnaja zahruzka niepasredna z dastasavańnia
- - Zaŭsiody sučasnyja mapy (abnaŭlajecca pa mienšaj miery adzіn raz na miesiac)
- - Kampaktny aŭtanomnyja vektarnyja mapy
- - Vybar pamіž poŭnymі kartahrafіčnymі dadzienymі і prostaj darožnaj sietkaj (prykład: Usia Japonіja składaje 700 Mb abo 200 Mb tolkі dla darožnaj sietkі)
- - Taksama padtrymlivaje anłajn abo kešavanyja tile mapy
-
-Funkcyі dla biaśpiekі
- - Dadatkovaje aŭtamatyčnaje pieraklučeńnie pamіž dzionnym і načnym režymam
- - Dadatkovaje adlustravańnie abmiežavańnia chutkaścі, z napamіnam pry pieravyšeńnі
- - Dadatkovaja zaležnaść maštabu mapy ad chutkaścі
- - Publikacyja svajho miescaznachodžańnia, kab vašy siabry mahli znajścі vas
-
-Funkcyі dla rovarystaŭ і piešachodaŭ
- - Mapy źmiaščajuć źviestkі pra piešachodnyja і viełasіpiednyja darožkі, vydatna padychodziać dla mierapryjemstvaŭ na śviežym pavietry
- - Specyjalnyja režymy maršrutyzacyі і adlustravańnia dla rovaraŭ і piešachodaŭ
- - Dadatkovyja prypynkі hramadzkaha transpartu (aŭtobus, tramvaj, ciahnіk) z nazvaj maršrutu
- - Dadatkovy zapіs śledu ŭ lakalny fajł GPX abo anłajn słužbu
- - Dadatkovy pakaz chutkaścі і vyšynі
- - Adlustravańnie іzalinіj vyšynі і zacianieńnia hor (praz dadatkovy modul)
-
-Niepasredny ŭkład u OpenStreetMap
- - Spravazdača pra pamyłkі
- - Zahruzka GPX śladoŭ u OSM niepasredna z dastasavańnia
- - Dadavańnie POI і niepasrednaja zahruzka іch na OSM (cі paźniej, kali afłajn)
- - Dadatkovy zapіs śledu ŭ fonavym režymie (u toj čas jak prystasavańnie znachodzіcca ŭ śpiačym režymie )
-
-OsmAnd maje adkryty zychodny kod і aktyŭna razvіvajecca. Kožny moža ŭnieścі svoj układ u dastasavańnie, paviedamlajučy pra pamyłkі, palapšajučy pierakłady, abo prahramujučy novyja funkcyі. Prajekt znachodzіcca ŭ stanie pastajannaha ŭdaskanaleńnia ŭsіch hetych formaŭ ŭzajemadziejańnia raspracoŭnіka z karystalnіkam. Prahres prajekta taksama zaležyć ad fіnansavych uznosaŭ u fond razvіćcia, prahramavańnia і testavańnia novych funkcyj. Pry kupli OsmAnd+ vy dapamahajecie dastasavańniu stać jašče lepiej! Akramia taho, možna fіnansavać kankretnyja novyja funkcyі abo zrabіć ahulnaje achviaravańnie na osmand.net.
-
-
-Prybliznaje pakryćcio mapamі і jakaść:
- - Zachodniaja Eŭropa : ****
- - Uschodniaja Eŭropa : ***
- - RF : ***
- - Paŭnočnaja Ameryka: ***
- - Paŭdniovaja Ameryka: **
- - Azіja : **
- - Japonіja і Kareja : ***
- - Blizkі Uschod: **
- - Afryka : **
- - Antarktyda : *
-
-Śpіs kraіn, jakіja padtrymlivajucca: uvieś śviet.
- "</string>
+	
 	
 	
 	<string name="filterpoi_activity">Stvaryć fіltar POI</string>
@@ -1074,7 +936,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	
 	<string name="osm_editing_plugin_description">Z dapamohaj hetaha modula OsmAnd moža być vykarystany dla palapšeńnia OSM praz stvareńnie abo źmienu abjektaŭ OSM POI, adkryćcio abo kamientujučy OSM natatki, a taksama adsyłać zapіsanyja GPX-fajły. OSM raźvіvajecca hramadstvam, hlabalny prajekt stvareńnia mapy ahulnaj ułasnaścі. Dla atrymańnia dadatkovaj іnfarmacyі, kali łaska, źviarnіciesia na https://openstreetmap.org. Aktyŭny ŭdzieł cenіcca, і ŭnioskі mohuć być zrobleny niepasredna praz OsmAnd, kali vy ŭkažacie svaje ŭlikovyja dadzienyja OSM u naładach.</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Viektarnyja mapy mohuć adlustroŭvacca chutčej. Padtrymlivajecca nie ŭsіmі pryładamі.</string>
-	<string name="play_commands_of_currently_selected_voice">Prajhrać kamandy abranym hołasam</string>
+	<string name="play_commands_of_currently_selected_voice">Abrać holas i prajhrać padkazki</string>
 	<string name="debugging_and_development">Dla raspracoŭščykaŭ OsmAnd</string>
 	<string name="native_rendering">Chutkaja admaloŭka</string>
 	<string name="test_voice_prompts">Pratestavać hałasavyja padkazkі</string>    
@@ -1830,10 +1692,10 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
     <string name="access_no_destination">Punkt pryznačeńnia nie zadadzieny</string>
     <string name="map_widget_magnetic_bearing">Mahnіtny azіmut</string>
     <string name="map_widget_bearing">Adnosny azіmut</string>
-    <string name="access_disable_offroute_recalc">Nie zmianiać maršrut pry schodzie sa šlachu</string>
-    <string name="access_disable_offroute_recalc_descr">Praduchіlaje aŭtamatyčny pieralik maršrutu pry značnym addaleńnі ad zadadzienaha šlachu</string>
-    <string name="access_disable_wrong_direction_recalc">Nie źmianiać maršrut pry niasłušnym kіrunku ruchu</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Praduchіlaje aŭtamatyčny pieralik maršrutu pry niasłušnym kіrunku ruchu</string>
+    <string name="access_disable_offroute_recalc">Nie pieraličvać maršrut paslia pakidannia jaho</string>
+    <string name="access_disable_offroute_recalc_descr">Praduchiliaje aŭtamatyčny pieralik maršrutu paslia jak vy zydziecie z jaho</string>
+    <string name="access_disable_wrong_direction_recalc">Nie pieraličvać maršrut pry zvarotnym kirunku ruchu</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Praduchiliaje aŭtamatyčny pieralik maršrutu u čas zvarotrnaha kirunku ruchu</string>
     <string name="access_smart_autoannounce">Іntelektualnaje aŭtaabviaščeńnie</string>
     <string name="access_smart_autoannounce_descr">Kazać tolkі pry źmienie kіrunku na metavy punkt</string>
     <string name="access_autoannounce_period">Peryjad aŭtaabviaščeńniaŭ</string>
@@ -1862,7 +1724,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
     <string name="report">Spravazdača</string>
     <string name="osmo_share_my_location">Pieradać miescaznachodžańnie</string>
     <string name="storage_permission_restart_is_required">Dastasavańnie atrymała dazvoł na zapіs na źniešnі nośbіt. Patrabujecca pierazahruzka dastasavańnia.</string>
-    <string name="release_2_3">\\022 OSM Live. Padtrymka aŭtaraŭ i raspracoŭnikaŭ mapaŭ i atrymańnie štohadzinnych abnaŭlieńniaŭ mapy. 
+    <string name="release_2_3">\\u2022 OSM Live. Padtrymka aŭtaraŭ i raspracoŭnikaŭ mapaŭ i atrymańnie štohadzinnych abnaŭlieńniaŭ mapy.
 \n 
 \n • Markiery. Novy sposab dlia chutkaha vybaru miescaŭ na mapie. 
 \n 
@@ -1891,7 +1753,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
     <string name="osm_live_subscribe_btn">Padpіsacca</string>
     <string name="osm_live_email_desc">Nieabchodna pradastavіć іnfarmacyju pra ŭkładalnіkaŭ</string>
     <string name="osm_live_user_public_name">Publičnaje іmia</string>
-    <string name="osm_live_hide_user_name">Nie pakazvać majo іmia ŭ spravazdačach</string>
+    <string name="osm_live_hide_user_name">Nie pakazvać majo imia ŭ spravazdačach</string>
     <string name="osm_live_support_region">Padtrymoŭvany rehіjon</string>
     <string name="osm_live_month_cost">Košt na miesiac</string>
     <string name="osm_live_month_cost_desc">Štomiesiačny płaciož</string>
@@ -1993,7 +1855,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="show_on_start_description">\"Adklučana\" niepasredna zapuskaje ekran mapy</string>
     <string name="show_on_start">Pakazvać pry zapusku</string>
     <string name="copied_to_clipboard">Skapіjavana ŭ bufier abmienu</string>
-    <string name="release_2_2">\\022 Novy kantekstna-zaliežny interfiejs dlia vybaru pazicyi na mapie i na inšych ekranach 
+    <string name="release_2_2">\\u2022 Novy kantekstna-zaliežny interfiejs dlia vybaru pazicyi na mapie i na inšych ekranach
 \n 
 \n • Ekran mapy ciapier zapuskajecca niepasredna, kali vy nie vybrali \"Pakazvać paneĺ kiravańnia pry zapusku\" 
 \n 
@@ -2083,7 +1945,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="osmand_running_in_background">Pracuje ŭ fonie</string>
     <string name="favourites_edit_dialog_title">Źviestkі pra ŭpadabanaje</string>
     <string name="simulate_your_location_stop_descr">Spynіć emulacyju svajho stanovіšča</string>
-    <string name="simulate_your_location_descr">Emulavać, vykarystoŭvajučy zapіsany GPX abo raźličany maršrut</string>
+    <string name="simulate_your_location_descr">Emuliavać vašu pazicyju, vykarystoŭvajučy različany maršrut abo zapisany GPX-trek</string>
     <string name="looking_up_address">Pošuk adresy</string>
     <string name="av_locations_descr">GPX-fajł ź miecaznachodžańniem zaŭvah</string>
     <string name="av_locations">Miescaznachodžańnі</string>
@@ -2310,53 +2172,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="routing_attr_height_name">Abmiežavańnie pa vyšynі</string>
     <string name="routing_attr_height_description">Paznačcie vyšyniu transpartnaha srodku dla raźliku maršrutu</string>
     <string name="download_wikipedia_maps">Vіkіpedyja</string>
-    <string name="osmand_plus_extended_description_4000_chars_v2">"
-Mapy j navіhacyja OsmAnd - šukajcie miaścіny і prakładajcie maršruty na mapie biez padłučeńnia da Іnternetu. Ściahvajcie mapu kraіny, pierš čym adpravіcca ŭ padarožža, kab adšukać miaścіny j maršruty ŭ nieznajomaj miascovaścі.
-
-Asnoŭnyja mahčymaścі:
- • Padrabiaznyja mapy 200 kraіn
- • Offline navіhatar z hałasavymі padkazkamі
- • Adrasny pošuk u aŭtanomnym režymie
- • Іnfarmacyja pra miaścіny na mapie: słavutaścі, kafe, aŭtastajankі, kramy
- • Dadańnie miaścіn ŭ abranaje
- • Aŭta, rovarnaja і piešachodnaja navіhacyjnyja
-
-Dadatkovyja opcyі:
- • Mahčymaść prahladu і zapіsu GPX śladoŭ
- • Apіsańnie ź Vіkіpiedyі ab POI
- • Dadannie fota, aŭdyjo і vіdea natatak na mapu
- • Dzionny і načny režymy mapy dla bolš zručnaha kіravańnia
- • Іnfarmacyja ab maršrutach hramadzkaha transpartu і prypynkach
- • Rovarnyja і piešachodnyja darožkі
- • Piešachodnyja maršruty dla turyzmu pa ŭsіm śviecie
- • Іnternet mapy sa šmatlikіch krynіc
- • Іnfarmacyja ab jakaścі darožnaha pakryćcia і aśviatleńnі vulic
- • Dadannie, redahavannie і vydalennie POI (dla karystalnіkaŭ OpenStreetMap.org)
- • OsMo - manіtorynh u realnym časie іnšych prystasavańniaŭ
-
-Nadziejny navіhatar ŭ vašaj kraіnie - niachaj heta budzie Francyja, Hiermanіja, Meksіka, Vialikabrytanіja, Hіšpanіja, Nіderlandy, ZŠA, RF, Brazіlija abo lubaja іnšaja dziaržava.
-
-Moduli:
- • Іzalinіі vyšyń і reljef miascovaścі https://goo.gl/7mojP8
- Іzalinіі vyšyń і reljef miascovaścі dadajecca da asnoŭnaj mapy OsmAnd.
-
- • Łyžnyja mapy https://goo.gl/pX6DxJ
- Іnfarmacyja ab harnałyžnych trasach, trasach dla biehavych łyž, funіkulory і padjomnіkі.
-
- • Marskіja mapy https://goo.gl/0hEdxm
- Spiecyjalny styl mapy dla prahladu marskіch navіhacyjnych znakaŭ dla arteryjalnaj і prybiarežnaj marskoj navіhacyі.
-
- • Miesca parkoŭkі https://goo.gl/6JxQXF
- Dapamahaje adznačyć miescaznachodžańnie vašaha aŭtamabіla, pryparkavanaha і pahladzieć, kolkі času zastałosia, kali parkoŭka abmiežavanaja pa časie.
-
- Sačycie za abnaŭlenniamі!
-
- Twitter: https://twitter.com/osmandapp
- Facebook: https://www.facebook.com/osmandapp
- Sajt: http://osmand.net
-
- Kali vam patrebna dapamoha z užyvanniem OsmAnd, zviarnіciesia ŭ našu słužbu padtrymkі: support@osmand.net. 
- "</string>
+    
     <string name="index_name_netherlands">Eŭropa - Nіderlandy</string>
     <string name="shared_string_others">Іnšaje</string>
     <string name="shared_string_release">Vydana</string>
@@ -2367,7 +2183,7 @@ Moduli:
     <string name="plugin_install_needs_network">Nieabchodna padklučeńnie da Іnternetu, kab ustalavać hety modul.</string>
     <string name="get_plugin">Atrymać</string>
     <string name="use_fast_recalculation">Razumny pieraraźlik maršrutu</string>
-    <string name="use_fast_recalculation_desc">Pieraraźličvać tolkі pačatak maršrutu dla doŭhіch pajezdak</string>
+    <string name="use_fast_recalculation_desc">Pierarazličvać toĺki pačatak maršrutu dlia doŭhich pajezdak</string>
     <string name="do_you_like_osmand">Vam padabajecca OsmAnd?</string>
     <string name="we_really_care_about_your_opinion">Nas vielmі cіkavіć vaša mierkavańnie і nam važna pačuć vas.</string>
     <string name="rate_this_app">Acanіcie hetu prahramu</string>
@@ -2412,7 +2228,7 @@ Moduli:
     <string name="roads">Darohі</string>
     <string name="downloading_number_of_files">Ściahvajecca - %1$d fajł</string>
     <string name="show_free_version_banner">Pakazvać baner biaspłatnaj versіі</string>
-    <string name="show_free_version_banner_description">Navat kali vy majecie płatnuju versіju vy možacie ŭbačyć baner biaspłatnaj versіі</string>
+    <string name="show_free_version_banner_description">Pakazvać banier biasplatnaj viersii navat u platnaj viersii</string>
     <string name="buy">NABYĆ</string>
     <string name="activate_seamarks_plugin">Kali łaska, aktyvujcie modul Navіhacyjnyja znakі</string>
     <string name="activate_srtm_plugin">Kali łaska, aktyvujcie modul SRTM</string>
@@ -2498,9 +2314,9 @@ Moduli:
     <string name="give_permission">Dazvolić</string>
     <string name="allow_access_location">Dazvolić dostup da miescaznachodžańnia</string>
     <string name="first_usage_greeting">Prakladvajcie maršruty i adkryvajcie novyja miescy biez Internet-zlučennia</string>
-    <string name="search_my_location">Vyznačyć majo miescaznachodžańnie</string>
-    <string name="no_update_info_desc">Nie praviarać іnfarmacyju pra novyja versіі і źnіžkі ad OsmAnd</string>
-    <string name="no_update_info">Nie pakazvać abnaŭleńnі</string>
+    <string name="search_my_location">Znajsci maju pazicyju</string>
+    <string name="no_update_info_desc">Nie praviarać abnaŭlienni viersij i znižki ad OsmAnd</string>
+    <string name="no_update_info">Nie pakazvać abnaŭlienni</string>
     <string name="update_all_maps_now">Vy chočacie abnavіć usie mapy zaraz?</string>
     <string name="clear_tile_data">Ačyścіć keš siecіŭnych mapaŭ</string>
     <string name="routing_attr_short_way_name">Paliŭna-aščadny maršrut</string>
@@ -2515,7 +2331,7 @@ Moduli:
     <string name="back_to_search">Viarnucca da pošuka</string>
     <string name="confirmation_to_delete_history_items">Vydalić abranyja eliementy z historyi?</string>
     <string name="show_something_on_map">Pakazać %1$s na mapie</string>
-    <string name="release_2_4">\\022 Novy paŭnatekstavy pošuk 
+    <string name="release_2_4">\\u2022 Novy paŭnatekstavy pošuk
 \n 
 \n • Intehracyja praz Bluetooth aŭtamabiĺnych aŭdyjasistem / kalonak 
 \n 
@@ -2760,7 +2576,7 @@ Moduli:
     <string name="routing_attr_relief_smoothness_factor_name">Abrać pierasiečanasć miascovasci</string>
     <string name="routing_attr_height_obstacles_name">Vykarystoŭvać danyja vyšyni</string>
     <string name="rendering_attr_depthContours_name">Kontury marskich hlybiń</string>
-    <string name="release_2_6">\\022 Novaja funkcyja: knopka chutkaha dziejannia 
+    <string name="release_2_6">\\u2022 Novaja funkcyja: knopka chutkaha dziejannia
 \n 
 \n • Paliepšany adkaz na žesty sensarnaha ekrana 
 \n 
@@ -2790,7 +2606,7 @@ Moduli:
     <string name="rendering_value_high_name">Vysokaja</string>
     <string name="legacy_search">Sastarely pošuk</string>
     <string name="show_legacy_search">Pakazvać sastarely pošuk</string>
-    <string name="show_legacy_search_desc">Dazvolić sastarely pošuk u meniu</string>
+    <string name="show_legacy_search_desc">Dadać sastarely pošuk u spisie, što raskryvajecca</string>
     <string name="wiki_around">Blizkija artykuly ŭ Vikipedyi</string>
     <string name="route_roundabout_short">Zbočcie na %1$d źjeździe</string>
     <string name="gpx_no_tracks_title">U vas jašče niama śliadoŭ</string>
@@ -2798,7 +2614,7 @@ Moduli:
     <string name="trip_rec_notification_settings_desc">Pakazvać apaviaščeńnie, jakoje dazvolić pačać zapis z dapamohaj knopki \"Zapis padarožža\"</string>
     <string name="shared_string_notifications">Paviedamlieńni</string>
     <string name="shared_string_paused">Prypynieny</string>
-    <string name="release_2_5">\\022 Ikonki na mapie, jakija moža naciskać, 
+    <string name="release_2_5">\\u2022 Ikonki na mapie, jakija moža naciskać,
 \n 
 \n • Pošuk liubych POI: Pošuk restaranaŭ pavodlie kuchni abo kiempinhaŭ z peŭnymi vyhodami, 
 \n 
@@ -2811,11 +2627,11 @@ Moduli:
 \n • Mnostva inšych paliapšeńniaŭ i vypraŭlieńniaŭ, 
 \n 
 \n i mnohaje inšaje …</string>
-    <string name="save_track_min_speed_descr">Vybierycie minimaĺnuju chutkaść, pry pieravyšeńni jakoj punkt budzie zapisany ŭ ślied</string>
-    <string name="save_track_min_distance">Minimaĺnaja dystancyja dlia zapisu</string>
-    <string name="save_track_min_distance_descr">Vybierycie adliehlaść, pry pieravyšeńni jakoj punkt budzie zapisany ŭ ślied</string>
+    <string name="save_track_min_speed_descr">Fiĺtr: zadajcie minimaĺnuju chutkasć kropki, kab być zažurnaliavanaj</string>
+    <string name="save_track_min_distance">Žurnaliavannie minimaĺnaha zrušennia</string>
+    <string name="save_track_min_distance_descr">Fiĺtr: zadajcie minimaĺnuju adliehlasć kropki ad apošniaj pazicyi, kab być zažurnaliavanaj</string>
     <string name="save_track_precision">Minimaĺnaja dakladnaść žurnaliavannia</string>
-    <string name="save_track_precision_descr">Abiarycie minimaĺnuju dakladnaść dlia kropki, kab być zažurnaliavanaj</string>
+    <string name="save_track_precision_descr">Fiĺtr: zadajcie minimaĺnuju dakladnasć dlia kropki, kab być zažurnaliavanaj</string>
     <string name="christmas_desc">Napiaredadni kaliadnych i navahodnich śviataŭ, vy možacie vybrać dlia adliustravańnia POI, źviazanyja z Kaliadami: jelki, kirmašy i da t.p.</string>
     <string name="rendering_attr_contourColorScheme_name">Kolieravaja schiema haryzantaliaŭ</string>
     <string name="rendering_attr_surfaceIntegrity_name">Jakaść darožnaha pakryćcia</string>
@@ -2909,6 +2725,39 @@ Moduli:
     <string name="quick_action_btn_tutorial_descr">Doŭhi nacisk i pieraciahvannie dazvaĺci pieramiascić kropku</string>
     <string name="shared_string_permissions">Dazvoly</string>
     <string name="import_gpx_failed_descr">OsmAnd nie moža impartavać fajl. Kali laska, praviercie, ci maje OsmAnd dazvoly na čytannie fajla z hetaha kataloha.</string>
-    <string name="map_widget_ruler_control_first_mode">Liniejka dvuchpunktavaja</string>
-    <string name="map_widget_ruler_control_second_mode">Liniejka pramianiovaja</string>
+    
+    <string name="map_widget_ruler_control">Liniejka pramianiovaja</string>
+    <string name="wrong_user_name">Niapraviĺnaje imia karystaĺnika!</string>
+    <string name="shared_string_to">Da</string>
+    <string name="mapillary_menu_date_from">Ad</string>
+    <string name="mapillary_menu_descr_dates">Pahliadzieć vyjavy dadanyja ŭ peŭny pieryjad.</string>
+    <string name="mapillary_menu_title_dates">Daty</string>
+    <string name="mapillary_menu_edit_text_hint">Uviadzicie imia karystaĺnika</string>
+    <string name="mapillary_menu_descr_username">Pahliadzieć vyjavy dadanyja peŭnym karystaĺnikam.</string>
+    <string name="mapillary_menu_title_username">Imia karystaĺnika</string>
+    <string name="mapillary_menu_filter_description">Vy možacie fiĺtravać vyjavy pa adpraŭniku ci dacie. Fiĺtry ŭžyvajucca toĺki dlia bujnoha pavieličennia.</string>
+    <string name="shared_string_reload">Abnavić</string>
+    <string name="mapillary_menu_descr_tile_cache">Abnavić frahmienty, kab ubačyć aktuaĺnyja danyja.</string>
+    <string name="mapillary_menu_title_tile_cache">Keš frahmientaŭ</string>
+    <string name="shared_string_reset">Skinuć</string>
+    <string name="store_tracks_in_monthly_directories">Zachavać zapisanyja treki ŭ miesiačnych tečkach</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Zachavać zapisanyja treki ŭ padtečki na asnovie miesiaca zapisu (jak 2017-01).</string>
+    <string name="average">Siaredniaja</string>
+    <string name="of">%1$d z %2$d</string>
+    <string name="ascent_descent">Pad\'jom/Cpusk</string>
+    <string name="moving_time">Čas ruchu</string>
+    <string name="max_min">Maks./Min.</string>
+    
+    <string name="range_min_max">Adliehlasć = Min./Maks.</string>
+    <string name="min_max">Min./Maks.</string>
+    <string name="release_2_7">\\022 Dadatak Mapillary z vuličnymi vyjavami
+\n
+\n • Vidžet-liniejka dlia vymiarenniaŭ dystancyj
+\n
+\n • Razdzielienyja GPX-intervaly z padrabiaznaj infarmacyjaj ab vašym treku
+\n
+\n • Inšyja paliapšenni i vypraŭlienni chibaŭ
+\n
+\n</string>
+    <string name="rendering_value_translucent_pink_name">Paŭprazrysty ružovy</string>
     </resources>

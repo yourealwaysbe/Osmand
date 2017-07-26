@@ -310,6 +310,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			search.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					mapActivity.dismissCardDialog();
 					mapActivity.showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
 				}
 			});
@@ -598,13 +599,17 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	protected void clickRouteCancel() {
+	public void stopNavigation() {
 		mapRouteInfoMenu.hide();
 		if (mapActivity.getRoutingHelper().isFollowingMode()) {
 			mapActivity.getMapActions().stopNavigationActionConfirm();
 		} else {
 			mapActivity.getMapActions().stopNavigationWithoutConfirm();
 		}
+	}
+
+	protected void clickRouteCancel() {
+		stopNavigation();
 	}
 
 	protected void clickRouteGo() {
@@ -744,6 +749,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			routePlanButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					mapActivity.dismissCardDialog();
 					doRoute(false);
 				}
 			});
@@ -1020,7 +1026,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				touchEvent = 0;
 				app.logEvent(mapActivity, "start_navigation");
 				app.getSettings().APPLICATION_MODE.set(routingHelper.getAppMode());
-				mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+				mapActivity.getMapViewTrackingUtilities().backToLocationImpl(17);
 				app.getSettings().FOLLOW_THE_ROUTE.set(true);
 				routingHelper.setFollowingMode(true);
 				routingHelper.setRoutePlanningMode(false);
@@ -1149,7 +1155,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void updateMyLocation(RoutingHelper rh, boolean dialogOpened) {
-		boolean enabled = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation() != null;
+		boolean enabled = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation() != null &&
+				!isLocationOutdated(mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation());
 		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
 
 		if (settings.NEW_MAP_VIEW.get()) {

@@ -43,6 +43,12 @@ import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import static android.text.InputType.TYPE_CLASS_PHONE;
+import static android.text.InputType.TYPE_CLASS_TEXT;
+import static android.text.InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS;
+import static android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
+import static android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
+
 public class QuickSearchCoordinatesFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final String TAG = "QuickSearchCoordinatesFragment";
@@ -107,7 +113,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		view = inflater.inflate(R.layout.search_advanced_coords, container, false);
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(app.getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
+		toolbar.setNavigationIcon(app.getIconsCache().getIcon(R.drawable.ic_arrow_back));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -503,6 +509,17 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		}
 	}
 
+	private void setInputTypeDependingOnFormat(EditText[] editTexts) {
+		for (EditText et : editTexts) {
+			if (currentFormat == PointDescription.FORMAT_DEGREES) {
+				et.setInputType(TYPE_CLASS_PHONE);
+			} else {
+				et.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_VISIBLE_PASSWORD |
+						TYPE_TEXT_FLAG_CAP_CHARACTERS | TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+			}
+		}
+	}
+
 	private boolean applyFormat(int format, boolean forceApply) {
 		if (currentFormat != format || forceApply) {
 			int prevFormat = currentFormat;
@@ -510,7 +527,8 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 			formatEdit.setText(PointDescription.formatToHumanString(getMyApplication(), currentFormat));
 			final EditText latEdit = ((EditText) view.findViewById(R.id.latitudeEditText));
 			final EditText lonEdit = ((EditText) view.findViewById(R.id.longitudeEditText));
-			updateControlsVisibility();
+            setInputTypeDependingOnFormat(new EditText[]{latEdit, lonEdit});
+            updateControlsVisibility();
 			if (currentFormat == PointDescription.UTM_FORMAT) {
 				final EditText northingEdit = ((EditText) view.findViewById(R.id.northingEditText));
 				final EditText eastingEdit = ((EditText) view.findViewById(R.id.eastingEditText));
@@ -621,8 +639,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		View compassView = view.findViewById(R.id.compass_layout);
 		Location ll = getMyApplication().getLocationProvider().getLastKnownLocation();
 		boolean showCompass = currentLatLon != null && location != null;
-		boolean gpsFixed = ll != null && System.currentTimeMillis() - ll.getTime() < 1000 * 60 * 60 * 20;
-		if (gpsFixed && showCompass) {
+		if (ll != null && showCompass) {
 			updateDistanceDirection(view, location, currentLatLon, heading);
 			compassView.setVisibility(View.VISIBLE);
 		} else {

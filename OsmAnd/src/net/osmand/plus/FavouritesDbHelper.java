@@ -415,16 +415,18 @@ public class FavouritesDbHelper {
 
 	
 	public void addEmptyCategory(String name) {
-		FavoriteGroup group = new FavoriteGroup();
-		group.name = name;
-		favoriteGroups.add(group);
-		flatGroups.put(name, group);
+		addEmptyCategory(name, 0, true);
 	}
 
 	public void addEmptyCategory(String name, int color) {
+		addEmptyCategory(name, color, true);
+	}
+
+	public void addEmptyCategory(String name, int color, boolean visible) {
 		FavoriteGroup group = new FavoriteGroup();
 		group.name = name;
 		group.color = color;
+		group.visible = visible;
 		favoriteGroups.add(group);
 		flatGroups.put(name, group);
 	}
@@ -661,7 +663,7 @@ public class FavouritesDbHelper {
 		if (conn.getVersion() == 0 || DATABASE_VERSION != conn.getVersion()) {
 			if (readonly) {
 				conn.close();
-				conn = context.getSQLiteAPI().getOrCreateDatabase(FAVOURITE_DB_NAME, readonly);
+				conn = context.getSQLiteAPI().getOrCreateDatabase(FAVOURITE_DB_NAME, false);
 			}
 			if (conn.getVersion() == 0) {
 				onCreate(conn);

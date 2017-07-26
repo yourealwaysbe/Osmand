@@ -1234,10 +1234,10 @@
 	<string name="poi_enforcement_toll">Kontrolo: imposto</string>
 
 	<string name="poi_animal_shelter">Azilo por bestoj</string>
-	<string name="poi_animal_shelter_dog">Azilo por: hundoj</string>
-	<string name="poi_animal_shelter_cat">Azilo por: katoj</string>
-	<string name="poi_animal_shelter_dog_cat">Azilo por: hundoj kaj katoj</string>
-	<string name="poi_animal_shelter_bird">Azilo por: birdoj</string>
+	<string name="poi_animal_shelter_dog">hundoj</string>
+	<string name="poi_animal_shelter_cat">katoj</string>
+	<string name="poi_animal_shelter_dog_cat">hundoj kaj katoj</string>
+	<string name="poi_animal_shelter_bird">birdoj</string>
 
 	<string name="poi_seats">Seĝoj</string>
 	<string name="poi_backrest_yes">Seĝodorsoj: jes</string>
@@ -1535,7 +1535,7 @@
 	<string name="poi_payment_gift_card_no">Donac-kartoj malakceptataj</string>
 	<string name="poi_payment_golden_crown_yes">Golden Crown</string>
 	<string name="poi_payment_golden_crown_no">Golden Crown kartoj malakceptataj</string>
-	<string name="poi_payment_pro100_yes">"PRO100 "</string>
+	<string name="poi_payment_pro100_yes">PRO100</string>
 	<string name="poi_payment_pro100_no">PRO100 kartoj malakceptataj</string>
 	<string name="poi_payment_union_card_yes">Union Card</string>
 	<string name="poi_payment_union_card_no">Union Card malakceptata</string>
@@ -2090,7 +2090,7 @@
 	<string name="poi_openfire_no">Fajro malpermesata</string>
 	<string name="poi_backcountry_yes">Jes</string>
 	<string name="poi_backcountry_no">Ne</string>
-	<string name="poi_scout_yes">Skolta kampadejo: jes</string>
+	<string name="poi_scout_yes">jes</string>
 	<string name="poi_scout_no">Skolta kampadejo: ne</string>
 	<string name="poi_group_only_yes">Nur por grupoj: jes</string>
 	<string name="poi_group_only_no">Nur por grupoj: ne</string>
@@ -2276,7 +2276,7 @@
 	<string name="poi_historic_period_old_kingdom">Historia periodo: malnova imperio (2686 – 2181 a.K.)</string>
 	<string name="poi_historic_period_first_intermediate_period">Historia periodo: unua intertempa periodo (2181 – 2055 a.K.)</string>
 	<string name="poi_historic_period_second_intermediate_period">Historia periodo: dua intertempa periodo (1650 – 1550 a.K.)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Historia periodo: tria intertempa periodo (1069 – 664 a.K.) "</string>
+	<string name="poi_historic_period_third_intermediate_period">Historia periodo: tria intertempa periodo (1069 – 664 a.K.)</string>
 	<string name="poi_historic_period_first_persian_period">Historia periodo: unua persa superregado</string>
 	<string name="poi_historic_period_late_period">Historia periodo: malfrua periodo (664 – 332 a.K.)</string>
 	<string name="poi_historic_period_second_persian_period">Historia periodo: dua Persa superregado</string>
@@ -2665,12 +2665,12 @@
 	<string name="poi_office_midwife">Oficejo de akuŝisto</string>
 
 	<string name="poi_fire_hydrant_flow_capacity">Flurapido hidranta</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Pozicio de hidranto: irejo</string>
-	<string name="poi_fire_hydrant_position_green">Pozicio de hidranto: gazono</string>
-	<string name="poi_fire_hydrant_position_lane">Pozicio de hidranto: veturejo</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Pozicio de hidranto: parkumejo</string>
-	<string name="poi_fire_hydrant_position_street">Pozicio de hidranto: strato</string>
-	<string name="poi_fire_hydrant_position_underground">Pozicio de hidranto: subtero</string>
+	<string name="poi_fire_hydrant_position_sidewalk">irejo</string>
+	<string name="poi_fire_hydrant_position_green">herbotapiŝo</string>
+	<string name="poi_fire_hydrant_position_lane">veturejo</string>
+	<string name="poi_fire_hydrant_position_parking_lot">parkumejo</string>
+	<string name="poi_fire_hydrant_position_street">strato</string>
+	<string name="poi_fire_hydrant_position_underground">subtero</string>
 	<string name="poi_fire_hydrant_style_wsh">Tipo de hidranto: wsh</string>
 	<string name="poi_fire_hydrant_style_water_source_main">Akvokonduktilo</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">Lageto</string>
@@ -2746,9 +2746,9 @@
 	<string name="poi_payment_troika_yes">Troika (Тройка)</string>
 	<string name="poi_payment_troika_no">Troika (Тройка) kartoj malakceptataj</string>
 
-	<string name="poi_telescope_type_optical">Teleskopo: optika</string>
-	<string name="poi_telescope_type_radio">Teleskopo: radia</string>
-	<string name="poi_telescope_type_gamma">Teleskopo: gam-radia</string>
+	<string name="poi_telescope_type_optical">optika</string>
+	<string name="poi_telescope_type_radio">radia</string>
+	<string name="poi_telescope_type_gamma">gam-radia</string>
 	<string name="poi_telescope_diameter">Diametro</string>
 	<string name="poi_telescope_spectrum">Spektro</string>
 	<string name="poi_telescope_usage_education">Uzado: edukado</string>
@@ -2937,7 +2937,7 @@
 	<string name="poi_health_specialty_urology_yes">urin-sistem-scienco (urologio)</string>
 	<string name="poi_health_specialty_surgery_yes">ĥirurgio</string>
 	<string name="poi_health_specialty_radiology_yes">radi-medicino (radiologio)</string>
-	<string name="poi_health_specialty_palliative_medicine_yes">Specialisto: isto de zorgado pri nekuracebluloj</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">zorgo pri nekuracebluloj</string>
 
 	<string name="poi_health_specialty_psychiatry_yes">psiĥiatrio</string>
 	<string name="poi_health_specialty_neurology_yes">nerv-scienco (neŭrologio)</string>
@@ -3017,8 +3017,8 @@
 	<string name="poi_additional_type">Aldona</string>
 <string name="poi_shop_craft">Materialoj-por-metio-vendejo</string>
 
-	<string name="poi_service_bicycle_charging_yes">Ŝargado de bicikloj: jes</string>
-	<string name="poi_service_bicycle_charging_no">Ŝargado de bicikloj: ne</string>
+	<string name="poi_service_bicycle_charging_yes">Ŝargo: jes</string>
+	<string name="poi_service_bicycle_charging_no">Ŝargo: ne</string>
 
 <string name="poi_fuel_avia_type">Speco</string>
 	<string name="poi_payment_fuel_type">Brulaĵ-kartoj</string>
@@ -3407,4 +3407,50 @@
 	<string name="poi_motorcycle_type_standard">normaj</string>
 
 <string name="poi_motorcycle_type_dualsport">dual-sport</string>
-	</resources>
+	<string name="poi_lock_basin">Kluza baseno</string>
+	<string name="poi_owner">Posedanto</string>
+
+<string name="poi_generator_output_electricity_no">Elaĵo (elektro): ne</string>
+
+	<string name="poi_animal_shelter_type">Akceptataj bestoj</string>
+	<string name="poi_animal_shelter_purpose">Celo</string>
+
+<string name="poi_animal_shelter_wildlife">sovaĝaj bestoj</string>
+	<string name="poi_animal_shelter_horse">ĉevaloj</string>
+	<string name="poi_animal_shelter_mammal">mamuloj</string>
+	<string name="poi_animal_shelter_fish">fiŝoj</string>
+
+	<string name="poi_animal_shelter_purpose_adoption_yes">adopto: jes</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">adopto: ne</string>
+	<string name="poi_animal_shelter_purpose_release_yes">elliberigo: jes</string>
+	<string name="poi_animal_shelter_purpose_release_no">elliberigo: ne</string>
+
+	<string name="poi_spaceport">Kosmodromo</string>
+
+<string name="poi_direction_n">Direkto: nordo</string>
+	<string name="poi_direction_nne">Direkto: nord-nord-orienta</string>
+	<string name="poi_direction_ne">Direkto: nord-orienta</string>
+	<string name="poi_direction_ene">Direkto: orient-nord-orienta</string>
+	<string name="poi_direction_e">Direkto: orienta</string>
+	<string name="poi_direction_ese">Direkto: orient-sud-orienta</string>
+	<string name="poi_direction_se">Direkto: sud-orienta</string>
+	<string name="poi_direction_sse">Direkto: sud-sud-orienta</string>
+	<string name="poi_direction_s">Direkto: suda</string>
+	<string name="poi_direction_ssw">Direkto: sud-sud-okcidenta</string>
+	<string name="poi_direction_sw">Direkto: sud-okcidenta</string>
+	<string name="poi_direction_wsw">Direkto: okcident-sud-okcidenta</string>
+	<string name="poi_direction_w">Direkto: okcidenta</string>
+	<string name="poi_direction_wnw">Direkto: okcident-nord-okcidenta</string>
+	<string name="poi_direction_nw">Direkto: nord-okcidenta</string>
+	<string name="poi_direction_nnw">Direkto: nord-nord-okcidenta</string>
+	<string name="poi_direction_forward">Direkto: antaŭen</string>
+	<string name="poi_direction_backward">Direkto: malantaŭen</string>
+	<string name="poi_direction_clockwise">Direkto: horloĝdirekten</string>
+	<string name="poi_direction_anticlockwise">Direkto: malhorloĝdirekten</string>
+	<string name="poi_direction_up">Direkto: supren</string>
+	<string name="poi_direction_down">Direkto: malsupren</string>
+	<string name="poi_direction_entrance">Direkto: eniro</string>
+	<string name="poi_direction_exit">Direkto: eliro</string>
+	<string name="poi_direction_all">Direkto: ĉiuj</string>
+
+</resources>

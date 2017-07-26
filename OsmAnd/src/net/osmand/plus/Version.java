@@ -33,7 +33,7 @@ public class Version {
 		} else if (isGooglePlayEnabled(ctx)) {
 			return "market://search?q=pname:";
 		} 
-		return "http://osmand.net/apps?id="; 
+		return "https://osmand.net/apps?id=";
 	}
 	
 	private static boolean isAmazonEnabled(OsmandApplication ctx) {
@@ -113,7 +113,7 @@ public class Version {
 	}
 	
 	public static boolean isDeveloperVersion(OsmandApplication ctx){
-		return getAppName(ctx).contains("~");
+		return getAppName(ctx).contains("~") || ctx.getPackageName().equals(FREE_DEV_VERSION_NAME);
 	}
 	
 	public static String getVersionForTracker(OsmandApplication ctx) {

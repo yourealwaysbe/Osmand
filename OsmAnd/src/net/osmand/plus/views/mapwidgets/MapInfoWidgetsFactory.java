@@ -31,6 +31,7 @@ import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.RulerControlLayer;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
@@ -111,126 +112,69 @@ public class MapInfoWidgetsFactory {
 		return gpsInfoControl;
 	}
 
-	public static class RulerWidgetState extends MapWidgetRegistry.WidgetState {
-
-		static final int RULER_CONTROL_WIDGET_STATE_FIRST_MODE = R.id.ruler_control_widget_state_first_mode;
-		static final int RULER_CONTROL_WIDGET_STATE_SECOND_MODE = R.id.ruler_control_widget_state_second_mode;
-		static final int RULER_CONTROL_WIDGET_STATE_EMPTY_MODE = R.id.ruler_control_widget_state_empty_mode;
-
-		private final OsmandSettings.CommonPreference<RulerMode> rulerMode;
-
-		public RulerWidgetState(OsmandApplication ctx) {
-			super(ctx);
-			rulerMode = ctx.getSettings().RULER_MODE;
-		}
-
-		@Override
-		public int getMenuTitleId() {
-			if (rulerMode.get() == RulerMode.SECOND) {
-				return R.string.map_widget_ruler_control_second_mode;
-			} else {
-				return R.string.map_widget_ruler_control_first_mode;
-			}
-		}
-
-		@Override
-		public int getMenuIconId() {
-			final RulerMode mode = rulerMode.get();
-			if (mode == RulerMode.FIRST) {
-				return R.drawable.ic_action_ruler_location;
-			} else if (mode == RulerMode.SECOND) {
-				return R.drawable.ic_action_ruler_circle;
-			}
-			return R.drawable.ic_action_hide;
-		}
-
-		@Override
-		public int getMenuItemId() {
-			RulerMode mode = rulerMode.get();
-			if (mode == RulerMode.FIRST) {
-				return RULER_CONTROL_WIDGET_STATE_FIRST_MODE;
-			} else if (mode == RulerMode.SECOND){
-				return RULER_CONTROL_WIDGET_STATE_SECOND_MODE;
-			} else {
-				return RULER_CONTROL_WIDGET_STATE_EMPTY_MODE;
-			}
-		}
-
-		@Override
-		public int[] getMenuTitleIds() {
-			return new int[]{R.string.map_widget_ruler_control_first_mode, R.string.map_widget_ruler_control_second_mode};
-		}
-
-		@Override
-		public int[] getMenuIconIds() {
-			return new int[]{R.drawable.ic_action_ruler_location, R.drawable.ic_action_ruler_circle};
-		}
-
-		@Override
-		public int[] getMenuItemIds() {
-			return new int[]{RULER_CONTROL_WIDGET_STATE_FIRST_MODE, RULER_CONTROL_WIDGET_STATE_SECOND_MODE};
-		}
-
-		@Override
-		public void changeState(int stateId) {
-			RulerMode newMode = RulerMode.FIRST;
-			if (stateId == RULER_CONTROL_WIDGET_STATE_SECOND_MODE) {
-				newMode = RulerMode.SECOND;
-			}
-			rulerMode.set(newMode);
-		}
-	}
-
 	public TextInfoWidget createRulerControl(final MapActivity map) {
-		final String title = map.getResources().getString(R.string.map_widget_show_ruler);
-        final TextInfoWidget rulerControl = new TextInfoWidget(map) {
-			boolean needNewLatLon;
-			long cacheMultiTouchTime;
+		final String title = "—";
+		final TextInfoWidget rulerControl = new TextInfoWidget(map) {
+			RulerControlLayer rulerLayer = map.getMapLayers().getRulerControlLayer();
+			LatLon cacheFirstTouchPoint = new LatLon(0, 0);
+			LatLon cacheSecondTouchPoint = new LatLon(0, 0);
+			LatLon cacheSingleTouchPoint = new LatLon(0, 0);
+			boolean fingerAndLocDistWasShown;
 
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
-				RulerMode mode = map.getMyApplication().getSettings().RULER_MODE.get();
 				OsmandMapTileView view = map.getMapView();
+				Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
 
-				if (cacheMultiTouchTime != view.getMultiTouchTime()) {
-					cacheMultiTouchTime = view.getMultiTouchTime();
-					needNewLatLon = true;
-				}
-				if (view.isMultiTouch() || System.currentTimeMillis() - cacheMultiTouchTime < 3000) {
-					if (needNewLatLon) {
-						float x1 = view.getFirstTouchPointX();
-						float y1 = view.getFirstTouchPointY();
-						float x2 = view.getSecondTouchPointX();
-						float y2 = view.getSecondTouchPointY();
-						LatLon firstFinger = view.getCurrentRotatedTileBox().getLatLonFromPixel(x1, y1);
-						LatLon secondFinger = view.getCurrentRotatedTileBox().getLatLonFromPixel(x2, y2);
-						setDistanceText(firstFinger.getLatitude(), firstFinger.getLongitude(),
-								secondFinger.getLatitude(), secondFinger.getLongitude());
-						needNewLatLon = false;
+				if (rulerLayer.isShowDistBetweenFingerAndLocation() && currentLoc != null) {
+					if (!cacheSingleTouchPoint.equals(rulerLayer.getTouchPointLatLon())) {
+						cacheSingleTouchPoint = rulerLayer.getTouchPointLatLon();
+						setDistanceText(cacheSingleTouchPoint.getLatitude(), cacheSingleTouchPoint.getLongitude(),
+								currentLoc.getLatitude(), currentLoc.getLongitude());
+						fingerAndLocDistWasShown = true;
 					}
-				} else if (mode == RulerMode.FIRST || mode == RulerMode.SECOND) {
-					Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
+				} else if (rulerLayer.isShowTwoFingersDistance()) {
+					if (!cacheFirstTouchPoint.equals(view.getFirstTouchPointLatLon()) ||
+							!cacheSecondTouchPoint.equals(view.getSecondTouchPointLatLon()) ||
+							fingerAndLocDistWasShown) {
+						cacheFirstTouchPoint = view.getFirstTouchPointLatLon();
+						cacheSecondTouchPoint = view.getSecondTouchPointLatLon();
+						setDistanceText(cacheFirstTouchPoint.getLatitude(), cacheFirstTouchPoint.getLongitude(),
+								cacheSecondTouchPoint.getLatitude(), cacheSecondTouchPoint.getLongitude());
+						fingerAndLocDistWasShown = false;
+					}
+				} else {
 					LatLon centerLoc = map.getMapLocation();
 
 					if (currentLoc != null && centerLoc != null) {
-						setDistanceText(currentLoc.getLatitude(), currentLoc.getLongitude(),
-								centerLoc.getLatitude(), centerLoc.getLongitude());
+						if (map.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+							setDistanceText(0);
+						} else {
+							setDistanceText(currentLoc.getLatitude(), currentLoc.getLongitude(),
+									centerLoc.getLatitude(), centerLoc.getLongitude());
+						}
+					} else {
+						setText(title, null);
 					}
-					needNewLatLon = true;
-				} else {
-					setText(title, null);
-					needNewLatLon = true;
 				}
 				return true;
 			}
 
-            private void setDistanceText(double firstLat, double firstLon, double secondLat, double secondLon) {
-                float dist = (float) MapUtils.getDistance(firstLat, firstLon, secondLat, secondLon);
-                String distance = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
-                int ls = distance.lastIndexOf(' ');
-                setText(distance.substring(0, ls), distance.substring(ls + 1));
-            }
-        };
+			private void setDistanceText(float dist) {
+				calculateAndSetText(dist);
+			}
+
+			private void setDistanceText(double firstLat, double firstLon, double secondLat, double secondLon) {
+				float dist = (float) MapUtils.getDistance(firstLat, firstLon, secondLat, secondLon);
+				calculateAndSetText(dist);
+			}
+
+			private void calculateAndSetText(float dist) {
+				String distance = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
+				int ls = distance.lastIndexOf(' ');
+				setText(distance.substring(0, ls), distance.substring(ls + 1));
+			}
+		};
 
 		rulerControl.setText(title, null);
 		setRulerControlIcon(rulerControl, map.getMyApplication().getSettings().RULER_MODE.get());
@@ -254,9 +198,7 @@ public class MapInfoWidgetsFactory {
 	}
 
 	private void setRulerControlIcon(TextInfoWidget rulerControl, RulerMode mode) {
-		if (mode == RulerMode.FIRST) {
-			rulerControl.setIcons(R.drawable.widget_ruler_location_day, R.drawable.widget_ruler_location_night);
-		} else if (mode == RulerMode.SECOND) {
+		if (mode == RulerMode.FIRST || mode == RulerMode.SECOND) {
 			rulerControl.setIcons(R.drawable.widget_ruler_circle_day, R.drawable.widget_ruler_circle_night);
 		} else {
 			rulerControl.setIcons(R.drawable.widget_hidden_day, R.drawable.widget_hidden_night);
@@ -271,8 +213,8 @@ public class MapInfoWidgetsFactory {
 		int bgLightLandId = R.drawable.btn_round;
 		int bgDarkLandId = R.drawable.btn_round_night;
 
-		int backBtnIconLightId = R.drawable.abc_ic_ab_back_mtrl_am_alpha;
-		int backBtnIconDarkId = R.drawable.abc_ic_ab_back_mtrl_am_alpha;
+		int backBtnIconLightId = R.drawable.ic_arrow_back;
+		int backBtnIconDarkId = R.drawable.ic_arrow_back;
 		int backBtnIconClrLightId = R.color.icon_color;
 		int backBtnIconClrDarkId = 0;
 
@@ -638,14 +580,18 @@ public class MapInfoWidgetsFactory {
 				titleView.setSingleLine(false);
 			}
 
-			if (controller.closeBtnVisible && closeButton.getVisibility() == View.GONE) {
-				closeButton.setVisibility(View.VISIBLE);
-			} else {
+			if (controller.closeBtnVisible) {
+				if (closeButton.getVisibility() == View.GONE) {
+					closeButton.setVisibility(View.VISIBLE);
+				}
+			} else if (closeButton.getVisibility() == View.VISIBLE) {
 				closeButton.setVisibility(View.GONE);
 			}
-			if (controller.refreshBtnVisible && refreshButton.getVisibility() == View.GONE) {
-				refreshButton.setVisibility(View.VISIBLE);
-			} else {
+			if (controller.refreshBtnVisible) {
+				if (refreshButton.getVisibility() == View.GONE) {
+					refreshButton.setVisibility(View.VISIBLE);
+				}
+			} else if (refreshButton.getVisibility() == View.VISIBLE) {
 				refreshButton.setVisibility(View.GONE);
 			}
 		}

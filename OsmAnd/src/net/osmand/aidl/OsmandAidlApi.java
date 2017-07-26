@@ -5,24 +5,33 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.ParcelFileDescriptor;
 import android.view.View;
 
 import net.osmand.IndexConstants;
+import net.osmand.aidl.favorite.AFavorite;
+import net.osmand.aidl.favorite.group.AFavoriteGroup;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
 import net.osmand.aidl.maplayer.AMapLayer;
 import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.aidl.mapmarker.AMapMarker;
 import net.osmand.aidl.mapwidget.AMapWidget;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -345,6 +354,128 @@ public class OsmandAidlApi {
 		return control;
 	}
 
+	boolean reloadMap() {
+		refreshMap();
+		return true;
+	}
+
+	boolean addFavoriteGroup(AFavoriteGroup favoriteGroup) {
+		if (favoriteGroup != null) {
+			FavouritesDbHelper favoritesHelper = app.getFavorites();
+			List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+			for (FavouritesDbHelper.FavoriteGroup g : groups) {
+				if (g.name.equals(favoriteGroup.getName())) {
+					return false;
+				}
+			}
+			int color = 0;
+			if (!Algorithms.isEmpty(favoriteGroup.getColor())) {
+				color = ColorDialogs.getColorByTag(favoriteGroup.getColor());
+			}
+			favoritesHelper.addEmptyCategory(favoriteGroup.getName(), color, favoriteGroup.isVisible());
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	boolean removeFavoriteGroup(AFavoriteGroup favoriteGroup) {
+		if (favoriteGroup != null) {
+			FavouritesDbHelper favoritesHelper = app.getFavorites();
+			List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+			for (FavouritesDbHelper.FavoriteGroup g : groups) {
+				if (g.name.equals(favoriteGroup.getName())) {
+					favoritesHelper.deleteGroup(g);
+					return true;
+				}
+			}
+			return false;
+		} else {
+			return false;
+		}
+	}
+
+	boolean updateFavoriteGroup(AFavoriteGroup gPrev, AFavoriteGroup gNew) {
+		if (gPrev != null && gNew != null) {
+			FavouritesDbHelper favoritesHelper = app.getFavorites();
+			List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+			for (FavouritesDbHelper.FavoriteGroup g : groups) {
+				if (g.name.equals(gPrev.getName())) {
+					int color = 0;
+					if (!Algorithms.isEmpty(gNew.getColor())) {
+						color = ColorDialogs.getColorByTag(gNew.getColor());
+					}
+					favoritesHelper.editFavouriteGroup(g, gNew.getName(), color, gNew.isVisible());
+					return true;
+				}
+			}
+			return false;
+		} else {
+			return false;
+		}
+	}
+
+	boolean addFavorite(AFavorite favorite) {
+		if (favorite != null) {
+			FavouritesDbHelper favoritesHelper = app.getFavorites();
+			FavouritePoint point = new FavouritePoint(favorite.getLat(), favorite.getLon(), favorite.getName(), favorite.getCategory());
+			point.setDescription(favorite.getDescription());
+			int color = 0;
+			if (!Algorithms.isEmpty(favorite.getColor())) {
+				color = ColorDialogs.getColorByTag(favorite.getColor());
+			}
+			point.setColor(color);
+			point.setVisible(favorite.isVisible());
+			favoritesHelper.addFavourite(point);
+			refreshMap();
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	boolean removeFavorite(AFavorite favorite) {
+		if (favorite != null) {
+			FavouritesDbHelper favoritesHelper = app.getFavorites();
+			List<FavouritePoint> favorites = favoritesHelper.getFavouritePoints();
+			for (FavouritePoint f : favorites) {
+				if (f.getName().equals(favorite.getName()) && f.getCategory().equals(favorite.getCategory()) &&
+						f.getLatitude() == favorite.getLat() && f.getLongitude() == favorite.getLon()) {
+					favoritesHelper.deleteFavourite(f);
+					refreshMap();
+					return true;
+				}
+			}
+			return false;
+		} else {
+			return false;
+		}
+	}
+
+	boolean updateFavorite(AFavorite fPrev, AFavorite fNew) {
+		if (fPrev != null && fNew != null) {
+			FavouritesDbHelper favoritesHelper = app.getFavorites();
+			List<FavouritePoint> favorites = favoritesHelper.getFavouritePoints();
+			for (FavouritePoint f : favorites) {
+				if (f.getName().equals(fPrev.getName()) && f.getCategory().equals(fPrev.getCategory()) &&
+						f.getLatitude() == fPrev.getLat() && f.getLongitude() == fPrev.getLon()) {
+					if (fNew.getLat() != f.getLatitude() || fNew.getLon() != f.getLongitude()) {
+						favoritesHelper.editFavourite(f, fNew.getLat(), fNew.getLon());
+					}
+					if (!fNew.getName().equals(f.getName()) || !fNew.getDescription().equals(f.getDescription()) ||
+							!fNew.getCategory().equals(f.getCategory())) {
+						favoritesHelper.editFavouriteName(f, fNew.getName(), fNew.getCategory(), fNew.getDescription());
+					}
+					refreshMap();
+					return true;
+				}
+			}
+			return false;
+		} else {
+			return false;
+		}
+	}
+
 	boolean addMapMarker(AMapMarker marker) {
 		if (marker != null) {
 			PointDescription pd = new PointDescription(
@@ -504,13 +635,71 @@ public class OsmandAidlApi {
 		return false;
 	}
 
-	boolean importGpxFromFile(File source, String destinationPath) {
+	private void finishGpxImport(boolean destinationExists, File destination, String color, boolean show) {
+		int col = ConfigureMapMenu.GpxAppearanceAdapter.parseTrackColor(
+					app.getRendererRegistry().getCurrentSelectedRenderer(), color);
+		if (!destinationExists) {
+			GpxDataItem gpxDataItem = new GpxDataItem(destination, col);
+			app.getGpxDatabase().add(gpxDataItem);
+		} else {
+			GpxDataItem item = app.getGpxDatabase().getItem(destination);
+			if (item != null) {
+				app.getGpxDatabase().updateColor(item, col);
+			}
+		}
+		final GpxSelectionHelper helper = app.getSelectedGpxHelper();
+		final SelectedGpxFile selectedGpx = helper.getSelectedFileByName(destination.getName());
+		if (selectedGpx != null) {
+			if (show) {
+				new AsyncTask<File, Void, GPXFile>() {
+
+					@Override
+					protected GPXFile doInBackground(File... files) {
+						return GPXUtilities.loadGPXFile(app, files[0]);
+					}
+
+					@Override
+					protected void onPostExecute(GPXFile gpx) {
+						if (gpx.warning == null) {
+							selectedGpx.setGpxFile(gpx);
+							refreshMap();
+						}
+					}
+
+				}.execute(destination);
+			} else {
+				helper.selectGpxFile(selectedGpx.getGpxFile(), false, false);
+				refreshMap();
+			}
+		} else if (show) {
+			new AsyncTask<File, Void, GPXFile>() {
+
+				@Override
+				protected GPXFile doInBackground(File... files) {
+					return GPXUtilities.loadGPXFile(app, files[0]);
+				}
+
+				@Override
+				protected void onPostExecute(GPXFile gpx) {
+					if (gpx.warning == null) {
+						helper.selectGpxFile(gpx, true, false);
+						refreshMap();
+					}
+				}
+
+			}.execute(destination);
+		}
+	}
+
+	boolean importGpxFromFile(File source, String destinationPath, String color, boolean show) {
 		if (source != null && !Algorithms.isEmpty(destinationPath)) {
 			if (source.exists() && source.canRead()) {
 				File destination = app.getAppPath(IndexConstants.GPX_INDEX_DIR + destinationPath);
 				if (destination.getParentFile().canWrite()) {
+					boolean destinationExists = destination.exists();
 					try {
 						Algorithms.fileCopy(source, destination);
+						finishGpxImport(destinationExists, destination, color, show);
 						return true;
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -521,18 +710,20 @@ public class OsmandAidlApi {
 		return false;
 	}
 
-	boolean importGpxFromUri(Uri gpxUri, String destinationPath) {
+	boolean importGpxFromUri(Uri gpxUri, String destinationPath, String color, boolean show) {
 		if (gpxUri != null && !Algorithms.isEmpty(destinationPath)) {
 			File destination = app.getAppPath(IndexConstants.GPX_INDEX_DIR + destinationPath);
-			ParcelFileDescriptor gpxParcelDescriptor = null;
+			ParcelFileDescriptor gpxParcelDescriptor;
 			try {
 				gpxParcelDescriptor = app.getContentResolver().openFileDescriptor(gpxUri, "r");
 				if (gpxParcelDescriptor != null) {
+					boolean destinationExists = destination.exists();
 					FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
 					InputStream is = new FileInputStream(fileDescriptor);
 					FileOutputStream fout = new FileOutputStream(destination);
 					try {
 						Algorithms.streamCopy(is, fout);
+						finishGpxImport(destinationExists, destination, color, show);
 					} finally {
 						try {
 							is.close();
@@ -554,14 +745,16 @@ public class OsmandAidlApi {
 		return false;
 	}
 
-	boolean importGpxFromData(String sourceRawData, String destinationPath) {
+	boolean importGpxFromData(String sourceRawData, String destinationPath, String color, boolean show) {
 		if (!Algorithms.isEmpty(sourceRawData) && !Algorithms.isEmpty(destinationPath)) {
 			File destination = app.getAppPath(IndexConstants.GPX_INDEX_DIR + destinationPath);
 			try {
 				InputStream is = new ByteArrayInputStream(sourceRawData.getBytes());
 				FileOutputStream fout = new FileOutputStream(destination);
+				boolean destinationExists = destination.exists();
 				try {
 					Algorithms.streamCopy(is, fout);
+					finishGpxImport(destinationExists, destination, color, show);
 				} finally {
 					try {
 						is.close();
@@ -586,9 +779,23 @@ public class OsmandAidlApi {
 		if (!Algorithms.isEmpty(fileName)) {
 			File f = app.getAppPath(IndexConstants.GPX_INDEX_DIR + fileName);
 			if (f.exists()) {
-				GPXFile gpx = GPXUtilities.loadGPXFile(app, f);
-				app.getSelectedGpxHelper().selectGpxFile(gpx, true, false);
-				refreshMap();
+				new AsyncTask<File, Void, GPXFile>() {
+
+					@Override
+					protected GPXFile doInBackground(File... files) {
+						return GPXUtilities.loadGPXFile(app, files[0]);
+					}
+
+					@Override
+					protected void onPostExecute(GPXFile gpx) {
+						if (gpx.warning == null) {
+							app.getSelectedGpxHelper().selectGpxFile(gpx, true, false);
+							refreshMap();
+						}
+					}
+
+				}.execute(f);
+
 				return true;
 			}
 		}

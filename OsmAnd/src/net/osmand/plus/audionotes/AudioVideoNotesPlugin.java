@@ -243,6 +243,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return file;
 		}
 
+		public long getLastModified() {
+			return file.lastModified();
+		}
 
 		public boolean setName(String name) {
 			File directory = file.getParentFile();
@@ -383,7 +386,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						rot -= 360;
 					}
 					int abs = (int) (Math.abs(rot) * 100.0);
-					String rotString = abs / 100f + "";
+					String rotString = abs + "/100";
 					setAttribute.invoke(exInstance, "GPSImgDirection", rotString);
 				}
 				if (loc != null && loc.hasAltitude()) {
@@ -859,14 +862,16 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	private void initRecMenu(AVActionType actionType, double lat, double lon) {
-		currentRecording = new CurrentRecording(actionType);
-		if (actionType == AVActionType.REC_PHOTO) {
-			recordingMenu = new AudioVideoNoteRecordingMenuFullScreen(this, lat, lon);
-		} else {
-			recordingMenu = new AudioVideoNoteRecordingMenu(this, lat, lon);
+		if (mapActivity != null) {
+			currentRecording = new CurrentRecording(actionType);
+			if (actionType == AVActionType.REC_PHOTO) {
+				recordingMenu = new AudioVideoNoteRecordingMenuFullScreen(this, lat, lon);
+			} else {
+				recordingMenu = new AudioVideoNoteRecordingMenu(this, lat, lon);
+			}
+			recordingDone = false;
+			lockScreenOrientation();
 		}
-		recordingDone = false;
-		lockScreenOrientation();
 	}
 
 	public void recordVideo(final double lat, final double lon, final MapActivity mapActivity) {
@@ -1655,7 +1660,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if (isRecording()) {
 			AVActionType type = currentRecording.type;
 			finishRecording();
-			if (!AV_RECORDER_SPLIT.get() || type != AVActionType.REC_VIDEO) {
+			if (type != AVActionType.REC_AUDIO && (!AV_RECORDER_SPLIT.get() || type != AVActionType.REC_VIDEO)) {
 				final Recording recordingForMenu = r;
 				app.runInUIThread(new Runnable() {
 					@Override

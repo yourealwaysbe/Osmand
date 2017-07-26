@@ -968,10 +968,10 @@
 	<string name="poi_fax">Fax</string>
 	<string name="facebook">Facebook</string>
 	<string name="poi_mobile">Mobiltelefon</string>
-	<string name="poi_animal_shelter_dog">Internat: hund</string>
-	<string name="poi_animal_shelter_cat">Internat: kat</string>
-	<string name="poi_animal_shelter_dog_cat">Internat: hund, kat</string>
-	<string name="poi_animal_shelter_bird">Internat: fugl</string>
+	<string name="poi_animal_shelter_dog">Hunde</string>
+	<string name="poi_animal_shelter_cat">Katte</string>
+	<string name="poi_animal_shelter_dog_cat">Hunde, katte</string>
+	<string name="poi_animal_shelter_bird">Fugle</string>
 
 <string name="poi_shower">Bruser</string>
 	<string name="poi_recycling_centre">Genbrugsplads</string>
@@ -1577,7 +1577,7 @@
 	<string name="poi_payment_gift_card_no">Gavekort accepteres ikke</string>
 	<string name="poi_payment_golden_crown_yes">Golden Crown</string>
 	<string name="poi_payment_golden_crown_no">Golden Crown kort accepteres ikke</string>
-	<string name="poi_payment_pro100_yes">"PRO100 "</string>
+	<string name="poi_payment_pro100_yes">PRO100</string>
 	<string name="poi_payment_pro100_no">PRO100 kort accepteres ikke</string>
 	<string name="poi_payment_union_card_yes">Union Card</string>
 	<string name="poi_payment_union_card_no">Union kort accepteres ikke</string>
@@ -2146,7 +2146,7 @@
 	<string name="poi_openfire_no">Åben ild ikke tilladt</string>
 	<string name="poi_backcountry_yes">Ja</string>
 	<string name="poi_backcountry_no">Nej</string>
-	<string name="poi_scout_yes">Spejderlejr: ja</string>
+	<string name="poi_scout_yes">Ja</string>
 	<string name="poi_scout_no">Spejderlejr: nej</string>
 	<string name="poi_group_only_yes">Kun grupper: ja</string>
 	<string name="poi_group_only_no">Kun grupper: nej</string>
@@ -2311,7 +2311,7 @@
 	<string name="poi_historic_period_old_kingdom">Historiskperiode: det gamle Kongerige (2686 - 2181 f.Kr.)</string>
 	<string name="poi_historic_period_first_intermediate_period">Historiskperiode: første mellemliggende periode (2181- 2055 f.Kr.)</string>
 	<string name="poi_historic_period_second_intermediate_period">Historiskperiode: anden mellemliggende periode (1650 – 1550 f.Kr.)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Historiskperiode: tredje mellemliggende periode (1069 - 664 f.Kr.) "</string>
+	<string name="poi_historic_period_third_intermediate_period">Historiskperiode: tredje mellemliggende periode (1069 - 664 f.Kr.)</string>
 	<string name="poi_historic_period_first_persian_period">Historiskperiode: første persiske periode</string>
 	<string name="poi_historic_period_late_period">Historiskperiode: sene periode (664 - 332 f.Kr.)</string>
 	<string name="poi_historic_period_second_persian_period">Historiskperiode: anden Persiske periode</string>
@@ -2794,7 +2794,7 @@
 	<string name="poi_health_facility_type_nursing_home">Sundhedsfacilitetstype: plejehjem</string>
 	<string name="poi_health_facility_type_support_group_home">Sundhedsfacilitetstype: bofællesskab</string>
 
-	<string name="poi_health_specialty_palliative_medicine_yes">Sundhedsspeciale: palliativ medicin</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Palliativ medicin</string>
 
 <string name="poi_suction_point">Sugepunkt</string>
 
@@ -2908,12 +2908,12 @@
 	<string name="poi_fire_hydrant_pressure">Brandhanetryk</string>
 	<string name="poi_fire_hydrant_count">Brandhaneantal</string>
 	<string name="poi_fire_hydrant_flow_capacity">Brandhaneflowkapacitet</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Brandhaneplacering: fortov</string>
-	<string name="poi_fire_hydrant_position_green">Brandhaneplacering: græsplæne</string>
-	<string name="poi_fire_hydrant_position_lane">Brandhaneplacering: vognbane</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Brandhaneplacering: parkeringsplads</string>
-	<string name="poi_fire_hydrant_position_street">Brandhaneplacering: gaden</string>
-	<string name="poi_fire_hydrant_position_underground">Brandhaneplacering: under jorden</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Fortov</string>
+	<string name="poi_fire_hydrant_position_green">Græs</string>
+	<string name="poi_fire_hydrant_position_lane">Kørebane</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Parkeringsplads</string>
+	<string name="poi_fire_hydrant_position_street">Gaden</string>
+	<string name="poi_fire_hydrant_position_underground">Under jorden</string>
 	<string name="poi_fire_hydrant_style_wsh">Brandhanetype: wsh</string>
 	<string name="poi_fire_hydrant_style_water_source_main">Primær</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">Dam</string>
@@ -2996,9 +2996,9 @@
 	<string name="poi_payment_troika_no">Troika kort accepteres ikke</string>
 
 <string name="poi_telescope">Teleskop</string>
-	<string name="poi_telescope_type_optical">Teleskop: optisk</string>
-	<string name="poi_telescope_type_radio">Teleskop: radio</string>
-	<string name="poi_telescope_type_gamma">Teleskop: gamma</string>
+	<string name="poi_telescope_type_optical">Optisk</string>
+	<string name="poi_telescope_type_radio">Radio</string>
+	<string name="poi_telescope_type_gamma">Gamma</string>
 	<string name="poi_telescope_diameter">Diameter</string>
 	<string name="poi_telescope_spectrum">Spektrum</string>
 	<string name="poi_telescope_usage_education">Anvendelse: uddannelse</string>
@@ -3096,8 +3096,8 @@
 <string name="poi_fuel_type">Type</string>
 	<string name="poi_payment_type">Betalingstype</string>
 	<string name="poi_additional_type">Yderligere</string>
-<string name="poi_service_bicycle_charging_yes">Cykel opladning: ja</string>
-	<string name="poi_service_bicycle_charging_no">Cykel opladning: nej</string>
+<string name="poi_service_bicycle_charging_yes">Opladning: ja</string>
+	<string name="poi_service_bicycle_charging_no">Opladning: nej</string>
 
 <string name="poi_shop_craft">Kunst og håndværk tilbehørsbutik</string>
 
@@ -3488,5 +3488,51 @@
 	<string name="poi_motorcycle_type_offroad">Offroad</string>
 	<string name="poi_motorcycle_type_dualsport">Enduro</string>
 	<string name="poi_motorcycle_type_standard">Standard</string>
+
+<string name="poi_lock_basin">Slusebassin</string>
+	<string name="poi_generator_output_electricity_no">Produktion (elektricitet): nej</string>
+
+<string name="poi_owner">Ejer</string>
+
+<string name="poi_animal_shelter_type">Dyr accepteres</string>
+	<string name="poi_animal_shelter_purpose">Formål</string>
+
+<string name="poi_animal_shelter_wildlife">Vilde dyr og planter</string>
+	<string name="poi_animal_shelter_horse">Heste</string>
+	<string name="poi_animal_shelter_mammal">Pattedyr</string>
+	<string name="poi_animal_shelter_fish">Fisk</string>
+
+	<string name="poi_animal_shelter_purpose_adoption_yes">Adoption: ja</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">Adoption: nej</string>
+	<string name="poi_animal_shelter_purpose_release_no">Frigivelse: nej</string>
+
+	<string name="poi_spaceport">Rumhavn</string>
+
+<string name="poi_animal_shelter_purpose_release_yes">Frigivelse: ja</string>
+	<string name="poi_direction_n">Retning: nord</string>
+	<string name="poi_direction_nne">Retning: nord-nordøst</string>
+	<string name="poi_direction_ne">Retning: nordøst</string>
+	<string name="poi_direction_ene">Retning: øst-nordøst</string>
+	<string name="poi_direction_e">Retning: øst</string>
+	<string name="poi_direction_ese">Retning: øst-sydøst</string>
+	<string name="poi_direction_se">Retning: sydøst</string>
+	<string name="poi_direction_sse">Retning: syd-sydøst</string>
+	<string name="poi_direction_s">Retning: syd</string>
+	<string name="poi_direction_ssw">Retning: syd-sydvest</string>
+	<string name="poi_direction_sw">Retning: sydvest</string>
+	<string name="poi_direction_wsw">Retning: vest-sydvest</string>
+	<string name="poi_direction_w">Retning: vest</string>
+	<string name="poi_direction_wnw">Retning: vest-nordvest</string>
+	<string name="poi_direction_nw">Retning: nordvest</string>
+	<string name="poi_direction_nnw">Retning: nord-nordvest</string>
+	<string name="poi_direction_forward">Retning: fremad</string>
+	<string name="poi_direction_backward">Retning: bagud</string>
+	<string name="poi_direction_clockwise">Retning: med uret</string>
+	<string name="poi_direction_anticlockwise">Retning: mod uret</string>
+	<string name="poi_direction_up">Retning: op</string>
+	<string name="poi_direction_down">Retning: ned</string>
+	<string name="poi_direction_entrance">Retning: indgang</string>
+	<string name="poi_direction_exit">Retning: udgang</string>
+	<string name="poi_direction_all">Retning: alle</string>
 
 </resources>

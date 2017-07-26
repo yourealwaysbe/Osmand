@@ -214,6 +214,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				"af",
 				"ar",
 				"ast",
+				"az",
 				"be",
 				"be_BY",
 				"bg",
@@ -272,6 +273,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				getString(R.string.lang_af) + incompleteSuffix,
 				getString(R.string.lang_ar),
 				getString(R.string.lang_ast) + incompleteSuffix,
+				getString(R.string.lang_az) + incompleteSuffix,
 				getString(R.string.lang_be),
 				getString(R.string.lang_be_by),
 				getString(R.string.lang_bg),
@@ -514,6 +516,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 			restartApp();
 		} else if (id.equals(settings.OSMAND_THEME.getId())) {
 			restartApp();
+		} else if (id.equals(settings.METRIC_SYSTEM.getId())) {
+			settings.METRIC_SYSTEM_CHANGED_MANUALLY.set(true);
 		} else {
 			updateAllSettings();
 		}

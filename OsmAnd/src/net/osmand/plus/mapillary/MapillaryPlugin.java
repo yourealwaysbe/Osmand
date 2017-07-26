@@ -26,6 +26,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.base.BottomSheetDialogFragment;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -33,7 +34,10 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
+import java.text.MessageFormat;
 import java.util.List;
+
+import static android.content.Intent.ACTION_VIEW;
 
 public class MapillaryPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.mapillary";
@@ -130,10 +134,17 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerLayerContextMenuActions(final OsmandMapTileView mapView,
-												ContextMenuAdapter adapter,
-												final MapActivity mapActivity) {
+	public void registerLayerContextMenuActions(final OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
 		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.OnRowItemClick() {
+
+			@Override
+			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
+				if (itemId == R.string.mapillary) {
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAPILLARY);
+					return false;
+				}
+				return true;
+			}
 
 			@Override
 			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked) {
@@ -157,10 +168,12 @@ public class MapillaryPlugin extends OsmandPlugin {
 		if (rasterLayer.getMap() == null) {
 			settings.SHOW_MAPILLARY.set(false);
 		}
-		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.mapillary, mapActivity)
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.mapillary, mapActivity)
 				.setSelected(settings.SHOW_MAPILLARY.get())
 				.setColor(settings.SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_mapillary)
+				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
 				.setPosition(11)
 				.createItem());
@@ -176,7 +189,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	private TextInfoWidget createMonitoringControl(final MapActivity map) {
 		mapillaryControl = new TextInfoWidget(map);
-		mapillaryControl.setText("", map.getString(R.string.mapillary));
+		mapillaryControl.setText(map.getString(R.string.mapillary), "");
 		mapillaryControl.setIcons(R.drawable.widget_mapillary_day, R.drawable.widget_mapillary_night);
 		mapillaryControl.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -206,14 +219,16 @@ public class MapillaryPlugin extends OsmandPlugin {
 		boolean success = false;
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		if (isPackageInstalled(MAPILLARY_PACKAGE_ID, app)) {
-			Intent launchIntent = app.getPackageManager().getLaunchIntentForPackage(MAPILLARY_PACKAGE_ID);
-			if (launchIntent != null) {
-				if (imageKey != null) {
-					launchIntent.putExtra("photo_id", imageKey);
-				}
-				app.startActivity(launchIntent);
-				success = true;
+			if (imageKey != null) {
+				Intent intent = new Intent(ACTION_VIEW, Uri.parse(MessageFormat.format("mapillary://mapillary/photo/{0}?image_key={0}", imageKey)));
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				app.startActivity(intent);
+			} else {
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mapillary://mapillary/capture"));
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				app.startActivity(intent);
 			}
+			success = true;
 		} else {
 			new MapillaryInstallDialogFragment().show(activity.getSupportFragmentManager(), MapillaryInstallDialogFragment.TAG);
 		}
@@ -229,7 +244,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	private static boolean execInstall(OsmandApplication app, String url) {
-		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+		Intent intent = new Intent(ACTION_VIEW, Uri.parse(url));
 		try {
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			app.startActivity(intent);

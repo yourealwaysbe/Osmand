@@ -9,8 +9,27 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="map_widget_ruler_control_first_mode">Two point ruler</string>
-    <string name="map_widget_ruler_control_second_mode">Radius ruler</string>
+    <string name="quick_action_resume_pause_navigation">Resume/Pause Navigation</string>
+    <string name="quick_action_resume_pause_navigation_descr">Press this button to pause the navigation, or to resume it if it was already paused.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Show Finish navigation dialog</string>
+    <string name="quick_action_start_stop_navigation">Start/Finish Navigation</string>
+    <string name="quick_action_start_stop_navigation_descr">Press this button to start the navigation, or to stop it if it was already started.</string>
+    <string name="store_tracks_in_monthly_directories">Store recorded tracks in monthly folders</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Store recorded tracks in sub-folders per recording month (like 2017-01).</string>
+    <string name="shared_string_reset">Reset</string>
+    <string name="shared_string_reload">Reload</string>
+    <string name="mapillary_menu_descr_tile_cache">Reload tiles to see up to date data.</string>
+    <string name="mapillary_menu_title_tile_cache">Tile cache</string>
+    <string name="wrong_user_name">Wrong user name!</string>
+    <string name="shared_string_to">To</string>
+    <string name="mapillary_menu_date_from">From</string>
+    <string name="mapillary_menu_descr_dates">View images added in a certain period.</string>
+    <string name="mapillary_menu_title_dates">Dates</string>
+    <string name="mapillary_menu_edit_text_hint">Type user name</string>
+    <string name="mapillary_menu_descr_username">View images added by a certain user.</string>
+    <string name="mapillary_menu_title_username">Username</string>
+    <string name="mapillary_menu_filter_description">You can filter images by submitter or by date. Filters apply only for closeup zoom.</string>
+    <string name="map_widget_ruler_control">Radius ruler</string>
     <string name="shared_string_permissions">Permissions</string>
     <string name="import_gpx_failed_descr">OsmAnd cannot import the file. Please check if OsmAnd has permission to read file from its location.</string>
     <string name="distance_moving">Distance corrected</string>
@@ -53,8 +72,8 @@
     <string name="favorite_group_name">Group name</string>
     <string name="change_color">Change color</string>
     <string name="edit_name">Edit name</string>
-    <string name="animate_my_location">Animate my location</string>
-    <string name="animate_my_location_desc">Enable animation of my location during navigation</string>
+    <string name="animate_my_location">Animate My Position</string>
+    <string name="animate_my_location_desc">Enable map panning animation of My Position during navigation</string>
     <string name="new_map_view">New map view</string>
     <string name="new_map_view_desc">Enable new map view</string>
     <string name="shared_string_overview">Overview</string>
@@ -102,9 +121,9 @@
     <string name="routing_attr_relief_smoothness_factor_hills_name">Hilly</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Less hilly</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Flat</string>
-    <string name="routing_attr_driving_style_speed_name">Speed</string>
+    <string name="routing_attr_driving_style_speed_name">Shorter routes</string>
     <string name="routing_attr_driving_style_balance_name">Balanced</string>
-    <string name="routing_attr_driving_style_safety_name">Safety</string>
+    <string name="routing_attr_driving_style_safety_name">Prefer byways</string>
     <string name="relief_smoothness_factor_descr">Preferred terrain: flat or hilly</string>
     <string name="shared_string_slope">Slope</string>
     <string name="add_new_folder">Add new folder</string>
@@ -151,6 +170,12 @@
 	\u2022 Several other improvements and bug fixes\n\n
 	and more…
 	</string>
+    <string name="release_2_7">
+	\u2022 Mapillary plugin with street-level imagery\n\n
+	\u2022 Ruler widget for distance measurement\n\n
+	\u2022 GPX split intervals with detailed info about your track\n\n
+	\u2022 Other improvements and bug fixes\n\n
+	</string>
     <string name="auto_split_recording_title">Auto-split recordings after gap</string>
     <string name="auto_split_recording_descr">Start new segment after gap of 6 min, new track after gap of 2 h, or new file after longer gap if date has changed.</string>
     <string name="rendering_attr_contourDensity_description">Contour lines density</string>
@@ -164,7 +189,7 @@
     <string name="rendering_attr_hideWaterPolygons_name">Hide water</string>
     <string name="legacy_search">Legacy search</string>
     <string name="show_legacy_search">Show legacy search</string>
-    <string name="show_legacy_search_desc">Enable legacy search in the drawer list</string>
+    <string name="show_legacy_search_desc">Add the legacy search to the drawer list</string>
     <string name="routing_attr_allow_motorway_name">Allow motorways</string>
     <string name="routing_attr_allow_motorway_description">Allow motorways</string>
     <string name="upload_osm_note_description">You can upload your OSM Note anonymously or using your OpenStreetMap.org profile.</string>
@@ -201,11 +226,11 @@
     </string>
     <string name="rendering_attr_contourColorScheme_description">Contour lines color scheme</string>
     <string name="save_track_min_speed">Logging minimum speed</string>
-    <string name="save_track_min_speed_descr">Set minimum speed for a point to be logged</string>
-    <string name="save_track_min_distance">Logging motion detection</string>
-    <string name="save_track_min_distance_descr">Set minimum distance from last position for point to be logged</string>
+    <string name="save_track_min_speed_descr">Filter: Set minimum speed for a point to be logged</string>
+    <string name="save_track_min_distance">Logging minimum displacement</string>
+    <string name="save_track_min_distance_descr">Filter: Set minimum distance from last position for point to be logged</string>
     <string name="save_track_precision">Logging minimum accuracy</string>
-    <string name="save_track_precision_descr">Set minimum accuracy for a point to be logged</string>
+    <string name="save_track_precision_descr">Filter: Set minimum accuracy for a point to be logged</string>
     <string name="christmas_poi">Christmas POI</string>
     <string name="christmas_desc">Anticipating Christmas and New Year holidays, you can choose to display the POI associated with Christmas: Christmas trees, markets, etc.</string>
     <string name="christmas_desc_q">Show Christmas POI?</string>
@@ -251,9 +276,9 @@
     <string name="give_permission">Give permission</string>
     <string name="allow_access_location">Allow access to location</string>
     <string name="first_usage_greeting">Get directions and discover new places without Internet connection</string>
-    <string name="search_my_location">Search my location</string>
-    <string name="no_update_info_desc">Don\'t check any updates about new versions, discounts related to OsmAnd</string>
-    <string name="no_update_info">Don\'t show updates</string>
+    <string name="search_my_location">Find my position</string>
+    <string name="no_update_info_desc">Do not check for version updates or OsmAnd related discounts</string>
+    <string name="no_update_info">Do not show updates</string>
     <string name="update_all_maps_now">Do you want to update all maps now?</string>
     <string name="clear_tile_data">Clear all tiles</string>
     <string name="routing_attr_short_way_name">Fuel-efficient way</string>
@@ -306,10 +331,10 @@
     <string name="access_no_destination">Destination is not set</string>
     <string name="map_widget_magnetic_bearing">Magnetic bearing</string>
     <string name="map_widget_bearing">Relative bearing</string>
-    <string name="access_disable_offroute_recalc">Don\'t change route when you are off the way</string>
-    <string name="access_disable_offroute_recalc_descr">Prevent automatic route recalculation when you are quite far from the right way</string>
-    <string name="access_disable_wrong_direction_recalc">Don\'t change route by wrong direction</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Prevent automatic route recalculation when you are moving in wrong direction</string>
+    <string name="access_disable_offroute_recalc">No route recalculation after leaving it</string>
+    <string name="access_disable_offroute_recalc_descr">Prevents automatic route recalculation after you have left the route</string>
+    <string name="access_disable_wrong_direction_recalc">No route recalculation for opposite direction</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Prevents automatic route recalculation while just moving in the opposite direction</string>
     <string name="access_smart_autoannounce">Smart autoannounce</string>
     <string name="access_smart_autoannounce_descr">Notify only when direction to the target point is changed</string>
     <string name="access_autoannounce_period">Autoannounce period</string>
@@ -391,7 +416,7 @@
     <string name="osm_live_subscribe_btn">Subscribe</string>
     <string name="osm_live_email_desc">We need it to provide you information about contributions</string>
     <string name="osm_live_user_public_name">Public Name</string>
-    <string name="osm_live_hide_user_name">Don\'t show my name in reports</string>
+    <string name="osm_live_hide_user_name">Do not show my name in reports</string>
     <string name="osm_live_support_region">Support region</string>
     <string name="osm_live_month_cost">Month cost</string>
     <string name="osm_live_month_cost_desc">Monthly payment</string>
@@ -582,7 +607,7 @@
     <string name="gps_wake_up_timer">GPS wake-up interval</string>
     <string name="favourites_edit_dialog_title">Favorite information</string>
     <string name="simulate_your_location_stop_descr">Stop simulating your position</string>
-    <string name="simulate_your_location_descr">Simulate using a calculated route or a recorded GPX</string>
+    <string name="simulate_your_location_descr">Simulate your position using a calculated route or a recorded GPX track</string>
     <string name="looking_up_address">Looking up address</string>
     <string name="av_locations_descr">GPX file with note locations</string>
     <string name="av_locations">Locations</string>
@@ -615,6 +640,7 @@
     <string name="rendering_value_translucent_blue_name">Translucent blue</string>
     <string name="rendering_value_purple_name">Purple</string>
     <string name="rendering_value_pink_name">Pink</string>
+    <string name="rendering_value_translucent_pink_name">Translucent pink</string>
     <string name="rendering_value_brown_name">Brown</string>
     <string name="rendering_value_translucent_purple_name">Translucent purple</string>
     <string name="restart_is_required">In order to fully apply the changes, a manual application restart is required.</string>
@@ -624,7 +650,7 @@
     <string name="lang_bn">Bengali</string>
     <string name="lang_tl">Tagalog</string>
     <string name="lang_sh">Serbo-Croatian</string>
-    <string name="lang_az">Azeri</string>
+    <string name="lang_az">Azerbaijani</string>
     <string name="lang_br">Breton</string>
     <string name="lang_sq">Albanian</string>
     <string name="lang_is">Icelandic</string>
@@ -996,6 +1022,12 @@
     <string name="int_hour">h</string>
     <string name="duration">Duration</string>
     <string name="distance">Distance</string>
+    <string name="average">Average</string>
+    <string name="of">%1$d of %2$d</string>
+    <string name="ascent_descent">Ascent/Descent</string>
+    <string name="moving_time">Moving time</string>
+    <string name="max_min">Max/Min</string>
+    <string name="min_max">Min/Max</string>
     <string name="index_tours">Tours</string>
     <string name="shared_string_all">All</string>
     <string name="waypoints">Waypoints</string>
@@ -1257,7 +1289,7 @@
     <string name="disable_complex_routing_descr">Disable 2-phase routing for car navigation</string>
     <string name="disable_complex_routing">Disable complex routing</string>
     <string name="amenity_type_seamark">Seamark</string>
-    <string name="app_modes_choose_descr">Choose use profiles visible in application</string>
+    <string name="app_modes_choose_descr">Select the use profiles to be visible in application</string>
     <string name="app_modes_choose">Application Profiles</string>
     <string name="map_widget_map_rendering">Map rendering</string>
     <string name="app_mode_hiking">Hiking</string>
@@ -1352,7 +1384,7 @@
     <string name="wait_current_task_finished">Please wait until current task is finished</string>
     <string name="use_kalman_filter_compass_descr">Reduces noise in compass readings but adds inertia</string>
     <string name="use_kalman_filter_compass">Use Kalman filter</string>
-    <string name="use_magnetic_sensor_descr">Use magnetic sensor to determine compass value instead of orientation sensor</string>
+    <string name="use_magnetic_sensor_descr">For the compass reading, use the magnetic sensor instead of the orientation sensor</string>
     <string name="use_magnetic_sensor">Use magnetic sensor</string>
     <string name="other_location">Other</string>
     <string name="files_limit">%1$d files left</string>
@@ -1821,7 +1853,7 @@
     <string name="prefs_plugins_descr">Plugins activate advanced settings and additional functionality</string>
     <string name="prefs_plugins">Plugins</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vector maps likely display faster. May not work well on some devices.</string>
-    <string name="play_commands_of_currently_selected_voice">Play commands of selected voice</string>
+    <string name="play_commands_of_currently_selected_voice">Select a voice and test by playing prompts</string>
     <string name="native_rendering">Native rendering</string>
     <string name="test_voice_prompts">Test voice prompts</string>
     <string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in Settings (Manage map files), or switch to online maps (enable online maps plugin for this).</string>
@@ -1906,6 +1938,8 @@
     <string name="live_monitoring_interval">Online tracking interval</string>
     <string name="live_monitoring_url_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
     <string name="live_monitoring_url">Online tracking web address</string>
+    <string name="live_monitoring_max_interval_to_send">Time buffer for online tracking</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Specify a time buffer to keep locations to send without connection</string>
     <string name="gpx_monitoring_disabled_warn">Log track using GPX widget or via \'Trip recording\' settings.</string>
     <string name="show_current_gpx_title">Show current track</string>
     <string name="free_version_message">This free OsmAnd version is limited to %1$s downloads and does not support offline Wikipedia articles.</string>
@@ -2182,7 +2216,7 @@
     <string name="poi_context_menu_delete">Delete POI</string>
     <string name="rotate_map_compass_opt">To compass</string>
     <string name="rotate_map_bearing_opt">To direction of movement</string>
-    <string name="rotate_map_none_opt">Don\'t rotate (north is up)</string>
+    <string name="rotate_map_none_opt">Do not rotate (north is up)</string>
     <string name="rotate_map_to_bearing_descr">Select map screen alignment</string>
     <string name="rotate_map_to_bearing">Map orientation</string>
     <string name="show_route">Route details</string>
@@ -2443,7 +2477,7 @@
     <string name="plugin_install_needs_network">You need an Internet connection to install this plugin.</string>
     <string name="get_plugin">Get</string>
     <string name="use_fast_recalculation">Smart route recalculation</string>
-    <string name="use_fast_recalculation_desc">Recalculate only initial part of the route for long trips</string>
+    <string name="use_fast_recalculation_desc">For long trips, only recalculate the initial part of the route</string>
     <string name="do_you_like_osmand">Do you like OsmAnd?</string>
     <string name="we_really_care_about_your_opinion">We care much about your opinion and it is important for us to hear you back.</string>
     <string name="rate_this_app">Rate this app</string>
@@ -2487,7 +2521,7 @@
     <string name="roads">Roads</string>
     <string name="downloading_number_of_files">Downloading - %1$d file</string>
     <string name="show_free_version_banner">Show free version banner</string>
-    <string name="show_free_version_banner_description">Even if you have paid version you still can see free version banner</string>
+    <string name="show_free_version_banner_description">Display the free version banner even in the paid version</string>
     <string name="buy">BUY</string>
     <string name="activate_seamarks_plugin">Please activate Seamarks plugin</string>
     <string name="activate_srtm_plugin">Please activate SRTM plugin</string>

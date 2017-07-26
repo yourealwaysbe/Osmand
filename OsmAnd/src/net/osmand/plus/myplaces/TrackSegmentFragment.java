@@ -57,6 +57,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.RotatedTileBox.RotatedTileBoxBuilder;
+import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -186,7 +187,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		return view;
 	}
 
-	public TrackActivity getMyActivity() {
+	public TrackActivity getTrackActivity() {
 		return (TrackActivity) getActivity();
 	}
 
@@ -202,7 +203,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		menu.clear();
-		getMyActivity().getClearToolbar(false);
+		getTrackActivity().getClearToolbar(false);
 		if (getGpx() != null && getGpx().path != null && !getGpx().showCurrentTrack) {
 			MenuItem item = menu.add(R.string.shared_string_share).setIcon(R.drawable.ic_action_gshare_dark)
 					.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -235,11 +236,11 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	private GPXFile getGpx() {
-		return getMyActivity().getGpx();
+		return getTrackActivity().getGpx();
 	}
 
 	private GpxDataItem getGpxDataItem() {
-		return getMyActivity().getGpxDataItem();
+		return getTrackActivity().getGpxDataItem();
 	}
 
 	private void startHandler() {
@@ -274,13 +275,32 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 
 	private void updateHeader() {
 		imageView = (ImageView) headerView.findViewById(R.id.imageView);
+		imageView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				WptPt pointToShow = getGpx() != null ? getGpx().findPointToShow() : null;
+				if (pointToShow != null) {
+					LatLon location = new LatLon(pointToShow.getLatitude(),
+							pointToShow.getLongitude());
+					final OsmandSettings settings = app.getSettings();
+					settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+							settings.getLastKnownMapZoom(),
+							new PointDescription(PointDescription.POINT_TYPE_WPT, getGpxDataItem().getFile().getName()),
+							false,
+							getRect()
+					);
+
+					MapActivity.launchMapActivityMoveToTop(getActivity());
+				}
+			}
+		});
 		final View splitColorView = headerView.findViewById(R.id.split_color_view);
 		final View divider = headerView.findViewById(R.id.divider);
 		final View splitIntervalView = headerView.findViewById(R.id.split_interval_view);
 		final View colorView = headerView.findViewById(R.id.color_view);
 		final SwitchCompat vis = (SwitchCompat) headerView.findViewById(R.id.showOnMapToggle);
 		final ProgressBar progressBar = (ProgressBar) headerView.findViewById(R.id.mapLoadProgress);
-		boolean selected = getGpx() != null &&
+		final boolean selected = getGpx() != null &&
 				((getGpx().showCurrentTrack && app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null) ||
 						(getGpx().path != null && app.getSelectedGpxHelper().getSelectedFileByPath(getGpx().path) != null));
 		vis.setChecked(selected);
@@ -294,6 +314,9 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 				final List<GpxDisplayGroup> groups = getDisplayGroups();
 				if (groups.size() > 0) {
 					updateSplit(groups, vis.isChecked() ? sf : null);
+					if (getGpxDataItem() != null) {
+						updateSplitInDatabase();
+					}
 				}
 				updateSplitIntervalView(splitIntervalView);
 				updateColorView(colorView);
@@ -346,11 +369,10 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			}
 		});
 
-		boolean hasPath = getGpx() != null && getGpx().showCurrentTrack;
+		boolean hasPath = getGpx() != null && (getGpx().tracks.size() > 0 || getGpx().routes.size() > 0);
 		if (rotatedTileBox == null || mapBitmap == null || mapTrackBitmap == null) {
 			QuadRect rect = getRect();
 			if (rect.left != 0 && rect.top != 0) {
-				hasPath = getGpx() != null && (getGpx().tracks.size() > 0 || getGpx().routes.size() > 0);
 				progressBar.setVisibility(View.VISIBLE);
 
 				double clat = rect.bottom / 2 + rect.top / 2;
@@ -418,7 +440,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 						popup.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
 						popup.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
 						popup.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
-						popup.setAdapter(new ArrayAdapter<>(getMyActivity(),
+						popup.setAdapter(new ArrayAdapter<>(getTrackActivity(),
 								R.layout.popup_list_text_item, options));
 						popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -429,6 +451,9 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 								final List<GpxDisplayGroup> groups = getDisplayGroups();
 								if (groups.size() > 0) {
 									updateSplit(groups, vis.isChecked() ? sf : null);
+									if (getGpxDataItem() != null) {
+										updateSplitInDatabase();
+									}
 								}
 								popup.dismiss();
 								updateSplitIntervalView(splitIntervalView);
@@ -446,6 +471,36 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		} else {
 			splitColorView.setVisibility(View.GONE);
 			divider.setVisibility(View.GONE);
+		}
+	}
+
+	private void updateSplitInDatabase() {
+		int splitType = 0;
+		double splitInterval = 0;
+		if (selectedSplitInterval == 0) {
+			splitType = GPXDatabase.GPX_SPLIT_TYPE_NO_SPLIT;
+			splitInterval = 0;
+		} else if (distanceSplit.get(selectedSplitInterval) > 0) {
+			splitType = GPXDatabase.GPX_SPLIT_TYPE_DISTANCE;
+			splitInterval = distanceSplit.get(selectedSplitInterval);
+		} else if (timeSplit.get(selectedSplitInterval) > 0) {
+			splitType = GPXDatabase.GPX_SPLIT_TYPE_TIME;
+			splitInterval = timeSplit.get(selectedSplitInterval);
+		}
+		app.getGpxDatabase().updateSplit(getGpxDataItem(), splitType, splitInterval);
+	}
+
+	public void updateSplitView() {
+		if (getGpx() != null) {
+			SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), ((SwitchCompat)headerView.findViewById(R.id.showOnMapToggle)).isChecked(), false);
+			final List<GpxDisplayGroup> groups = getDisplayGroups();
+			if (groups.size() > 0) {
+				updateSplit(groups, ((SwitchCompat)headerView.findViewById(R.id.showOnMapToggle)).isChecked() ? sf : null);
+				if (getGpxDataItem() != null) {
+					updateSplitInDatabase();
+				}
+			}
+			updateSplitIntervalView(headerView.findViewById(R.id.split_interval_view));
 		}
 	}
 
@@ -655,26 +710,28 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	private List<GpxDisplayGroup> filterGroups(boolean useDisplayGroups) {
-		List<GpxDisplayGroup> result = getMyActivity().getGpxFile(useDisplayGroups);
 		List<GpxDisplayGroup> groups = new ArrayList<>();
-		for (GpxDisplayGroup group : result) {
-			boolean add = hasFilterType(group.getType());
-			if (isArgumentTrue(ARG_TO_FILTER_SHORT_TRACKS)) {
-				Iterator<GpxDisplayItem> item = group.getModifiableList().iterator();
-				while (item.hasNext()) {
-					GpxDisplayItem it2 = item.next();
-					if (it2.analysis != null && it2.analysis.totalDistance < 100) {
-						item.remove();
+		if (getTrackActivity() != null) {
+			List<GpxDisplayGroup> result = getTrackActivity().getGpxFile(useDisplayGroups);
+			for (GpxDisplayGroup group : result) {
+				boolean add = hasFilterType(group.getType());
+				if (isArgumentTrue(ARG_TO_FILTER_SHORT_TRACKS)) {
+					Iterator<GpxDisplayItem> item = group.getModifiableList().iterator();
+					while (item.hasNext()) {
+						GpxDisplayItem it2 = item.next();
+						if (it2.analysis != null && it2.analysis.totalDistance < 100) {
+							item.remove();
+						}
+					}
+					if (group.getModifiableList().isEmpty()) {
+						add = false;
 					}
 				}
-				if (group.getModifiableList().isEmpty()) {
-					add = false;
+				if (add) {
+					groups.add(group);
 				}
-			}
-			if (add) {
-				groups.add(group);
-			}
 
+			}
 		}
 		return groups;
 	}
@@ -688,7 +745,9 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		}
 		adapter.setNotifyOnChange(true);
 		adapter.notifyDataSetChanged();
-		updateHeader();
+		if (getActivity() != null) {
+			updateHeader();
+		}
 	}
 
 	protected List<GpxDisplayItem> flatten(List<GpxDisplayGroup> groups) {
@@ -780,7 +839,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			WrapContentHeightViewPager pager;
 			boolean create = false;
 			if (row == null) {
-				LayoutInflater inflater = getMyActivity().getLayoutInflater();
+				LayoutInflater inflater = getTrackActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.gpx_list_item_tab_content, parent, false);
 
 				boolean light = app.getSettings().isLightContent();
@@ -964,9 +1023,17 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 					}
 				} else {
 					float distance = pos * dataSet.getDivX();
-					for (WptPt p : segment.points) {
-						if (p.distance >= distance) {
-							wpt = p;
+					double previousSplitDistance = 0;
+					for (int i = 0; i < segment.points.size(); i++) {
+						WptPt currentPoint = segment.points.get(i);
+						if (i != 0) {
+							WptPt previousPoint = segment.points.get(i - 1);
+							if (currentPoint.distance < previousPoint.distance) {
+								previousSplitDistance += previousPoint.distance;
+							}
+						}
+						if (previousSplitDistance + currentPoint.distance >= distance) {
+							wpt = currentPoint;
 							break;
 						}
 					}
@@ -1157,12 +1224,22 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 								view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 								view.findViewById(R.id.start_end_time).setVisibility(View.GONE);
 							}
-							view.findViewById(R.id.details_view).setOnClickListener(new View.OnClickListener() {
+							view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
-									openDetails(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
+									openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
 								}
 							});
+							if (getGpx().showCurrentTrack) {
+								view.findViewById(R.id.split_interval).setVisibility(View.GONE);
+							} else {
+								view.findViewById(R.id.split_interval).setOnClickListener(new View.OnClickListener() {
+									@Override
+									public void onClick(View view) {
+										openSplitIntervalScreen();
+									}
+								});
+							}
 
 							break;
 						case GPX_TAB_ITEM_ALTITUDE:
@@ -1201,12 +1278,22 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 								view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 								view.findViewById(R.id.ascent_descent).setVisibility(View.GONE);
 							}
-							view.findViewById(R.id.details_view).setOnClickListener(new View.OnClickListener() {
+							view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
-									openDetails(GPXTabItemType.GPX_TAB_ITEM_ALTITUDE);
+									openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_ALTITUDE);
 								}
 							});
+							if (getGpx().showCurrentTrack) {
+								view.findViewById(R.id.split_interval).setVisibility(View.GONE);
+							} else {
+								view.findViewById(R.id.split_interval).setOnClickListener(new View.OnClickListener() {
+									@Override
+									public void onClick(View view) {
+										openSplitIntervalScreen();
+									}
+								});
+							}
 
 							break;
 						case GPX_TAB_ITEM_SPEED:
@@ -1244,12 +1331,22 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 								view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 								view.findViewById(R.id.time_distance).setVisibility(View.GONE);
 							}
-							view.findViewById(R.id.details_view).setOnClickListener(new View.OnClickListener() {
+							view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
-									openDetails(GPXTabItemType.GPX_TAB_ITEM_SPEED);
+									openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_SPEED);
 								}
 							});
+							if (getGpx().showCurrentTrack) {
+								view.findViewById(R.id.split_interval).setVisibility(View.GONE);
+							} else {
+								view.findViewById(R.id.split_interval).setOnClickListener(new View.OnClickListener() {
+									@Override
+									public void onClick(View view) {
+										openSplitIntervalScreen();
+									}
+								});
+							}
 							break;
 					}
 				}
@@ -1352,7 +1449,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			}
 		}
 
-		void openDetails(GPXTabItemType tabType) {
+		void openAnalyzeOnMap(GPXTabItemType tabType) {
 			LatLon location = null;
 			WptPt wpt = null;
 			gpxItem.chartTypes = null;
@@ -1415,6 +1512,15 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		}
 	}
 
+	void openSplitIntervalScreen() {
+		getTrackActivity().getSupportFragmentManager()
+				.beginTransaction()
+				.replace(R.id.track_activity_layout, new SplitSegmentFragment())
+				.addToBackStack(SplitSegmentFragment.TAG)
+				.commit();
+		getTrackActivity().getSlidingTabLayout().setVisibility(View.GONE);
+	}
+
 	private class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 		@Nullable
 		private final SelectedGpxFile mSelectedGpxFile;
@@ -1426,24 +1532,25 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		SplitTrackAsyncTask(@Nullable SelectedGpxFile selectedGpxFile, List<GpxDisplayGroup> groups) {
 			mSelectedGpxFile = selectedGpxFile;
 			mFragment = TrackSegmentFragment.this;
-			mActivity = getMyActivity();
+			mActivity = getTrackActivity();
 			this.groups = groups;
 		}
 
 		protected void onPostExecute(Void result) {
+			if (!mActivity.isFinishing()) {
+				mActivity.setSupportProgressBarIndeterminateVisibility(false);
+			}
 			if (mSelectedGpxFile != null) {
-				mSelectedGpxFile.setDisplayGroups(getDisplayGroups());
+				List<GpxDisplayGroup> groups = getDisplayGroups();
+				mSelectedGpxFile.setDisplayGroups(groups);
 			}
 			if (mFragment.isVisible()) {
 				//mFragment.updateContent();
 			}
-			if (!mActivity.isFinishing()) {
-				mActivity.setProgressBarIndeterminateVisibility(false);
-			}
 		}
 
 		protected void onPreExecute() {
-			mActivity.setProgressBarIndeterminateVisibility(true);
+			mActivity.setSupportProgressBarIndeterminateVisibility(true);
 		}
 
 		@Override

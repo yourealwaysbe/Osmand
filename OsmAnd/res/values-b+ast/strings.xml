@@ -310,8 +310,8 @@
     <string name="no_index_file_to_download">Nun s\'alcontraron descargues, por favor comprueba la to conexón d\'internet.</string>
     <string name="select_index_file_to_download">Nun s\'alcontró nada. Si nun pues alcontrar la to rexón, pue facela tu mesmu (mira http://osmand.net).</string>
     <string name="loading_smth">Cargando %1$s…</string>
-    <string name="gpx_info_average_speed">"Velocidá promediu: %1$s "</string>
-    <string name="gpx_info_maximum_speed">"Velocidá máxima: %1$s "</string>
+    <string name="gpx_info_average_speed">Velocidá media: %1$s</string>
+    <string name="gpx_info_maximum_speed">Velocidá máxima: %1$s</string>
     <string name="gpx_info_avg_altitude">Altitú promediu: %1$s</string>
     <string name="gpx_info_diff_altitude">Rangu d\'altitú: %1$s</string>
     <string name="gpx_info_asc_altitude">Descendente/ascendente: %1$s</string>
@@ -333,7 +333,7 @@
     <string name="osmo_connected_devices">Preseos coneutaos</string>
     <string name="osmo_session_token">Pase de sesión: %1$s</string>
     <string name="osmo_auth_pending">Esperando pola autorización…</string>
-    <string name="osmo_io_error">"Problema de conexón d\'OsMo: "</string>
+    <string name="osmo_io_error">Problema de conexón d\'OsMo:</string>
     <string name="osmo_settings_uuid">ID única de preséu</string>
     <string name="osmo_settings">OsMo</string>
     <string name="voice_pref_title">Voz</string>
@@ -417,7 +417,7 @@
     <string name="speak_cameras">Radares de velocidá</string>
     <string name="speak_traffic_warnings">Alvertencies de tráficu</string>
     <string name="osb_author_or_password_not_specified">"Especifica l\'usuariu y contraseña  d\'OSM n\'Axustes, por favor"</string>
-    <string name="route_descr_map_location">"Mapa: "</string>
+    <string name="route_descr_map_location">Mapa:</string>
     <string name="route_descr_lat_lon">Lla %1$.3f, llo %2$.3f</string>
     <string name="route_descr_destination">Destín</string>
     <string name="route_to">A:</string>
@@ -461,7 +461,7 @@ Llo %2$s</string>
     <string name="lang_bn">Bengalí</string>
     <string name="lang_tl">Tagalu</string>
     <string name="lang_sh">Serbocroata</string>
-    <string name="lang_az">Azerí</string>
+    <string name="lang_az">Azerbaiyanu</string>
     <string name="lang_bpy">Bishnupriya</string>
     <string name="lang_nv">Navayu</string>
     <string name="lang_ku">Curdu</string>
@@ -544,7 +544,7 @@ L\'allugamientu y tiempu son visibles nel cuadru de mandos d\'OsmAnd tamién nel
     <string name="shared_string_add_to_favorites">Amestar a favoritos</string>
     <string name="record_plugin_name">Grabación de viaxe</string>
 	<string name="audionotes_plugin_description">El complementu de notes d\'audiu/videu apurre la funcionalidá de facer notes d\'audiu/semeyes/videu nun viaxe, usando un botón na pantalla\'l mapa o direutamente dende\'l menú contestual pa cualesquier posición nel mapa.</string>
-    <string name="free">"Llibre %1$s "</string>
+    <string name="free">%1$s llibre</string>
     <string name="remove_the_tag">DESANICIAR ETIQUETA</string>
     <string name="show_pedestrian_warnings">Pasos peatones</string>
     <string name="background_service_is_enabled_question">Entá ta executándose\'l serviciu de fondu d\'OsmAnd. ¿Quies paralu tamién?</string>
@@ -556,9 +556,9 @@ L\'allugamientu y tiempu son visibles nel cuadru de mandos d\'OsmAnd tamién nel
     <string name="rendering_attr_moreDetailed_name">Más detalles</string>
     <string name="rendering_attr_lessDetailed_name">Dellos detalles</string>
     <string name="osmo_auth_error_short">Falló l\'autorización</string>
-    <string name="gpx_info_distance">"Distancia: %1$s (%2$s puntos) "</string>
+    <string name="gpx_info_distance">Distancia: %1$s (%2$s puntos)</string>
     <string name="gpx_selection_segment_title">Segmentu</string>
-    <string name="gpx_selection_number_of_points">" %1$s puntos"</string>
+    <string name="gpx_selection_number_of_points">%1$s puntos</string>
     <string name="gpx_selection_point">Puntu %1$s</string>
     <string name="osmo_share_session">Compartir sesión</string>
     <string name="shared_string_from">dende</string>
@@ -634,7 +634,7 @@ L\'allugamientu y tiempu son visibles nel cuadru de mandos d\'OsmAnd tamién nel
     <string name="avoid_toll_roads">Evitar carreteres con portalgu</string>
     <string name="error_occurred_saving_gpx">Fallu entrín se guardaba\'l GPX</string>
     <string name="fast_route_mode">Ruta más rápida</string>
-    <string name="fast_route_mode_descr">"Habilitar pal cálculu de la ruta más rápida o deshabilitar pa una ruta aforradora de gasolina "</string>
+    <string name="fast_route_mode_descr">Activar pa calcular la ruta más rápida o desactivar pa una ruta aforradora de combustible</string>
     <string name="speak_street_names">Nomes de cais (TTS)</string>
     <string name="si_mi_meters">Milles/metros</string>
     <string name="si_mi_feet">Milles/pies</string>
@@ -661,7 +661,7 @@ Puntos</string>
     <string name="hours_ago">hai hores</string>
     <string name="minutes_ago">hai mins</string>
     <string name="seconds_ago">hai segs</string>
-    <string name="osmo_conn_successfull">"Conexón afitada: %1$s "</string>
+    <string name="osmo_conn_successfull">Conexón afitada: %1$s</string>
     <string name="index_item_world_altitude_correction">Correición d\'altitú mundial</string>
     <string name="routing_attr_weight_name">Llende d\'anchor</string>
     <string name="routing_attr_height_name">Llende d\'altor</string>
@@ -675,7 +675,7 @@ Puntos</string>
     <string name="wait_current_task_finished">Espera fasta que fines la xera actual, por favor</string>
     <string name="use_kalman_filter_compass_descr">Amenorga\'l ruíu nes llectures de la brúxula pero amiesta inercia</string>
     <string name="use_kalman_filter_compass">Usar peñera Kalman</string>
-    <string name="use_magnetic_sensor_descr">Usa\'l sensor magnéticu pa determinar el valor de la brúxula en cuentes del sensor d\'orientación</string>
+    <string name="use_magnetic_sensor_descr">Pa lleer la brúxula, usar el sensor magnéticu en cuentes del sensor d\'orientación</string>
     <string name="files_limit">Falten %1$d ficheros</string>
     <string name="install_paid">Versión completa</string>
     <string name="clear_destination">Llimpiar destín</string>
@@ -714,16 +714,18 @@ Puntos</string>
     <string name="shared_string_topbar">Barra cimera</string>
     <string name="text_size_descr">Afita\'l tamañu\'l testu nel mapa.</string>
     <string name="use_osm_live_routing_description">Habilita la navegación pa camudancies d\'OSM Live (Beta)</string>
-	<string name="access_disable_offroute_recalc_descr">Evita\'l recálculu automáticu de ruta al tar daqué lloñe del camín correutu</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Evita\'l recálculu automáticu de ruta cuando teas diendo pela direición incorreuta</string>
+	<string name="access_disable_offroute_recalc_descr">Evita\'l recálculu automáticu de la ruta después d\'abandonala</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Evita\'l recálculu automáticu de la ruta cuando sólo te muevas en direición contraria</string>
     <string name="osmo_tracker_id_descr">Primi pa ver la ID del rastrexador</string>
-    <string name="osmo_plugin_description">"Esti complementu apurre de mou parcial la función de Siguimientu d\'OpenStreetMap, mira https://osmo.mobi
+    <string name="osmo_plugin_description">Esti complementu apurre de mou parcial la función de Siguimientu d\'OpenStreetMap, mira https://osmo.mobi 
 \n 
-\nPues siguir en tiempu real tolos preseos d\'un grupu participante. Tamién pues ver el puntu y les traces xubíes al grupu que perteneces.
+\n
+\nPues siguir en tiempu real tolos preseos d\'un grupu participante. Tamién pues ver el puntu y les traces xubíes al grupu que perteneces. 
 \n 
-\nEl grupu nun se desanició dempués de meses, ponlu en llinia coles regles coles que crees grupos nel sitiu web OsMo.mobi "</string>
+\n
+\nEl grupu nun se desanició dempués de meses, ponlu en llinia coles regles coles que crees grupos nel sitiu web OsMo.mobi</string>
     <string name="simulate_your_location_stop_descr">Para de simular el to allugamientu</string>
-    <string name="simulate_your_location_descr">Simula usando una ruta calculada o un GPX grabáu</string>
+    <string name="simulate_your_location_descr">Simular la posición usando una ruta calculada o una traza GPX grabada</string>
     <string name="disable_recording_once_app_killed_descrp">Posaráse\'l rexistru de GPX cuando s\'amortie l\'aplicación (per aplicaciones recientes). (La indicación de fondu d\'OsmAnd desapaecerá de la barra d\'avisos d\'Android).</string>
     <string name="restore_purchases">Restaurar merques</string>
     <string name="fonts_header">Fontes pal mapa</string>
@@ -775,27 +777,27 @@ Puntos</string>
 
     <string name="rendering_attr_depthContours_description">Amosar les curves de nivel y puntos</string>
     <string name="rendering_attr_depthContours_name">Curves de fondura marina</string>
-	<string name="release_2_6">" • Nueva función: Botón d\'aición rápida
-\n
-\n • Respuesta ameyorada a xestos en pantalles táctiles (p.ex. abasnar y ampliar al tiempu)
-\n
-\n • Nueves tipografíes del mapa que cubren más llingües
-\n
-\n • Soporte TTS pa variantes rexonales de llingua
-\n
-\n • Ameyoramientos de visibilidá en dellos estilos de mapes y Wikipedia
-\n
-\n • Encontu pa Open Location Code (OLC)
-\n
-\n • Ver el perfil d\'elevación, pendiente y velocidá pa les traces GPX grabaes y la ruta calculada
-\n
-\n • Opción «Estilu de conducción» y ameyoramientos na llóxica del cálculu de rutes pa bicicletes
-\n
-\n • Opciones para usar los datos d\'altitú nel cálculu de rutes pa bicicletes
-\n
-\n • Dellos ameyoramientos y errores iguaos más
-\n
-\n y más… "</string>
+	<string name="release_2_6">\\u2022 Nueva función: Botón d\'aición rápida
+\n 
+\n • Respuesta ameyorada a xestos en pantalles táctiles (p.ex. abasnar y ampliar al tiempu) 
+\n 
+\n • Nueves tipografíes del mapa que cubren más llingües 
+\n 
+\n • Soporte TTS pa variantes rexonales de llingua 
+\n 
+\n • Ameyoramientos de visibilidá en dellos estilos de mapes y Wikipedia 
+\n 
+\n • Encontu pa Open Location Code (OLC) 
+\n 
+\n • Ver el perfil d\'elevación, pendiente y velocidá pa les traces GPX grabaes y la ruta calculada 
+\n 
+\n • Opción «Estilu de conducción» y ameyoramientos na llóxica del cálculu de rutes pa bicicletes 
+\n 
+\n • Opciones para usar los datos d\'altitú nel cálculu de rutes pa bicicletes 
+\n 
+\n • Dellos ameyoramientos y errores iguaos más 
+\n 
+\n y más…</string>
 	<string name="search_another_country">Esbillar otra rexón</string>
     <string name="shared_string_change">Camudar</string>
     <string name="mapillary_image">Imaxe de Mapillary</string>
@@ -832,8 +834,8 @@ Puntos</string>
     <string name="favorite_group_name">Nome del grupu</string>
     <string name="change_color">Camudar color</string>
     <string name="edit_name">Editar nome</string>
-    <string name="animate_my_location">Animar el mio allugamientu</string>
-    <string name="animate_my_location_desc">Habilita l\'animación del mio allugamientu na navegación</string>
+    <string name="animate_my_location">Animar la mio posición</string>
+    <string name="animate_my_location_desc">Activa l\'animación de la mio posición na navegación</string>
     <string name="shared_string_overview">Previsualización</string>
     <string name="select_street">Esbillar cai</string>
     <string name="shared_string_in_name">en %1$s</string>
@@ -845,7 +847,7 @@ Puntos</string>
     <string name="select_postcode">Esbillar códigu postal</string>
     <string name="quick_action_add_destination">Amestar destín</string>
     <string name="quick_action_replace_destination">Trocar destín</string>
-    <string name="subscribe_email_error">Fallu</string>
+    <string name="subscribe_email_error">Error</string>
     <string name="nautical_maps">Mapes náuticos</string>
     <string name="shared_string_visible">Visible</string>
     <string name="rendering_attr_hideWaterPolygons_description">Agua</string>
@@ -867,11 +869,11 @@ Puntos</string>
     <string name="shared_string_record">Grabar</string>
     <string name="gpx_logging_no_data">Ensin datos</string>
     <string name="save_track_min_speed">Rexistru de velocidá mínima</string>
-    <string name="save_track_min_speed_descr">Afita la velocidá mínima pa un un puntu a rexistrar</string>
-    <string name="save_track_min_distance">Rexistru de deteición de movición</string>
-    <string name="save_track_min_distance_descr">Afita la distancia mínima dende la cabera posición pal puntu a rexistrar</string>
+    <string name="save_track_min_speed_descr">Filtru: Configura la velocidá mínima pa rexistrar un puntu</string>
+    <string name="save_track_min_distance">Movimientu mínimu a grabar</string>
+    <string name="save_track_min_distance_descr">Filtru: Configura la distancia mínima dende la cabera posición pa rexistrar el puntu</string>
     <string name="save_track_precision">Rexistru de precisión mínimo</string>
-    <string name="save_track_precision_descr">Afita la precisión mínimo pa un puntu a rexistrar</string>
+    <string name="save_track_precision_descr">Filtru: Configura la precisión mínima pa rexistrar un puntu</string>
     <string name="christmas_poi">POI de Nadal</string>
     <string name="christmas_desc">Anticipa les vacaciones de Nadal y Añu nuevu, pues escoyer l\'amosar los POI asociaos col Nadal: Árboles de nadal, tiendes... etc.</string>
     <string name="christmas_desc_q">¿Amosar POI de Nadal?</string>
@@ -887,8 +889,41 @@ Puntos</string>
     <string name="show_something_on_map">Amosar %1$s nel mapa</string>
     <string name="shared_string_is_open_24_7">Abierto 24/7</string>
     <string name="current_track">Ruta actual</string>
-    <string name="access_disable_offroute_recalc">Nun camudar la ruta al tar fuera de la carretera</string>
+    <string name="access_disable_offroute_recalc">Nun recalcular la ruta cuando s\'abandone</string>
     <string name="shared_string_permissions">Permisos</string>
     <string name="import_gpx_failed_descr">OsmAnd nun pudo importar el ficheru. Comprueba si OsmAnd tien permisu pa lleer el ficheru dende\'l so allugamientu.</string>
     <string name="distance_moving">Distancia correxida</string>
+    <string name="wrong_user_name">Nome d\'usuariu incorreutu</string>
+    <string name="shared_string_to">A</string>
+    <string name="mapillary_menu_date_from">Dende</string>
+    <string name="mapillary_menu_descr_dates">Ver les imaxes añadíes nun periodu determináu.</string>
+    <string name="mapillary_menu_title_dates">Feches</string>
+    <string name="mapillary_menu_edit_text_hint">Escribe\'l nome d\'usuariu</string>
+    <string name="mapillary_menu_descr_username">Ver les imaxes añadíes por un determináu usuariu.</string>
+    <string name="mapillary_menu_title_username">Nome del usuariu</string>
+    <string name="mapillary_menu_filter_description">Pueden filtriase les imaxes pol remitente o pola data. Los filtros aplíquense solo nes escales cercanes.</string>
+    
+    <string name="map_widget_ruler_control">Regla de radiu</string>
+    <string name="improve_coverage_mapillary">Ameyorar la cobertura de fotos con Mapillary</string>
+    <string name="hillshade_menu_download_descr">Pa ver la solombra del relieve nel mapa, necesites descargar la superposición de solombra del relieve d\'esta rexón.</string>
+    <string name="hillshade_purchase_header">Pa ver la solombra del relieve nel mapa, necesites comprar ya instalar el complementu Curves de Nivel</string>
+    <string name="srtm_menu_download_descr">Pa ver les curves de nivel nel mapa, necesites descargar el mapa de curves de nivel d\'esta rexón.</string>
+    <string name="store_tracks_in_monthly_directories">Almacenar les traces grabaes en carpetes mensuales</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Almacenar les traces grabaes en subcarpetes por mes de grabación (como 2017 - 01).</string>
+    <string name="shared_string_reset">Reaniciar</string>
+    <string name="shared_string_reload">Recargar</string>
+    <string name="mapillary_menu_descr_tile_cache">Recargar los mosaicos pa ver los datos actualizaos.</string>
+    <string name="mapillary_menu_title_tile_cache">Caché de mosaicos</string>
+    <string name="srtm_purchase_header">Pa ver les curves de nivel nel mapa, necesites comprar ya instalar el complementu «Curves de nivel»</string>
+    <string name="show_from_zoom_level">Amosar dende\'l nivel de zoom</string>
+    <string name="display_zoom_level">Nivel de zoom: %1$s</string>
+    <string name="quick_action_auto_zoom">Zoom automáticu del mapa sí/non</string>
+    <string name="quick_action_auto_zoom_on">Zoom automáticu del mapa activáu</string>
+    <string name="quick_action_auto_zoom_off">Zoom automáticu del mapa desactiváu</string>
+    <string name="quick_action_add_first_intermediate">Añadir primer intermediu</string>
+    <string name="no_overlay">Ensin superposición</string>
+    <string name="no_underlay">Ensin fondu</string>
+    <string name="subscribe_email_desc"/>
+    <string name="depth_contour_descr">Conxuntu de mapes que contienen la batimetría y puntos del fondu del mar.</string>
+    <string name="sea_depth_thanks">¡Gracies por comprar les curves de fondura marina!</string>
     </resources>

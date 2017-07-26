@@ -1213,10 +1213,10 @@
 	<string name="poi_urban">Město</string>
 	<string name="poi_rural">Venkov</string>
 
-	<string name="poi_animal_shelter_dog">Typ útulku: pes</string>
-	<string name="poi_animal_shelter_cat">Typ útulku: kočky</string>
-	<string name="poi_animal_shelter_dog_cat">Typ útulku: pes, kočka</string>
-	<string name="poi_animal_shelter_bird">Typ útulku: pták</string>
+	<string name="poi_animal_shelter_dog">Psi</string>
+	<string name="poi_animal_shelter_cat">Kočky</string>
+	<string name="poi_animal_shelter_dog_cat">Psi, kočky</string>
+	<string name="poi_animal_shelter_bird">Ptáci</string>
 
 	<string name="poi_seats">Sedačky</string>
 	<string name="poi_backrest_yes">Opěradlo: ano</string>
@@ -1886,9 +1886,9 @@
 	<string name="poi_pump_status_locked">Stav pumpy: zamčená</string>
 
 	<string name="poi_telescope">Dalekohled</string>
-	<string name="poi_telescope_type_optical">Dalekohled: optický</string>
-	<string name="poi_telescope_type_radio">Dalekohled: rádiový</string>
-	<string name="poi_telescope_type_gamma">Dalekohled: gama</string>
+	<string name="poi_telescope_type_optical">Optický</string>
+	<string name="poi_telescope_type_radio">Rádiový</string>
+	<string name="poi_telescope_type_gamma">Gama</string>
 	<string name="poi_telescope_diameter">Průměr</string>
 	<string name="poi_telescope_spectrum">Spektrum</string>
 	<string name="poi_telescope_usage_education">Použití: výuka</string>
@@ -1975,7 +1975,7 @@
 	<string name="poi_payment_gift_card_no">Nepřijímá dárkové poukázky</string>
 	<string name="poi_payment_golden_crown_yes">Golden Crown</string>
 	<string name="poi_payment_golden_crown_no">Nepřijímá Golden Crown karty</string>
-	<string name="poi_payment_pro100_yes">"PRO100 "</string>
+	<string name="poi_payment_pro100_yes">PRO100</string>
 	<string name="poi_payment_pro100_no">Nepřijímá PRO100 karty</string>
 	<string name="poi_payment_union_card_yes">Union karty</string>
 	<string name="poi_payment_union_card_no">Nepřijímá Union Card</string>
@@ -2275,7 +2275,7 @@
 	<string name="poi_tents_no">Stany nepovoleny</string>
 	<string name="poi_backcountry_yes">Ano</string>
 	<string name="poi_backcountry_no">Ne</string>
-	<string name="poi_scout_yes">Skautský tábor: ano</string>
+	<string name="poi_scout_yes">Ano</string>
 	<string name="poi_scout_no">Skautský tábor: ne</string>
 	<string name="poi_group_only_yes">Pouze skupina: ano</string>
 	<string name="poi_group_only_no">Pouze skupina: ne</string>
@@ -2397,7 +2397,7 @@
 	<string name="poi_historic_period_old_kingdom">Historické období: Stará říše (2686–2181 př.n.l.)</string>
 	<string name="poi_historic_period_first_intermediate_period">Historické období: první přechodná doba (2181–2055 př. n. l.)</string>
 	<string name="poi_historic_period_second_intermediate_period">Historické období: druhá přechodná doba (1650–1550 př.n.l.)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Historické období: třetí přechodná doba (1069–664 př.n.l) "</string>
+	<string name="poi_historic_period_third_intermediate_period">Historické období: třetí přechodná doba (1069–664 př.n.l)</string>
 	<string name="poi_historic_period_first_persian_period">Historické období: první perské období</string>
 	<string name="poi_historic_period_late_period">Historické období: pozdní období (664–332 př. n. l.)</string>
 	<string name="poi_historic_period_second_persian_period">Historické období: druhé perské období</string>
@@ -2483,7 +2483,7 @@
 
 	<string name="poi_wiki_lang_af">Africká wiki</string>
 	<string name="poi_wiki_lang_als">Alsaská wiki</string>
-	<string name="poi_wiki_lang_az">Azerská wiki</string>
+	<string name="poi_wiki_lang_az">Azerbajdžánská wiki</string>
 	<string name="poi_craft_electronics_repair">Oprava elektroniky</string>
 	<string name="poi_fireworks">Prodej zábavní pyrotechniky</string>
 
@@ -2842,12 +2842,12 @@
 	<string name="poi_fire_hydrant_pressure">Tlak hydrantu</string>
 	<string name="poi_fire_hydrant_count">Počet hydrantů</string>
 	<string name="poi_fire_hydrant_flow_capacity">Kapacita průtoku hydrantu</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Pozice hydrantu: chodník</string>
-	<string name="poi_fire_hydrant_position_green">Pozice hydrantu: tráva</string>
-	<string name="poi_fire_hydrant_position_lane">Pozice hydrantu: cesta</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Pozice hydrantu: parkoviště</string>
-	<string name="poi_fire_hydrant_position_street">Pozice hydrantu: ulice</string>
-	<string name="poi_fire_hydrant_position_underground">Pozice hydrantu: podzemní</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Chodník</string>
+	<string name="poi_fire_hydrant_position_green">Tráva</string>
+	<string name="poi_fire_hydrant_position_lane">Cesta</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Parkoviště</string>
+	<string name="poi_fire_hydrant_position_street">Ulice</string>
+	<string name="poi_fire_hydrant_position_underground">Podzemní</string>
 	<string name="poi_fire_hydrant_style_wsh">Styl hydrantu: wsh</string>
 	<string name="poi_fire_hydrant_style_water_source_main">Hlavní</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">Rybník</string>
@@ -3053,8 +3053,8 @@
 
 	<string name="poi_gambling_lottery">Loterie</string>
 	<string name="poi_gambling_slot_machines">Hrací automaty</string>
-	<string name="poi_cuisine_bulgarian">Bulharština</string>
-	<string name="poi_cuisine_tibetan">Tibetština</string>
+	<string name="poi_cuisine_bulgarian">Bulharská</string>
+	<string name="poi_cuisine_tibetan">Tibetská</string>
 
 	<string name="poi_feeding_place">Místo pro krmení zvířat</string>
 
@@ -3110,14 +3110,14 @@
 	<string name="poi_takeaway_filter_yes">Ano</string>
 	<string name="poi_delivery_filter_yes">Ano</string>
 	<string name="poi_outdoor_seating_filter_yes">Ano</string>
-	<string name="poi_service_bicycle_charging_yes">Nabíjení jízdních kol: Ano</string>
-	<string name="poi_service_bicycle_charging_no">Nabíjení jízdních kol: ne</string>
+	<string name="poi_service_bicycle_charging_yes">Nabíjení: Ano</string>
+	<string name="poi_service_bicycle_charging_no">Nabíjení: ne</string>
 	<string name="poi_shower_filter_yes">Ano</string>
 	<string name="poi_social_facility_outreach">Nebytové zařízení</string>
 	<string name="poi_hackerspace">Komunitní místo</string>
 
 
-	<string name="poi_health_specialty_palliative_medicine_yes">Zdravotní specializace: paliativní medicína</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Paliativní medicína</string>
 
 	<string name="poi_fair_trade_yes">Spravedlivý obchod: Ano</string>
 	<string name="poi_fair_trade_no">Spravedlivý obchod: ne</string>
@@ -3382,5 +3382,8 @@
 
 	<string name="poi_motorcycle_services">Služby</string>
 	<string name="poi_motorcycle_type">Typ motocyklu</string>
+
+<string name="poi_animal_shelter_type">Zvířata povolena</string>
+	<string name="poi_animal_shelter_purpose">Účel</string>
 
 </resources>

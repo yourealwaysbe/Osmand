@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="poi_office">Ofis</string>
+<resources>
+	<string name="poi_office">Ofis</string>
 	<string name="poi_sport">İdman</string>
 	<string name="poi_tourism">Turizm</string>
 	<string name="poi_club">Klub</string>
@@ -87,5 +88,64 @@
 	<string name="poi_resource_gravel">Çınqıl</string>
 	<string name="poi_resource_gypsum">Gips</string>
 	<string name="poi_resource_iron_ore">Dəmir filizi</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge"></string>
-	</resources>
+	<string name="poi_post_office">Poçt şöbəsi</string>
+	<string name="poi_post_box">Poçt qutusu</string>
+	<string name="poi_telephone">Telefon</string>
+	<string name="poi_communication_tower">Kommunikasiya qülləsi</string>
+	<string name="poi_observation_tower">Müşahidə qülləsi</string>
+	<string name="poi_bell_tower">Zəng qülləsi</string>
+	<string name="poi_lighting_tower">İşıq qülləsi</string>
+	<string name="poi_recycling">Təkrar emal</string>
+
+	<string name="poi_recycling_container">Konteyner</string>
+	<string name="poi_recycling_glass">Şüşə</string>
+	<string name="poi_recycling_paper">Kağız</string>
+	<string name="poi_recycling_clothes">Geyimlər</string>
+	<string name="poi_recycling_plastic">Plastik</string>
+	<string name="poi_recycling_batteries">Batareyalar</string>
+	<string name="poi_bed">Yataq əşyaları mağazası</string>
+	<string name="poi_camera">Kameralar və obyektivlər</string>
+	<string name="poi_computer">Kompyuter mağazası</string>
+	<string name="poi_frame">Şəkil çərçivəsi dükanı</string>
+	<string name="poi_shop_yes">Ümumi mağaza</string>
+	<string name="poi_gift">Hədiyyə dükanı</string>
+	<string name="poi_photo">Şəkil dükanı</string>
+	<string name="poi_second_hand">İkinci əl mağazası</string>
+	<string name="poi_ticket">Bilet satışları</string>
+	<string name="poi_video">Video mağazası</string>
+	<string name="poi_electronics">Elektronika mağazası</string>
+	<string name="poi_car_parts">Avtomobil hissələri</string>
+	<string name="poi_cosmetics">Kosmetika</string>
+	<string name="poi_perfumery">Ətir mağazası</string>
+	<string name="poi_honey">Bal mağazası</string>
+	<string name="poi_fuel_diesel">Dizel</string>
+	<string name="poi_fuel_gtl_diesel">GTL dizel</string>
+	<string name="poi_fuel_hgv_diesel">HGV dizel</string>
+	<string name="poi_fuel_biodiesel">Bio dizel</string>
+	<string name="poi_public_transport_platform">İctimai nəqliyyat dayanacağı</string>
+	<string name="poi_public_transport_platform_bus">Avtobus dayanacağı</string>
+	<string name="poi_bus_stop">Avtobus dayanacağı</string>
+	<string name="poi_subway_station">Metro stansiyası</string>
+	<string name="poi_tunnel">Tunel</string>
+	<string name="poi_bridge">Körpü</string>
+
+	<string name="poi_speed_camera">Sürət kamerası</string>
+	<string name="poi_recycling_newspaper">Qəzet</string>
+	<string name="poi_recycling_mobile_phones">Mobil telefonlar</string>
+	<string name="poi_recycling_computers">Kompyuterlər</string>
+	<string name="poi_recycling_tv_monitor">TV, monitorlar</string>
+	<string name="poi_recycling_paint">Boya</string>
+	<string name="poi_recycling_cars">Avtomobillər</string>
+	<string name="poi_recycling_bicycles">Velosipedlər</string>
+
+	<string name="poi_college">Kollec</string>
+	<string name="poi_driving_school">Sürücülük məktəbi</string>
+	<string name="poi_school">Məktəb</string>
+	<string name="poi_university">Universitet</string>
+
+	<string name="poi_country">Ölkə</string>
+	<string name="poi_city">Şəhər</string>
+	<string name="poi_stadium">Stadion</string>
+	<string name="poi_sports_centre">İdman mərkəzi</string>
+	<string name="poi_golf">Qolf</string>
+</resources>

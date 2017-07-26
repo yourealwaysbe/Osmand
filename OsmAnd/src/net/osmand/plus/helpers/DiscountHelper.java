@@ -1,9 +1,12 @@
 package net.osmand.plus.helpers;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.provider.Settings.Secure;
+import android.util.Log;
+import android.view.View;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.plus.OsmandApplication;
@@ -19,13 +22,10 @@ import net.osmand.util.Algorithms;
 
 import org.json.JSONObject;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.provider.Settings.Secure;
-import android.util.Log;
-import android.view.View;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class DiscountHelper {
 
@@ -38,21 +38,22 @@ public class DiscountHelper {
 	private static String mIcon;
 	private static String mUrl;
 	private static boolean mBannerVisible;
-	private static final String URL = "http://osmand.net/api/motd";
+	private static final String URL = "https://osmand.net/api/motd";
 	private static final String INAPP_PREFIX = "osmand-in-app:";
 
 
 	public static void checkAndDisplay(final MapActivity mapActivity) {
-		if (mapActivity.getMyApplication().getSettings().DO_NOT_SHOW_STARTUP_MESSAGES.get()) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
+		if (settings.DO_NOT_SHOW_STARTUP_MESSAGES.get() || !settings.INAPPS_READ.get()) {
 			return;
 		}
 		if (mBannerVisible) {
 			showDiscountBanner(mapActivity, mTitle, mDescription, mIcon, mUrl);
 		}
-		OsmandApplication app = mapActivity.getMyApplication();
 		if (System.currentTimeMillis() - mLastCheckTime < 1000 * 60 * 60 * 24
-				|| !app.getSettings().isInternetConnectionAvailable()
-				|| app.getSettings().NO_DISCOUNT_INFO.get()) {
+				|| !settings.isInternetConnectionAvailable()
+				|| settings.NO_DISCOUNT_INFO.get()) {
 			return;
 		}
 		mLastCheckTime = System.currentTimeMillis();

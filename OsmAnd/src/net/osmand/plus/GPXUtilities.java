@@ -275,6 +275,7 @@ public class GPXUtilities {
 		public double minElevation = 99999;
 		public double maxElevation = -100;
 
+		public float minSpeed = Float.MAX_VALUE;
 		public float maxSpeed = 0;
 		public float avgSpeed;
 
@@ -372,16 +373,18 @@ public class GPXUtilities {
 					}
 					long time = point.time;
 					if (time != 0) {
-						if (s.segment.generalSegment) {
-							if (point.firstPoint) {
-								startTimeOfSingleSegment = time;
-							} else if (point.lastPoint) {
-								endTimeOfSingleSegment = time;
-							}
-							if (startTimeOfSingleSegment != 0 && endTimeOfSingleSegment != 0) {
-								timeSpan += endTimeOfSingleSegment - startTimeOfSingleSegment;
-								startTimeOfSingleSegment = 0;
-								endTimeOfSingleSegment = 0;
+						if (s.metricEnd == 0) {
+							if (s.segment.generalSegment) {
+								if (point.firstPoint) {
+									startTimeOfSingleSegment = time;
+								} else if (point.lastPoint) {
+									endTimeOfSingleSegment = time;
+								}
+								if (startTimeOfSingleSegment != 0 && endTimeOfSingleSegment != 0) {
+									timeSpan += endTimeOfSingleSegment - startTimeOfSingleSegment;
+									startTimeOfSingleSegment = 0;
+									endTimeOfSingleSegment = 0;
+								}
 							}
 						}
 						startTime = Math.min(startTime, time);
@@ -518,6 +521,7 @@ public class GPXUtilities {
 						hasElevationData = true;
 					}
 
+					minSpeed = Math.min(speed, minSpeed);
 					if (speed > 0) {
 						totalSpeedSum += speed;
 						maxSpeed = Math.max(speed, maxSpeed);
@@ -807,9 +811,11 @@ public class GPXUtilities {
 			for (int i = 0; i < tracks.size(); i++) {
 				Track subtrack = tracks.get(i);
 				for (TrkSegment segment : subtrack.segments) {
-					g.totalTracks++;
-					if (segment.points.size() > 1) {
-						splitSegments.add(new SplitSegment(segment));
+					if (!segment.generalSegment) {
+						g.totalTracks++;
+						if (segment.points.size() > 1) {
+							splitSegments.add(new SplitSegment(segment));
+						}
 					}
 				}
 			}
@@ -917,7 +923,7 @@ public class GPXUtilities {
 			for (Track t : tracks) {
 				int trackColor = t.getColor(getColor(0));
 				for (TrkSegment ts : t.segments) {
-					if (ts.points.size() > 0) {
+					if (!ts.generalSegment && ts.points.size() > 0) {
 						TrkSegment sgmt = new TrkSegment();
 						tpoints.add(sgmt);
 						sgmt.points.addAll(ts.points);
