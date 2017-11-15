@@ -632,7 +632,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	private void addMapMarkersSyncGroup() {
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		File gpx = getGpxDataItem().getFile();
-		MarkersSyncGroup syncGroup = new MarkersSyncGroup(gpx.getAbsolutePath(),
+		final MarkersSyncGroup syncGroup = new MarkersSyncGroup(gpx.getAbsolutePath(),
 				AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE);
 		markersHelper.addMarkersSyncGroup(syncGroup);
 		markersHelper.syncGroup(syncGroup);
@@ -647,7 +647,9 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 				.setAction(getResources().getString(R.string.view), new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						MapActivity.launchMapActivityMoveToTop(getTrackActivity(), MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS);
+						Bundle args = new Bundle();
+						args.putString(MarkersSyncGroup.MARKERS_SYNC_GROUP_ID, syncGroup.getId());
+						MapActivity.launchMapActivityMoveToTop(getTrackActivity(), MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS, args);
 					}
 				});
 		snackbar.addCallback(new Snackbar.Callback() {
