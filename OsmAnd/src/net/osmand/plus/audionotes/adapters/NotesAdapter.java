@@ -67,7 +67,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 				HeaderViewHolder hHolder = new HeaderViewHolder(row);
 				row.setTag(hHolder);
 			} else {
-				row = inflater.inflate(R.layout.note, parent, false);
+				row = inflater.inflate(R.layout.note_list_item, parent, false);
 				ItemViewHolder iHolder = new ItemViewHolder(row);
 				row.setTag(iHolder);
 			}
@@ -78,7 +78,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 			holder.checkBox.setVisibility(selectionMode ? View.VISIBLE : View.GONE);
 			holder.headerRow.setEnabled(selectionMode);
 			if (selectionMode) {
-				holder.checkBox.setChecked(isSelectAllChecked());
+				holder.checkBox.setChecked(isSelectAllChecked(type));
 				holder.checkBox.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -121,11 +121,11 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 					holder.description.setText(recording.getNewSmallDescription(app));
 					int iconRes = recording.isAudio() ? R.drawable.ic_type_audio
 							: (recording.isVideo() ? R.drawable.ic_type_video : R.drawable.ic_type_img);
-					holder.icon.setImageDrawable(app.getIconsCache().getIcon(iconRes, R.color.color_distance));
+					int colorRes = app.getSettings().isLightContent() ? R.color.icon_color : R.color.ctx_menu_info_text_dark;
+					holder.icon.setImageDrawable(app.getIconsCache().getIcon(iconRes, colorRes));
 				}
 
-				holder.play.setVisibility(View.GONE);
-				holder.bottomDivider.setVisibility(View.VISIBLE);
+				holder.bottomDivider.setVisibility(hideBottomDivider(position) ? View.GONE : View.VISIBLE);
 				holder.icon.setVisibility(selectionMode ? View.GONE : View.VISIBLE);
 				holder.checkBox.setVisibility(selectionMode ? View.VISIBLE : View.GONE);
 				holder.options.setVisibility(selectionMode ? View.GONE : View.VISIBLE);
@@ -183,16 +183,32 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 		return TYPE_COUNT;
 	}
 
-	private boolean isSelectAllChecked() {
+	private boolean hideBottomDivider(int pos) {
+		return pos == getCount() - 1 || !(getItem(pos + 1) instanceof Recording);
+	}
+
+	private boolean isSelectAllChecked(int type) {
 		for (int i = 0; i < getCount(); i++) {
 			Object item = getItem(i);
 			if (item instanceof Recording) {
+				if (type != TYPE_DATE_HEADER && !isAppropriate((Recording) item, type)) {
+					continue;
+				}
 				if (!selected.contains(item)) {
 					return false;
 				}
 			}
 		}
 		return true;
+	}
+
+	private boolean isAppropriate(Recording rec, int type) {
+		if (type == NotesAdapter.TYPE_AUDIO_HEADER) {
+			return rec.isAudio();
+		} else if (type == NotesAdapter.TYPE_PHOTO_HEADER) {
+			return rec.isPhoto();
+		}
+		return rec.isVideo();
 	}
 
 	private class HeaderViewHolder {
@@ -218,17 +234,15 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 		final TextView title;
 		final TextView description;
 		final ImageButton options;
-		final View play;
 		final View bottomDivider;
 
 		ItemViewHolder(View view) {
 			this.view = view;
 			icon = (ImageView) view.findViewById(R.id.icon);
-			checkBox = (CheckBox) view.findViewById(R.id.check_local_index);
-			title = (TextView) view.findViewById(R.id.name);
+			checkBox = (CheckBox) view.findViewById(R.id.check_box);
+			title = (TextView) view.findViewById(R.id.title);
 			description = (TextView) view.findViewById(R.id.description);
 			options = (ImageButton) view.findViewById(R.id.options);
-			play = view.findViewById(R.id.play);
 			bottomDivider = view.findViewById(R.id.bottom_divider);
 		}
 	}

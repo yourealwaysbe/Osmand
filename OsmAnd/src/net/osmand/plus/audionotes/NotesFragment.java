@@ -3,12 +3,13 @@ package net.osmand.plus.audionotes;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
 import android.view.LayoutInflater;
@@ -42,12 +43,10 @@ import net.osmand.plus.audionotes.adapters.NotesAdapter.NotesAdapterListener;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -218,9 +217,9 @@ public class NotesFragment extends OsmAndListFragment {
 			@Override
 			public void onHeaderClick(int type, boolean checked) {
 				if (checked) {
-					selectAll();
+					selectAll(type);
 				} else {
-					deselectAll();
+					deselectAll(type);
 				}
 				updateSelectionTitle(actionMode);
 			}
@@ -261,19 +260,47 @@ public class NotesFragment extends OsmAndListFragment {
 		fragment.show(getChildFragmentManager(), SortByMenuBottomSheetDialogFragment.TAG);
 	}
 
-	private void selectAll() {
-		for (int i = 0; i < listAdapter.getCount(); i++) {
-			Object item = listAdapter.getItem(i);
-			if (item instanceof Recording) {
-				selected.add((Recording) item);
+	private List<Recording> getRecordingsByType(int type) {
+		List<Recording> allRecs = new LinkedList<>(plugin.getAllRecordings());
+		List<Recording> res = new LinkedList<>();
+		for (Recording rec : allRecs) {
+			if (isAppropriate(rec, type)) {
+				res.add(rec);
 			}
 		}
-		listAdapter.notifyDataSetInvalidated();
+		return res;
 	}
 
-	private void deselectAll() {
-		selected.clear();
-		listAdapter.notifyDataSetInvalidated();
+	private boolean isAppropriate(Recording rec, int type) {
+		if (type == NotesAdapter.TYPE_AUDIO_HEADER) {
+			return rec.isAudio();
+		} else if (type == NotesAdapter.TYPE_PHOTO_HEADER) {
+			return rec.isPhoto();
+		}
+		return rec.isVideo();
+	}
+
+	private void selectAll(int type) {
+		if (type == NotesAdapter.TYPE_DATE_HEADER) {
+			for (int i = 0; i < listAdapter.getCount(); i++) {
+				Object item = listAdapter.getItem(i);
+				if (item instanceof Recording) {
+					selected.add((Recording) item);
+				}
+			}
+		} else {
+			selected.addAll(getRecordingsByType(type));
+		}
+		listAdapter.notifyDataSetChanged();
+	}
+
+	private void deselectAll(int type) {
+		if (type == NotesAdapter.TYPE_DATE_HEADER) {
+			selected.clear();
+		} else {
+			selected.removeAll(getRecordingsByType(type));
+		}
+		listAdapter.notifyDataSetChanged();
 	}
 
 	private List<Recording> sortItemsByDateDescending(List<Recording> recs) {
@@ -377,7 +404,7 @@ public class NotesFragment extends OsmAndListFragment {
 
 	private void updateSelectionMode(ActionMode m) {
 		updateSelectionTitle(m);
-		listAdapter.notifyDataSetInvalidated();
+		listAdapter.notifyDataSetChanged();
 	}
 
 	private void deleteItems(final Set<Recording> selected) {
@@ -401,29 +428,20 @@ public class NotesFragment extends OsmAndListFragment {
 	}
 
 	private void shareItems(Set<Recording> selected) {
-		Intent intent = new Intent();
-		intent.setAction(Intent.ACTION_SEND_MULTIPLE);
-		intent.setType("image/*"); /* This example is sharing jpeg images. */
-		ArrayList<Uri> files = new ArrayList<Uri>();
-		for (Recording path : selected) {
-			if (path == SHARE_LOCATION_FILE) {
-				File fl = generateGPXForRecordings(selected);
-				if (fl != null) {
-					files.add(FileProvider.getUriForFile(getActivity(), getActivity().getPackageName() + ".fileprovider", fl));
-				}
-			} else {
-				File src = path.getFile();
-				File dst = new File(getActivity().getCacheDir(), "share/" + src.getName());
-				try {
-					Algorithms.fileCopy(src, dst);
-					files.add(FileProvider.getUriForFile(getActivity(), getActivity().getPackageName() + ".fileprovider", dst));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+		ArrayList<Uri> files = new ArrayList<>();
+		for (Recording rec : selected) {
+			File file = rec == SHARE_LOCATION_FILE ? generateGPXForRecordings(selected) : rec.getFile();
+			if (file != null) {
+				files.add(Uri.parse(file.getAbsolutePath()));
 			}
 		}
-		intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, files);
+		Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+		intent.setType("*/*");
+		intent.putExtra(Intent.EXTRA_STREAM, files);
 		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		if (Build.VERSION.SDK_INT > 18) {
+			intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+		}
 		startActivity(Intent.createChooser(intent, getString(R.string.share_note)));
 	}
 
@@ -480,22 +498,26 @@ public class NotesFragment extends OsmAndListFragment {
 		};
 	}
 
-	private void shareNote(Recording recording) {
-		Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-		if (recording.isPhoto()) {
-			Uri screenshotUri = Uri.parse(recording.getFile().getAbsolutePath());
-			sharingIntent.setType("image/*");
-			sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
-		} else if (recording.isAudio()) {
-			Uri audioUri = Uri.parse(recording.getFile().getAbsolutePath());
-			sharingIntent.setType("audio/*");
-			sharingIntent.putExtra(Intent.EXTRA_STREAM, audioUri);
-		} else if (recording.isVideo()) {
-			Uri videoUri = Uri.parse(recording.getFile().getAbsolutePath());
-			sharingIntent.setType("video/*");
-			sharingIntent.putExtra(Intent.EXTRA_STREAM, videoUri);
+	private void shareNote(final Recording recording) {
+		if (!recording.getFile().exists()) {
+			return;
 		}
-		startActivity(Intent.createChooser(sharingIntent, getString(R.string.share_note)));
+		MediaScannerConnection.scanFile(getActivity(), new String[]{recording.getFile().getAbsolutePath()},
+				null, new MediaScannerConnection.OnScanCompletedListener() {
+					public void onScanCompleted(String path, Uri uri) {
+						Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+						if (recording.isPhoto()) {
+							shareIntent.setType("image/*");
+						} else if (recording.isAudio()) {
+							shareIntent.setType("audio/*");
+						} else if (recording.isVideo()) {
+							shareIntent.setType("video/*");
+						}
+						shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+						shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+						startActivity(Intent.createChooser(shareIntent, getString(R.string.share_note)));
+					}
+				});
 	}
 
 	private void showOnMap(Recording recording) {
