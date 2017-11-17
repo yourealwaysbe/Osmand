@@ -538,7 +538,7 @@ public class GpxSelectionHelper {
 					mapMarkersHelper.removeMarkersSyncGroup(gpx.getAbsolutePath(), true);
 				}
 			}
-			mapMarkersHelper.syncGroup(syncGroup, enabled);
+			mapMarkersHelper.syncGroupAsync(syncGroup, enabled);
 		}
 	}
 
@@ -555,6 +555,16 @@ public class GpxSelectionHelper {
 		private boolean routePoints;
 
 		private List<GpxDisplayGroup> displayGroups;
+
+		private boolean synced;
+
+		public void setSynced(boolean synced) {
+			this.synced = synced;
+		}
+
+		public boolean isSynced() {
+			return synced;
+		}
 
 		public void setGpxFile(GPXFile gpxFile) {
 			this.gpxFile = gpxFile;
