@@ -11,8 +11,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -117,7 +120,27 @@ public class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 
 	private Drawable getIcon(OsmPoint point) {
 		if (point.getGroup() == OsmPoint.Group.POI) {
-			return app.getIconsCache().getIcon(R.drawable.ic_type_info, R.color.color_distance);
+			OpenstreetmapPoint osmPoint = (OpenstreetmapPoint) point;
+			String type = osmPoint.getType();
+			String subtype = osmPoint.getSubtype();
+			int iconResId = RenderingIcons.getBigIconResourceId(type);
+			if (iconResId == 0) {
+				iconResId = RenderingIcons.getBigIconResourceId(type + "_" + subtype);
+				if (iconResId == 0) {
+					iconResId = R.drawable.ic_type_info;
+				}
+			}
+			int colorResId = R.color.color_distance;
+			if (point.getAction() == OsmPoint.Action.CREATE) {
+				colorResId = R.color.color_osm_edit_create;
+			} else if (point.getAction() == OsmPoint.Action.MODIFY) {
+				colorResId = R.color.color_osm_edit_modify;
+			} else if (point.getAction() == OsmPoint.Action.DELETE) {
+				colorResId = R.color.color_osm_edit_delete;
+			} else if (point.getAction() == OsmPoint.Action.REOPEN) {
+				colorResId = R.color.color_osm_edit_modify;
+			}
+			return app.getIconsCache().getIcon(iconResId, colorResId);
 		} else if (point.getGroup() == OsmPoint.Group.BUG) {
 			return app.getIconsCache().getIcon(R.drawable.ic_type_bug, R.color.color_distance);
 		}
