@@ -18,9 +18,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,7 +32,7 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.NotesSortByMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.MapActivity;
@@ -69,6 +71,7 @@ public class NotesFragment extends OsmAndListFragment {
 	private Set<Recording> selected = new HashSet<>();
 
 	private View footerView;
+	private View emptyView;
 
 	private boolean selectionMode;
 
@@ -92,6 +95,12 @@ public class NotesFragment extends OsmAndListFragment {
 
 		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
 		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
+		ViewStub emptyStub = (ViewStub) view.findViewById(R.id.empty_view_stub);
+		emptyStub.setLayoutResource(R.layout.empty_state_av_notes);
+		emptyView = emptyStub.inflate();
+		int icRes = getMyApplication().getSettings().isLightContent()
+				? R.drawable.ic_empty_state_av_notes_day : R.drawable.ic_empty_state_av_notes_night;
+		((ImageView) emptyView.findViewById(R.id.empty_state_image_view)).setImageResource(icRes);
 
 		return view;
 	}
@@ -109,6 +118,7 @@ public class NotesFragment extends OsmAndListFragment {
 		List<Object> items = createItemsList();
 		ListView listView = getListView();
 		listView.setDivider(null);
+		listView.setEmptyView(emptyView);
 		if (items.size() > 0 && footerView == null) {
 			footerView = getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false);
 			listView.addFooterView(footerView);
@@ -178,37 +188,37 @@ public class NotesFragment extends OsmAndListFragment {
 	private List<Object> createItemsList() {
 		List<Recording> recs = new LinkedList<>(plugin.getAllRecordings());
 		List<Object> res = new LinkedList<>();
-		OsmandSettings settings = getMyApplication().getSettings();
-		if (settings.NOTES_SORT_BY_MODE.get().isByDate()) {
-			res.add(NotesAdapter.TYPE_DATE_HEADER);
-			res.addAll(sortItemsByDateDescending(recs));
-		} else if (settings.NOTES_SORT_BY_MODE.get().isByType()) {
-			List<Recording> audios = new LinkedList<>();
-			List<Recording> photos = new LinkedList<>();
-			List<Recording> videos = new LinkedList<>();
-			for (Recording rec : recs) {
-				if (rec.isAudio()) {
-					audios.add(rec);
-				} else if (rec.isPhoto()) {
-					photos.add(rec);
-				} else {
-					videos.add(rec);
+		if (!recs.isEmpty()) {
+			NotesSortByMode sortByMode = getMyApplication().getSettings().NOTES_SORT_BY_MODE.get();
+			if (sortByMode.isByDate()) {
+				res.add(NotesAdapter.TYPE_DATE_HEADER);
+				res.addAll(sortItemsByDateDescending(recs));
+			} else if (sortByMode.isByType()) {
+				List<Recording> audios = new LinkedList<>();
+				List<Recording> photos = new LinkedList<>();
+				List<Recording> videos = new LinkedList<>();
+				for (Recording rec : recs) {
+					if (rec.isAudio()) {
+						audios.add(rec);
+					} else if (rec.isPhoto()) {
+						photos.add(rec);
+					} else {
+						videos.add(rec);
+					}
 				}
-			}
-			if (!audios.isEmpty()) {
-				res.add(NotesAdapter.TYPE_AUDIO_HEADER);
-				res.addAll(audios);
-			}
-			if (!photos.isEmpty()) {
-				res.add(NotesAdapter.TYPE_PHOTO_HEADER);
-				res.addAll(photos);
-			}
-			if (!videos.isEmpty()) {
-				res.add(NotesAdapter.TYPE_VIDEO_HEADER);
-				res.addAll(videos);
+				addToResIfNotEmpty(res, audios, NotesAdapter.TYPE_AUDIO_HEADER);
+				addToResIfNotEmpty(res, photos, NotesAdapter.TYPE_PHOTO_HEADER);
+				addToResIfNotEmpty(res, videos, NotesAdapter.TYPE_VIDEO_HEADER);
 			}
 		}
 		return res;
+	}
+
+	private void addToResIfNotEmpty(List<Object> res, List<Recording> recs, int header) {
+		if (!recs.isEmpty()) {
+			res.add(header);
+			res.addAll(recs);
+		}
 	}
 
 	private NotesAdapterListener createAdapterListener() {
@@ -325,11 +335,15 @@ public class NotesFragment extends OsmAndListFragment {
 		return new SortFragmentListener() {
 			@Override
 			public void onSortModeChanged() {
-				listAdapter.clear();
-				listAdapter.addAll(createItemsList());
-				listAdapter.notifyDataSetChanged();
+				recreateAdapterData();
 			}
 		};
+	}
+
+	private void recreateAdapterData() {
+		listAdapter.clear();
+		listAdapter.addAll(createItemsList());
+		listAdapter.notifyDataSetChanged();
 	}
 
 	private void enterSelectionMode(final int type) {
@@ -418,9 +432,8 @@ public class NotesFragment extends OsmAndListFragment {
 							Recording rec = it.next();
 							plugin.deleteRecording(rec, true);
 							it.remove();
-							listAdapter.remove(rec);
 						}
-						listAdapter.notifyDataSetChanged();
+						recreateAdapterData();
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
