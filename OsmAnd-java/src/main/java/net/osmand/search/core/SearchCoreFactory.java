@@ -3,6 +3,7 @@ package net.osmand.search.core;
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 
+import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter;
@@ -500,9 +501,11 @@ public class SearchCoreFactory {
 		private static final int LIMIT = 10000;
 		private static final int BBOX_RADIUS = 500 * 1000;
 		private static final int BBOX_RADIUS_INSIDE = 10000 * 1000; // to support city search for basemap
+		private MapPoiTypes types;
 
-		public SearchAmenityByNameAPI() {
+		public SearchAmenityByNameAPI(MapPoiTypes types) {
 			super(ObjectType.POI);
+			this.types = types;
 		}
 
 		@Override
@@ -516,6 +519,8 @@ public class SearchCoreFactory {
 			final NameStringMatcher nm = phrase.getNameStringMatcher();
 			QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);
 			final Set<String> ids = new HashSet<String>();
+			final String searchPhrase = phrase.getUnknownSearchPhrase();
+			final String[] searchWords = searchPhrase.trim().split(" ", 2);
 			SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
 					(int)bbox.centerX(), (int)bbox.centerY(),
 					phrase.getUnknownSearchWord(),
@@ -529,6 +534,25 @@ public class SearchCoreFactory {
 								return false;
 							}
 							String poiID = object.getType().getKeyName() + "_" + object.getId();
+
+							if (searchWords.length > 1) {
+								String subcategory = searchWords[0];
+								String searchQuery = searchWords[1];
+								AbstractPoiType poiTypeSubtype = types.getAnyPoiTypeByKey(subcategory);
+								if (poiTypeSubtype != null) {
+									String subType = poiTypeSubtype.getKeyName();
+									Collator col = phrase.getCollator();
+									if (!col.equals(subType, subcategory)) {
+										return false;
+									}
+									NameStringMatcher nsm = phrase.getNameStringMatcher(searchQuery, false);
+									List<String> otherNames = object.getAllNames(true);
+									String name = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
+									if (!(nsm.matches(name) || nsm.matches(otherNames) || nsm.matches(object.getAdditionalInfo().values()))) {
+										return false;
+									}
+								}
+							}
 							if (ids.contains(poiID)) {
 								return false;
 							}

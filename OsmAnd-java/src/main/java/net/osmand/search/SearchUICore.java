@@ -311,7 +311,7 @@ public class SearchUICore {
 		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI());
 		apis.add(new SearchCoreFactory.SearchAmenityTypesAPI(poiTypes));
 		apis.add(new SearchCoreFactory.SearchAmenityByTypeAPI(poiTypes));
-		apis.add(new SearchCoreFactory.SearchAmenityByNameAPI());
+		apis.add(new SearchCoreFactory.SearchAmenityByNameAPI(poiTypes));
 		SearchBuildingAndIntersectionsByStreetAPI streetsApi =
 				new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI();
 		apis.add(streetsApi);
