@@ -84,6 +84,8 @@ public class SearchCoreFactory {
 	protected static final double SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE = 0.001;
 	protected static final double SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE = 0.005;
 
+	private static boolean skipSearchAmenityByName = false;
+
 	public static abstract class SearchBaseAPI implements SearchCoreAPI {
 
 		private ObjectType[] searchTypes;
@@ -604,6 +606,9 @@ public class SearchCoreFactory {
 
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
+			if (skipSearchAmenityByName) {
+				return -1;
+			}
 			if (p.hasObjectType(ObjectType.POI) ||
 					!p.isUnknownSearchWordPresent()) {
 				return -1;
@@ -732,7 +737,6 @@ public class SearchCoreFactory {
 					resultMatcher.publish(res);
 				}
 			}
-
 			return true;
 		}
 
@@ -753,11 +757,9 @@ public class SearchCoreFactory {
 		}
 	}
 
-
-
 	public static class SearchAmenityByTypeAPI extends SearchBaseAPI {
 		private static final int BBOX_RADIUS = 10000;
-
+		private List<AbstractPoiType> results;
 		private MapPoiTypes types;
 
 		public SearchAmenityByTypeAPI(MapPoiTypes types) {
@@ -918,19 +920,24 @@ public class SearchCoreFactory {
 
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
-			if ((p.isLastWord(ObjectType.POI_TYPE) || containsPOICatergories(p)) &&
+			if ((p.isLastWord(ObjectType.POI_TYPE) || containsPOICategories(p)) &&
 					p.getLastTokenLocation() != null) {
+				skipSearchAmenityByName = true;
 				return SEARCH_AMENITY_BY_TYPE_PRIORITY;
 			}
+			skipSearchAmenityByName = false;
 			return -1;
 		}
 
-		private boolean containsPOICatergories(SearchPhrase p) {
+		private boolean containsPOICategories(SearchPhrase p) {
+			if (results != null) {
+				return !results.isEmpty();
+			}
 			Map<String, PoiType> translatedNames = types.getAllTranslatedNames(false);
 			List<PoiFilter> topVisibleFilters = types.getTopVisibleFilters();
 			List<PoiCategory> categories = types.getCategories(false);
 			NameStringMatcher stringMatcher = new NameStringMatcher(p.getUnknownSearchWord(), StringMatcherMode.CHECK_CONTAINS);
-			List<AbstractPoiType> results = new ArrayList<>();
+			results = new ArrayList<>();
 			for (PoiFilter pf : topVisibleFilters) {
 				if (!p.isUnknownSearchWordPresent()
 						|| stringMatcher.matches(pf.getTranslation())
