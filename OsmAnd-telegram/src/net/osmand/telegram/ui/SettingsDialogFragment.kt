@@ -14,11 +14,15 @@ import net.osmand.telegram.R
 import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.TelegramSettings.DurationPref
 import net.osmand.telegram.helpers.TelegramUiHelper
+import net.osmand.telegram.utils.AndroidNetworkUtils
 import net.osmand.telegram.utils.AndroidUtils
+import net.osmand.telegram.utils.OsmandApiUtils
+import org.json.JSONObject
 
 class SettingsDialogFragment : BaseDialogFragment() {
 
 	private val uiUtils get() = app.uiUtils
+	private lateinit var container : ViewGroup
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -26,7 +30,7 @@ class SettingsDialogFragment : BaseDialogFragment() {
 		savedInstanceState: Bundle?
 	): View {
 		val mainView = inflater.inflate(R.layout.fragement_settings_dialog, parent)
-
+		container = mainView.findViewById<ViewGroup>(R.id.share_as_container);
 		val appBarLayout = mainView.findViewById<View>(R.id.app_bar_layout)
 		AndroidUtils.addStatusBarPadding19v(context!!, appBarLayout)
 
@@ -35,7 +39,7 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			setNavigationOnClickListener { dismiss() }
 		}
 
-		var container = mainView.findViewById<ViewGroup>(R.id.gps_and_loc_container)
+		container = mainView.findViewById<ViewGroup>(R.id.gps_and_loc_container)
 		for (pref in settings.gpsAndLocPrefs) {
 			inflater.inflate(R.layout.item_with_desc_and_right_value, container, false).apply {
 				findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getThemedIcon(pref.iconId))
@@ -126,6 +130,11 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			DisconnectTelegramBottomSheet.showInstance(childFragmentManager)
 		}
 
+		mainView.findViewById<TextView>(R.id.add_new_device_btn).setOnClickListener {
+			fragmentManager?.also { fm ->
+				AddNewDeviceBottomSheet.showInstance(fm, this)
+			}
+		}
 		return mainView
 	}
 
@@ -135,6 +144,23 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			LogoutBottomSheet.LOGOUT_REQUEST_CODE -> {
 				logoutTelegram()
 				dismiss()
+			}
+			AddNewDeviceBottomSheet.NEW_DEVICE_REQUEST_CODE -> {
+				OsmandApiUtils.createNewDevice(app, data!!.getStringExtra("deviceName"), 12345678,
+					object : AndroidNetworkUtils.OnRequestResultListener {
+						override fun onResult(result: String) {
+							val jsonResult = JSONObject(result)
+							val status = jsonResult.getString("status")
+							val deviceBot =
+								OsmandApiUtils.parseDeviceBot(jsonResult.getJSONObject("device"))
+							val inflater = activity?.layoutInflater
+
+							if (inflater != null) {
+								addItemToContainer(inflater, container, deviceBot.externalId, deviceBot.deviceName)
+							}
+						}
+					})
+//				dismiss()
 			}
 		}
 	}
