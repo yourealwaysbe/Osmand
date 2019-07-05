@@ -364,6 +364,8 @@ public class RoutingOptionsHelper {
 				return new RouteSimulationItem();
 			case ShowAlongTheRouteItem.KEY:
 				return new ShowAlongTheRouteItem();
+			case ElevationNavigationItem.KEY:
+				return new ElevationNavigationItem();
 			case AvoidPTTypesRoutingParameter.KEY:
 				return new AvoidPTTypesRoutingParameter();
 			case AvoidRoadsRoutingParameter.KEY:
@@ -770,6 +772,29 @@ public class RoutingOptionsHelper {
 		@Override
 		public int getDisabledIconId() {
 			return R.drawable.ic_action_show_along_route;
+		}
+	}
+
+	public static class ElevationNavigationItem extends LocalRoutingParameter {
+
+		public static final String KEY = "ElevationNavigation";
+
+		public ElevationNavigationItem() {
+			super(null);
+		}
+
+		public String getKey() {
+			return KEY;
+		}
+
+		@Override
+		public int getActiveIconId() {
+			return R.drawable.ic_action_elevation;
+		}
+
+		@Override
+		public int getDisabledIconId() {
+			return R.drawable.ic_action_elevation;
 		}
 	}
 

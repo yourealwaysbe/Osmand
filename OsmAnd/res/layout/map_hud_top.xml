@@ -567,6 +567,11 @@
 
         </FrameLayout>
 
+    <FrameLayout
+        android:id="@+id/elevation_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <!-- Widgets -->
 
     <FrameLayout

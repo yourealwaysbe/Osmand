@@ -2665,6 +2665,8 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference("voice_mute", false).makeGlobal();
 
+	public final OsmandPreference<Boolean> ELEVATION_NAVIGATION = new BooleanPreference("elevation_navigation", false).makeGlobal();
+
 	// for background service
 	public final OsmandPreference<Boolean> MAP_ACTIVITY_ENABLED = new BooleanPreference("map_activity_enabled", false).makeGlobal();
 

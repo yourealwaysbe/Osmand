@@ -41,6 +41,7 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.MuteSoundRoutin
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherSettingsRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.RouteSimulationItem;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.ShowAlongTheRouteItem;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.ElevationNavigationItem;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.router.GeneralRouter;
@@ -86,6 +87,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				items.add(createMuteSoundItem(optionsItem));
 			} else if (optionsItem instanceof ShowAlongTheRouteItem) {
 				items.add(createShowAlongTheRouteItem(optionsItem));
+			} else if (optionsItem instanceof ElevationNavigationItem) {
+				items.add(createElevationNavigationItem(optionsItem));
 			} else if (optionsItem instanceof RouteSimulationItem) {
 				if (OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null) {
 					items.add(createRouteSimulationItem(optionsItem));
@@ -180,6 +183,27 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 						updateMenu();
 					}
 				}).create();
+	}
+
+	private BaseBottomSheetItem createElevationNavigationItem(final LocalRoutingParameter optionsItem) {
+		final BottomSheetItemWithCompoundButton[] elevationNavigationItem = new BottomSheetItemWithCompoundButton[1];
+		elevationNavigationItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+				.setChecked(settings.ELEVATION_NAVIGATION.get())
+				.setDescription(getString(R.string.elevation_navigation_desc))
+				.setTitle(getString(R.string.elevation_navigation))
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_switch_56dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
+						boolean ev = !settings.ELEVATION_NAVIGATION.get();
+						settings.ELEVATION_NAVIGATION.set(ev);
+						elevationNavigationItem[0].setChecked(ev);
+						updateMenu();
+					}
+				})
+				.create();
+		return elevationNavigationItem[0];
 	}
 
 	private BaseBottomSheetItem createRouteSimulationItem(final LocalRoutingParameter optionsItem) {
@@ -467,6 +491,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				GeneralRouter.ALLOW_MOTORWAYS,
 				AvoidRoadsRoutingParameter.KEY,
 				ShowAlongTheRouteItem.KEY,
+				ElevationNavigationItem.KEY,
 				DividerItem.KEY,
 				GpxLocalRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,

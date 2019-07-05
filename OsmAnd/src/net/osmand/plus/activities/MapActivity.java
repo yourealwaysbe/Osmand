@@ -136,6 +136,7 @@ import net.osmand.plus.views.OsmandMapTileView.OnDrawMapListener;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
+import net.osmand.plus.widgets.ElevationNavigationFragment;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
@@ -174,6 +175,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private static MapContextMenu mapContextMenu = new MapContextMenu();
 	private static MapRouteInfoMenu mapRouteInfoMenu = new MapRouteInfoMenu();
 	private static TrackDetailsMenu trackDetailsMenu = new TrackDetailsMenu();
+	private static ElevationNavigationFragment elevationNavigation = new ElevationNavigationFragment();
 	private static Intent prevActivityIntent = null;
 
 	private List<ActivityResultListener> activityResultListeners = new ArrayList<>();
@@ -238,6 +240,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		mapContextMenu.setMapActivity(this);
 		mapRouteInfoMenu.setMapActivity(this);
 		trackDetailsMenu.setMapActivity(this);
+		elevationNavigation.setMapActivity(this);
 
 		super.onCreate(savedInstanceState);
 		// Full screen is not used here
@@ -1315,6 +1318,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		mapContextMenu.setMapActivity(null);
 		mapRouteInfoMenu.setMapActivity(null);
 		trackDetailsMenu.setMapActivity(null);
+		elevationNavigation.setMapActivity(null);
 		unregisterReceiver(screenOffReceiver);
 		app.getAidlApi().onDestroyMapActivity(this);
 		FailSafeFuntions.quitRouteRestoreDialog();
